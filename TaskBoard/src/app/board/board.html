@@ -1,0 +1,16 @@
+<div class="flex gap-3 items-start overflow-x-auto min-h-screen bg-white">
+    @for (list of boardLists; track list.id) {
+        <app-list [listData]="list"/>
+    }
+
+    <button type="button" class="flex items-center justify-between w-80 shrink-0 mt-2 py-2 px-1 border-y-2 border-gray-200 
+    active:bg-gray-200 transition hover:bg-gray-100 cursor-pointer">
+        <div class="flex inline-flex justify-between w-full">
+            <span class=" text-lg">
+                Add another list
+            </span>
+            <img src="add-icon.png" alt="add icon" class="w-5 h-5 object-contain mt-1">
+        </div>
+    </button>
+</div>
+

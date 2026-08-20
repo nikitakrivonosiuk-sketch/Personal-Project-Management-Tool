@@ -1,0 +1,70 @@
+<div class="fixed flex bg-black/30 inset-0 z-50 items-center justify-center">
+
+    <div class="flex flex-col rounded-xl bg-white w-250 overflow-hidden">
+        
+        <div class="flex inline-flex justify-end bg-slate-600">
+            <button (click)="onClose()" type="button" class="hover:opacity-75 h-10 px-2 cursor-pointer">
+                <img src="close-icon.png" alt="close icon" class="w-5 h-5 object-contain">
+            </button>
+        </div>
+
+        <div class="flex w-full min-h-[500px]">
+            <!-- Card Info -->
+            <div class="flex flex-col w-2/3 p-9 bg-white">
+                
+                <!-- Title and Edit button -->
+                <div class="flex items-center w-full justify-between">
+                    <h3 class="text-3xl font-bold">
+                        {{cardInfo.title}}
+                    </h3>
+                    <button (click)="onEditClick()" class="flex gap-2 py-1 px-5 cursor-pointer border border-gray-300 items-center rounded-md
+                    hover:opacity-80 active:bg-gray-100">
+                        <img src="edit-icon.png" alt="edit icon" class="w-4 h-4 object-contain">
+                        <span class="font-base text-black text-base font-semibold"> Edit card </span>
+                    </button>
+                </div>
+
+                <!-- Other Info -->
+                <div class="grid grid-cols-[100px_1fr] gap-y-6 items-center gap-10 py-6">
+                    <!-- List -->
+                        <div class="flex items-center gap-2">
+                            <img src="list-icon.png" alt="list icon" class="object-contain w-4 h-4 opacity-50">
+                            <span class="text-base font-normal text-gray-500"> List </span>
+                        </div>
+                        <span class="text-base text-black font-semibold"> {{cardList}} </span>
+    
+                    <!-- Date -->
+                        <div class="flex items-center gap-2">
+                            <img src="calendar-icon.png" alt="calendar icon" class="object-contain w-4 h-4 opacity-50">
+                            <span class="text-base font-normal text-gray-500"> Due date </span>
+                        </div>
+                        <span class="text-base text-black font-semibold"> {{cardInfo.dueDate | date: "EEEE, d MMM"}} </span>
+
+                    <!-- Priority -->
+                        <div class="flex items-center gap-2">
+                            <img src="tag-icon.png" alt="tag icon" class="object-contain w-4 h-4 opacity-70">
+                            <span class="text-base font-normal text-gray-500"> Priority </span>
+                        </div>
+                        <span class="text-base text-black font-semibold"> {{cardInfo.priority}} </span>
+                </div>
+
+                <div class="flex flex-col py-4 gap-2">
+                    <h3 class="text-xl font-bold"> Description </h3>
+
+                    <span class="text-base font-normal text-gray-500">
+                        {{cardInfo.description}}
+                    </span>
+                </div>
+            </div>
+
+            <!-- History -->
+            <div class="w-1/3 bg-gray-100">
+                <div class="flex flex-col gap-3 p-8">
+                    <span class="text-xl text-black font-semibold"> Activity </span>
+                    
+                    <!-- History messages -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

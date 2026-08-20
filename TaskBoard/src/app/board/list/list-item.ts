@@ -1,6 +1,6 @@
 import { CardItem } from "./card/card-item";
 
-export interface TaskList {
+export interface ListItem {
     id: string;
     title: string;
     cards: CardItem[];

@@ -1,0 +1,66 @@
+<div class="fixed flex bg-black/30 inset-0 z-50 items-center justify-center">
+    <div class="flex flex-col rounded-xl w-150 bg-white overflow-hidden">
+
+        <div class="flex  justify-end bg-slate-600">
+            <button type="button" (click)="close()" class="hover:opacity-75 h-10 px-2 cursor-pointer">
+                <img src="close-icon.png" alt="close icon" class="w-5 h-5 object-contain">
+            </button>
+        </div>
+
+        <div class="flex flex-col gap-6 p-6 ">
+            <input placeholder="New Card" class="text-black text-3xl font-bold py-2" type="text" [(ngModel)]="cardModel.title">
+
+            <div class="grid grid-cols-[100px_1fr] gap-y-8 items-center gap-20">
+                <!-- 1 row -->
+                <span class="text-gray-500 font-medium items-center flex gap-2">
+                    <img class="w-4 h-4 object-contain opacity-50 " src="list-icon.png" alt="list icon">
+                    List
+                </span>
+                <select class="border border-gray-200 rounded-md bg-gray-100 w-40 p-2 focus:border-gray-300 outline-none"
+                    [(ngModel)]="cardModel.listId" required>
+                    @for (list of lists; track list.id) {
+                    <option [value]="list.id" class="bg-gray-100">{{list.title}}</option>
+                    }
+                </select>
+
+                <!-- 2 row -->
+                <span class="text-gray-500 font-medium items-center flex gap-2">
+                    <img class="w-4 h-4 object-contain opacity-50 " src="calendar-icon.png" alt="calenda icon">
+                    Due Date
+                </span>
+                <input [(ngModel)]="cardModel.dueDate" type="date" class="bg-gray-100 w-40 p-2 rounded-md text-sm text-sm font-base border border-gray-200">
+
+                <!-- 3 row -->
+                 <span class="text-gray-500 font-medium items-center flex gap-2">
+                    <img class="w-4 h-4 object-contain opacity-50 " src="calendar-icon.png" alt="list icon">
+                    Priority
+                </span>
+                <select class="border border-gray-200 rounded-md w-40 p-2 bg-gray-100 focus:border-gray-300 outline-none"
+                    [(ngModel)]="cardModel.priority">
+                        <option value="low" > Low </option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                </select>
+            </div>
+
+            <div class="">
+                <h3 class="font-bold text-xl text-black"> Description </h3>
+                <textarea placeholder="Write some information..." 
+                [(ngModel)]="cardModel.description"
+                type="text" 
+                class="w-full h-25 text-sm resize-none border border-gray-300 rounded-md mt-2"></textarea>
+            </div>
+
+            <div class="flex inline-flex justify-between w-full">
+                <button (click)="onSave()" type="submit" class="bg-slate-600 text-white w-60 h-10 rounded-md 
+                hover:bg-slate-500 cursor-pointer">
+                    Save                    
+                </button>
+                <button (click)="close()" type="submit" class="bg-white text-black w-60 h-10 rounded-md border border-gray-300
+                hover:bg-gray-100 cursor-pointer">
+                    Cancel                   
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

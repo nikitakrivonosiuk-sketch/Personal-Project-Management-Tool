@@ -1,16 +1,57 @@
 <div class="flex gap-3 items-start overflow-x-auto min-h-screen bg-white">
     @for (list of boardLists; track list.id) {
-        <app-list [listData]="list"/>
+        <app-list [listData]="list"
+                  (deleteList)="deleteList(list.id)"
+                  (addCard)="openCardModel(list.id)"
+                  (cardAction)="onHandleCard($event)"
+                  [lists]="boardLists"/> 
     }
 
-    <button type="button" class="flex items-center justify-between w-80 shrink-0 mt-2 py-2 px-1 border-y-2 border-gray-200 
-    active:bg-gray-200 transition hover:bg-gray-100 cursor-pointer">
-        <div class="flex inline-flex justify-between w-full">
-            <span class=" text-lg">
-                Add another list
-            </span>
-            <img src="add-icon.png" alt="add icon" class="w-5 h-5 object-contain mt-1">
+    @if(!isAddingList){
+        <button (click)="isAddingList = true" type="button" class="flex items-center justify-between w-80 shrink-0 mt-2 py-2 px-1 border-y-2 border-gray-200 
+        active:bg-gray-200 transition hover:bg-gray-100 cursor-pointer">
+            <div class="flex inline-flex justify-between w-full">
+                <span class="text-lg font-medium">
+                    Add another list
+                </span>
+                <img src="add-icon.png" alt="add icon" class="w-5 h-5 object-contain mt-1">
+            </div>
+        </button>
+    }
+    @else {
+        <div class="gap-3 w-80 shrink-0 bg-white py-2">
+            <div class="flex w-75 h-12 bg-gray-100 border border-gray-300 rounded-xs shadow-xs">
+                <input [(ngModel)]="newListTitle" class="px-4 w-full h-full font-semibold text-base" type="text">
+            </div>
+            <div class="flex inline-flex items-center w-full shrink-0 gap-2 py-3">
+                <button (click)="onAddListClick()" type="submit" class="bg-slate-500 w-36 h-10 rounded-md
+                hover:bg-slate-600 active:bg-slate-500 cursor-pointer">
+                    <p class="text-white font-medium"> Add list</p>
+                </button>
+
+                <button (click)="isAddingList = false" type="submit" class="bg-white w-36 h-10 rounded-xs border border-gray-200
+                hover:bg-gray-100 active:bg-gray-200 cursor-pointer">
+                    <p class="text-black font-medium"> Cancel</p>
+                </button>
+            </div>
         </div>
-    </button>
+    }
+
+    @if (isCardModal) {
+        <app-card-modal 
+        (isOpened)="closeCardModel()" 
+        [lists]="boardLists"
+        (savedCard)="SaveCardToList($event)"
+        [currentListId]="listId"
+        [cardData]="isEditingCardData"/>
+    }
+
+    @if (isViewCardModal){
+        <app-card-view-modal 
+        [lists]="boardLists"
+        (isOpened)="closeCardModel()"
+        [cardInfo]="isViewingCard!"
+        (isEditing)="EditCard($event)"/>
+    }
 </div>
 

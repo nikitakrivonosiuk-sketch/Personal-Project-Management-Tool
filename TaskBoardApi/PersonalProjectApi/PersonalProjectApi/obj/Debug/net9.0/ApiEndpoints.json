@@ -1,0 +1,22 @@
+[
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.CardsController",
+    "Method": "GetAllCards",
+    "RelativePath": "api/Cards",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.ListsController",
+    "Method": "GetAllLists",
+    "RelativePath": "api/Lists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

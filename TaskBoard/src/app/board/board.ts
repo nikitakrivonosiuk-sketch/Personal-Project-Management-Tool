@@ -82,7 +82,7 @@ export class Board implements OnInit {
         break;
       case 'move':
         //moving card to another list
-        this.MoveCard(event.card.listId, event.card);
+        this.MoveCard(event.card, event.desiredListId!);
         break;
       case 'view':
         // Just view a card lol.
@@ -101,15 +101,38 @@ export class Board implements OnInit {
       this.isViewCardModal = false;
   }
 
-  MoveCard(desiredListId: string, card: CardItem){
-    this.boardLists.update(lists => lists.map(list => {
-      let updatedCards = list.cards.filter(x => x.id !== card.id);
+  MoveCard(card: CardItem, desiredListId: string){
+    const updatedCard = {...card, boardListId: desiredListId}
 
-      if (desiredListId === list.id){
-        updatedCards = [...updatedCards, card];
-      }
+    this.boardService.updateCard(updatedCard.id, updatedCard).subscribe({
+      next: (updatedCardFromDb) => {
+        this.boardLists.update(lists => lists.map(list => {
+          if (card.listId === list.id) {
+            return {...list, cards: list.cards.filter(c => c.id !== card.id)};
+          }
 
-      return {...list, cards: updatedCards }}))
+          if (desiredListId === list.id){
+            const mappedCard: CardItem = {
+              ...card,
+              listId: desiredListId
+            };
+
+            const newCards = [...list.cards, mappedCard];
+
+            // Sorting this array by datetime
+            newCards.sort((x, y) => {
+              const dateX = x.dueDate ? new Date(x.dueDate).getTime() : Infinity;
+              const dateY = y.dueDate ? new Date(y.dueDate).getTime() : Infinity;
+              return (dateX - dateY);
+            });
+            return {...list, cards: newCards};
+          };
+
+          return list;
+        }));
+      },
+      error: (err) => console.error("Smthing wrong with backend or couldnt find card in DB.", err),
+    });
   };
 
   DeleteCard(listId: string, cardId: string){
@@ -154,8 +177,8 @@ export class Board implements OnInit {
 
                   // Sorting this array by datetime
                   newCardsArray.sort((x, y) => {
-                    const dateX = x.dueDate ? new Date(x.dueDate).getDate() : Infinity;
-                    const dateY = y.dueDate ? new Date(y.dueDate).getDate() : Infinity;
+                    const dateX = x.dueDate ? new Date(x.dueDate).getTime() : Infinity;
+                    const dateY = y.dueDate ? new Date(y.dueDate).getTime() : Infinity;
 
                     return (dateX - dateY);
                   });

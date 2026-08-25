@@ -32,7 +32,7 @@ export class Card {
     const selectedElement = event.target as HTMLSelectElement;
     const targetListId = selectedElement.value;
 
-    this.cardAction.emit({cardAction: 'move', card: {...this.cardData, listId: targetListId}});
+    this.cardAction.emit({cardAction: 'move', card: this.cardData, desiredListId: targetListId});
     
     selectedElement.value = 'Move to:';
   }

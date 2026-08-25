@@ -14,4 +14,5 @@ export type CardActionType = 'edit' | 'move' | 'delete' | 'view';
 export interface CardActionEvent {
     cardAction: CardActionType;
     card: CardItem;
+    desiredListId?: string;
 }

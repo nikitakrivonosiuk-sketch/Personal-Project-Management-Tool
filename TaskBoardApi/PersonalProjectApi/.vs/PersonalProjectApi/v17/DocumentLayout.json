@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\controllers\\listscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\controllers\\listscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\carddtos\\updatecarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\carddtos\\updatecarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\domain\\boardlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\domain\\boardlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\controllers\\listscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\controllers\\listscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\cardsrepositories\\sqlcardsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,12 +19,16 @@
       "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\listrepositories\\sqllistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\boardlistsdto\\boardlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\boardlistsdto\\boardlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\listrepositories\\ilistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\listrepositories\\ilistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\carddtos\\updatecarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\carddtos\\updatecarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\domain\\boardlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\domain\\boardlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\boardlistsdto\\boardlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\boardlistsdto\\boardlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\carddtos\\carddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,16 +39,8 @@
       "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\controllers\\cardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\listrepositories\\ilistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\listrepositories\\ilistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\cardsrepositories\\icardsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\cardsrepositories\\icardsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\data\\taskboarddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -77,6 +73,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\migrations\\20260822164958_changepriorityincards.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\migrations\\20260822164958_changepriorityincards.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\migrations\\20260825084935_addinglistposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\migrations\\20260825084935_addinglistposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -86,7 +86,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 158,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -110,46 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SQLListsRepository.cs",
-              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
-              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
-              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
-              "RelativeToolTip": "PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwB8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T10:34:23.456Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ListsController.cs",
-              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\ListsController.cs",
-              "RelativeDocumentMoniker": "PersonalProjectApi\\Controllers\\ListsController.cs",
-              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\ListsController.cs",
-              "RelativeToolTip": "PersonalProjectApi\\Controllers\\ListsController.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAkwE4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T10:32:04.412Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CardsController.cs",
-              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\CardsController.cs",
-              "RelativeDocumentMoniker": "PersonalProjectApi\\Controllers\\CardsController.cs",
-              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\CardsController.cs",
-              "RelativeToolTip": "PersonalProjectApi\\Controllers\\CardsController.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwEIAAABxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T08:20:00.519Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "BoardListDto.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\BoardListsDto\\BoardListDto.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\BoardListsDto\\BoardListDto.cs",
@@ -157,12 +118,11 @@
               "RelativeToolTip": "PersonalProjectApi\\Models\\DTO\\BoardListsDto\\BoardListDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T10:29:14.561Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-22T10:29:14.561Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "CardDto.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\CardDto.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\CardDto.cs",
@@ -170,12 +130,11 @@
               "RelativeToolTip": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\CardDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T09:07:51.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-22T09:07:51.705Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "UpdateCardDto.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\UpdateCardDto.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\UpdateCardDto.cs",
@@ -194,14 +153,14 @@
               "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\CardsRepositories\\SQLCardsRepository.cs",
               "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\SQLCardsRepository.cs",
               "RelativeToolTip": "PersonalProjectApi\\Repositories\\CardsRepositories\\SQLCardsRepository.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAA3wB8AAABDAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAkwC8AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-22T08:29:22.792Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "BoardList.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\Domain\\BoardList.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\Domain\\BoardList.cs",
@@ -209,25 +168,11 @@
               "RelativeToolTip": "PersonalProjectApi\\Models\\Domain\\BoardList.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-20T15:52:26.866Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-20T15:52:26.866Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ICardsRepository.cs",
-              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
-              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
-              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
-              "RelativeToolTip": "PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T08:27:33.726Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "IListsRepository.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\IListsRepository.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\ListRepositories\\IListsRepository.cs",
@@ -240,7 +185,57 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 3,
+              "Title": "SQLListsRepository.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA1wB8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T10:34:23.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ListsController.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\ListsController.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Controllers\\ListsController.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\ListsController.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Controllers\\ListsController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAA1wDcAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T10:32:04.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CardsController.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\CardsController.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Controllers\\CardsController.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\CardsController.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Controllers\\CardsController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwEIAAABxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T08:20:00.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ICardsRepository.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T08:27:33.726Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Card.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\Domain\\Card.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\Domain\\Card.cs",
@@ -252,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 18,
               "Title": "20260825084935_AddingListPosition.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs",
@@ -260,12 +255,11 @@
               "RelativeToolTip": "PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-25T08:49:35.997Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-25T08:49:35.997Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "TaskBoardDbContext.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Data\\TaskBoardDbContext.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Data\\TaskBoardDbContext.cs",
@@ -273,12 +267,11 @@
               "RelativeToolTip": "PersonalProjectApi\\Data\\TaskBoardDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-20T16:31:11.313Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-20T16:31:11.313Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "AddCardRequestDto.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\AddCardRequestDto.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\AddCardRequestDto.cs",
@@ -290,7 +283,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Program.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Program.cs",
@@ -302,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "20260822164743_ChangePriorityToEnum.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260822164743_ChangePriorityToEnum.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260822164743_ChangePriorityToEnum.cs",
@@ -314,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "20260822164958_ChangePriorityInCards.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260822164958_ChangePriorityInCards.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260822164958_ChangePriorityInCards.cs",
@@ -326,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "20260821075850_InitialCreate.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260821075850_InitialCreate.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260821075850_InitialCreate.cs",
@@ -338,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\appsettings.json",
               "RelativeDocumentMoniker": "PersonalProjectApi\\appsettings.json",

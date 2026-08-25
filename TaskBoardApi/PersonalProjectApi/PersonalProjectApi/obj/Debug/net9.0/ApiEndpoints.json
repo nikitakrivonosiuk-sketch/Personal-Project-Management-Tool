@@ -10,6 +10,59 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PersonalProjectApi.Controllers.CardsController",
+    "Method": "CreateCard",
+    "RelativePath": "api/Cards",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cardRequestDto",
+        "Type": "PersonalProjectApi.Models.DTO.CardDTOs.AddCardRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.CardsController",
+    "Method": "UpdateCard",
+    "RelativePath": "api/Cards/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "cardRequestDto",
+        "Type": "PersonalProjectApi.Models.DTO.CardDTOs.UpdateCardDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.CardsController",
+    "Method": "DeleteCard",
+    "RelativePath": "api/Cards/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PersonalProjectApi.Controllers.ListsController",
     "Method": "GetAllLists",
     "RelativePath": "api/Lists",
@@ -17,6 +70,59 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.ListsController",
+    "Method": "CreateList",
+    "RelativePath": "api/Lists",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardListDto",
+        "Type": "PersonalProjectApi.Models.DTO.BoardListsDto.BoardListDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.ListsController",
+    "Method": "UpdateList",
+    "RelativePath": "api/Lists/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "boardListDto",
+        "Type": "PersonalProjectApi.Models.DTO.BoardListsDto.BoardListDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.ListsController",
+    "Method": "DeleteList",
+    "RelativePath": "api/Lists/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

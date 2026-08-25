@@ -20,13 +20,16 @@ export class CardModal implements OnInit {
     title: '',
     listId: this.currentListId || '',
     description: '',
-    priority: 'low',
-    status: 'todo',
+    priority: 'Low',
   };
 
   ngOnInit(){
     if (this.cardData){
       this.cardModel = {...this.cardData}
+
+      if (this.cardModel.dueDate) {
+      this.cardModel.dueDate = this.cardModel.dueDate.toString().split('T')[0];
+    }
     }
     else if(this.currentListId) {
       this.cardModel.listId = this.currentListId;
@@ -36,6 +39,18 @@ export class CardModal implements OnInit {
   onSave(){
     if(!this.cardModel.title?.trim()){
       alert("Please enter the card name.")
+      return;
+    }
+    if(!this.cardModel.dueDate){
+      alert("Please enter the date.")
+      return;
+    }
+    if(!this.cardModel.priority){
+      alert("Please enter the card name.")
+      return;
+    }
+    if(!this.cardModel.listId){
+      alert("Please choose the list.")
       return;
     }
     this.savedCard.emit(this.cardModel);

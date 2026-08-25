@@ -31,13 +31,13 @@
             <!-- Card priority -->
             <div class="flex items-center py-1">
                 <span class="inline-flex bg-gray-200 items-center gap-2 px-2  rounded-xl">
-                    @if(cardData.priority === 'low'){
+                    @if(cardData.priority === 'Low'){
                         <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                     }
-                    @else if (cardData.priority === 'medium') {
+                    @else if (cardData.priority === 'Medium') {
                         <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
                     }
-                    @else if (cardData.priority === 'high') {
+                    @else if (cardData.priority === 'High') {
                         <span class="w-1.5 h-1.5 rounded-full bg-gray-800"></span>
                     }
                     {{cardData.priority}}

@@ -10,7 +10,6 @@ namespace PersonalProjectApi.Data
 
         }
 
-        public DbSet<Priority> Priorities { get; set; }
         public DbSet<BoardList> BoardLists { get; set; }
         public DbSet<Card> Cards { get; set; }
 
@@ -23,16 +22,19 @@ namespace PersonalProjectApi.Data
                 {
                     Id = Guid.Parse("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
                     Title = "To Do",
+                    Position = 0,
                 },
                 new BoardList()
                 {
                     Id = Guid.Parse("faa6be83-b7c5-4130-98a3-c6fa0982c67f"),
                     Title = "In Progress",
+                    Position = 1,
                 },
                 new BoardList()
                 {
                     Id = Guid.Parse("d009636a-b61a-444d-a186-40aae85263c8"),
                     Title = "Finished",
+                    Position = 2,
                 });
 
             modelBuilder.Entity<Card>().HasData(
@@ -43,7 +45,7 @@ namespace PersonalProjectApi.Data
                     Description = "Make an DB with all necesary data, connect it with API and front. Test it.",
                     BoardListId = Guid.Parse("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
                     DueDate = new DateTime(2026, 8, 30, 18, 0, 30),
-                    PriorityId = Guid.Parse("c1f2fa72-41e5-4dbf-bc93-19311c40a43e")
+                    Priority = TaskPriority.High,
                 },
                 new Card()
                 {
@@ -52,7 +54,7 @@ namespace PersonalProjectApi.Data
                     Description = "Go to the gym and eat well after that.",
                     BoardListId = Guid.Parse("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
                     DueDate = DateTime.Now,
-                    PriorityId = Guid.Parse("f4000d47-117a-42cd-81de-44a64d5a4219")
+                    Priority = TaskPriority.Medium,
                 },
                 new Card()
                 {
@@ -61,25 +63,7 @@ namespace PersonalProjectApi.Data
                     Description = "Clean my wardrobe...",
                     BoardListId = Guid.Parse("d009636a-b61a-444d-a186-40aae85263c8"),
                     DueDate = DateTime.Now,
-                    PriorityId = Guid.Parse("9e1572d6-328d-431d-a5c8-46d2fa119a64")
-                }
-            );
-
-            modelBuilder.Entity<Priority>().HasData(
-                new Priority()
-                {
-                    Id = Guid.Parse("9e1572d6-328d-431d-a5c8-46d2fa119a64"),
-                    CardPriority = "Low",
-                },
-                new Priority()
-                {
-                    Id = Guid.Parse("f4000d47-117a-42cd-81de-44a64d5a4219"),
-                    CardPriority = "Medium",
-                },
-                new Priority()
-                {
-                    Id = Guid.Parse("c1f2fa72-41e5-4dbf-bc93-19311c40a43e"),
-                    CardPriority = "High",
+                    Priority = TaskPriority.Low,
                 }
             );
         }

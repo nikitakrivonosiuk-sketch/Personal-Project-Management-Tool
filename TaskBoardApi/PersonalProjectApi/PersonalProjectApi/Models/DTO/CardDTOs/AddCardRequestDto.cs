@@ -2,15 +2,12 @@
 
 namespace PersonalProjectApi.Models.DTO.CardDTOs
 {
-    public class CardDto
+    public class AddCardRequestDto
     {
-        public Guid Id { get; set; }
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; }
         public DateTime? DueDate { get; set; }
         public string? Description { get; set; }
         public Guid BoardListId { get; set; }
-
-        public string BoardTitle { get; set; } = string.Empty;
         public TaskPriority Priority { get; set; }
     }
 }

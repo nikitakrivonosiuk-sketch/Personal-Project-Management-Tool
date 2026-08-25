@@ -1,5 +1,4 @@
-export type TaskStatus = 'todo' | 'planned' | 'in progress' | 'done'; 
-export type TaskPriority = 'low' | 'medium' | 'high';
+export type TaskPriority = 'Low' | 'Medium' | 'High';
 
 export interface CardItem {
     id: string;
@@ -8,7 +7,6 @@ export interface CardItem {
     description?: string;
     dueDate?: string;
     priority: TaskPriority;
-    status: TaskStatus;
 }
 
 export type CardActionType = 'edit' | 'move' | 'delete' | 'view';

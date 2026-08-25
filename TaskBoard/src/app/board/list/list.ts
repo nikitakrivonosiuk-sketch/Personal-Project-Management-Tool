@@ -18,6 +18,7 @@ export class List {
   @Output() deleteList = new EventEmitter<void>();
   @Output() addCard = new EventEmitter<string>();
   @Output() cardAction = new EventEmitter<CardActionEvent>();
+  @Output() updateList = new EventEmitter<ListItem>();
 
 
   isEditing = false;
@@ -36,6 +37,7 @@ export class List {
     this.listData.title = this.newName;
 
     // Saving to db.
+    this.updateList.emit(this.listData);
 
     this.isEditing = false;
   }

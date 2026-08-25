@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalProjectApi.Data;
 
@@ -11,9 +12,11 @@ using PersonalProjectApi.Data;
 namespace PersonalProjectApi.Migrations
 {
     [DbContext(typeof(TaskBoardDbContext))]
-    partial class TaskBoardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260822164958_ChangePriorityInCards")]
+    partial class ChangePriorityInCards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +31,6 @@ namespace PersonalProjectApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -43,19 +43,16 @@ namespace PersonalProjectApi.Migrations
                         new
                         {
                             Id = new Guid("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
-                            Position = 0,
                             Title = "To Do"
                         },
                         new
                         {
                             Id = new Guid("faa6be83-b7c5-4130-98a3-c6fa0982c67f"),
-                            Position = 1,
                             Title = "In Progress"
                         },
                         new
                         {
                             Id = new Guid("d009636a-b61a-444d-a186-40aae85263c8"),
-                            Position = 2,
                             Title = "Finished"
                         });
                 });
@@ -103,7 +100,7 @@ namespace PersonalProjectApi.Migrations
                             Id = new Guid("aa94bb74-7c70-4fa8-89ab-de6148c34f98"),
                             BoardListId = new Guid("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
                             Description = "Go to the gym and eat well after that.",
-                            DueDate = new DateTime(2026, 8, 25, 11, 49, 35, 403, DateTimeKind.Local).AddTicks(5313),
+                            DueDate = new DateTime(2026, 8, 22, 19, 49, 58, 498, DateTimeKind.Local).AddTicks(3691),
                             Priority = 2,
                             Title = "Workout"
                         },
@@ -112,7 +109,7 @@ namespace PersonalProjectApi.Migrations
                             Id = new Guid("30e15610-ba6a-41b9-ac8d-060fd0e6fbea"),
                             BoardListId = new Guid("d009636a-b61a-444d-a186-40aae85263c8"),
                             Description = "Clean my wardrobe...",
-                            DueDate = new DateTime(2026, 8, 25, 11, 49, 35, 403, DateTimeKind.Local).AddTicks(5354),
+                            DueDate = new DateTime(2026, 8, 22, 19, 49, 58, 498, DateTimeKind.Local).AddTicks(3737),
                             Priority = 1,
                             Title = "Do household chores"
                         });

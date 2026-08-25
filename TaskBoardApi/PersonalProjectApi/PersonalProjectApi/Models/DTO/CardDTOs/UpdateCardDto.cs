@@ -2,7 +2,7 @@
 
 namespace PersonalProjectApi.Models.DTO.CardDTOs
 {
-    public class CardDto
+    public class UpdateCardDto
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -10,7 +10,6 @@ namespace PersonalProjectApi.Models.DTO.CardDTOs
         public string? Description { get; set; }
         public Guid BoardListId { get; set; }
 
-        public string BoardTitle { get; set; } = string.Empty;
         public TaskPriority Priority { get; set; }
     }
 }

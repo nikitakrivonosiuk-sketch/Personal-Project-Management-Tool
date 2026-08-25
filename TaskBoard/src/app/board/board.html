@@ -1,10 +1,11 @@
 <div class="flex gap-3 items-start overflow-x-auto min-h-screen bg-white">
-    @for (list of boardLists; track list.id) {
+    @for (list of boardLists(); track list.id) {
         <app-list [listData]="list"
                   (deleteList)="deleteList(list.id)"
                   (addCard)="openCardModel(list.id)"
                   (cardAction)="onHandleCard($event)"
-                  [lists]="boardLists"/> 
+                  [lists]="boardLists()"
+                  (updateList)="updateList($event)"/> 
     }
 
     @if(!isAddingList){
@@ -40,7 +41,7 @@
     @if (isCardModal) {
         <app-card-modal 
         (isOpened)="closeCardModel()" 
-        [lists]="boardLists"
+        [lists]="boardLists()"
         (savedCard)="SaveCardToList($event)"
         [currentListId]="listId"
         [cardData]="isEditingCardData"/>
@@ -48,7 +49,7 @@
 
     @if (isViewCardModal){
         <app-card-view-modal 
-        [lists]="boardLists"
+        [lists]="boardLists()"
         (isOpened)="closeCardModel()"
         [cardInfo]="isViewingCard!"
         (isEditing)="EditCard($event)"/>

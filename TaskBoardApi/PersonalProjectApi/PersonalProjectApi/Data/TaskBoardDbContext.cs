@@ -12,6 +12,7 @@ namespace PersonalProjectApi.Data
 
         public DbSet<BoardList> BoardLists { get; set; }
         public DbSet<Card> Cards { get; set; }
+        public DbSet<ActivityLog> ActivityLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,6 +67,17 @@ namespace PersonalProjectApi.Data
                     Priority = TaskPriority.Low,
                 }
             );
+            modelBuilder.Entity<ActivityLog>()
+                .HasOne(a => a.BoardList)
+                .WithMany()
+                .HasForeignKey(a => a.BoardListId)
+                .OnDelete(DeleteBehavior.NoAction); 
+
+            modelBuilder.Entity<ActivityLog>()
+                .HasOne(a => a.Card)
+                .WithMany()
+                .HasForeignKey(a => a.CardId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

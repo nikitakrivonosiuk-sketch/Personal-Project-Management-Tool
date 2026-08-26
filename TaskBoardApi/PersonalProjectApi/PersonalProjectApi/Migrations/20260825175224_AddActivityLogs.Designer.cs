@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalProjectApi.Data;
 
@@ -11,9 +12,11 @@ using PersonalProjectApi.Data;
 namespace PersonalProjectApi.Migrations
 {
     [DbContext(typeof(TaskBoardDbContext))]
-    partial class TaskBoardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260825175224_AddActivityLogs")]
+    partial class AddActivityLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,10 +35,7 @@ namespace PersonalProjectApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("BoardListId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CardId")
+                    b.Property<Guid>("CardId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -46,8 +46,6 @@ namespace PersonalProjectApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BoardListId");
 
                     b.HasIndex("CardId");
 
@@ -135,7 +133,7 @@ namespace PersonalProjectApi.Migrations
                             Id = new Guid("aa94bb74-7c70-4fa8-89ab-de6148c34f98"),
                             BoardListId = new Guid("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
                             Description = "Go to the gym and eat well after that.",
-                            DueDate = new DateTime(2026, 8, 26, 5, 2, 22, 591, DateTimeKind.Local).AddTicks(2420),
+                            DueDate = new DateTime(2026, 8, 25, 20, 52, 24, 47, DateTimeKind.Local).AddTicks(4495),
                             Priority = 2,
                             Title = "Workout"
                         },
@@ -144,7 +142,7 @@ namespace PersonalProjectApi.Migrations
                             Id = new Guid("30e15610-ba6a-41b9-ac8d-060fd0e6fbea"),
                             BoardListId = new Guid("d009636a-b61a-444d-a186-40aae85263c8"),
                             Description = "Clean my wardrobe...",
-                            DueDate = new DateTime(2026, 8, 26, 5, 2, 22, 591, DateTimeKind.Local).AddTicks(2460),
+                            DueDate = new DateTime(2026, 8, 25, 20, 52, 24, 47, DateTimeKind.Local).AddTicks(4539),
                             Priority = 1,
                             Title = "Do household chores"
                         });
@@ -152,17 +150,11 @@ namespace PersonalProjectApi.Migrations
 
             modelBuilder.Entity("PersonalProjectApi.Models.Domain.ActivityLog", b =>
                 {
-                    b.HasOne("PersonalProjectApi.Models.Domain.BoardList", "BoardList")
-                        .WithMany()
-                        .HasForeignKey("BoardListId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("PersonalProjectApi.Models.Domain.Card", "Card")
                         .WithMany()
                         .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("BoardList");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Card");
                 });

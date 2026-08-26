@@ -26,6 +26,15 @@ namespace PersonalProjectApi.Repositories.ListRepositories
             boardList.Position = maxPosittion + 1;
 
             await dbContext.BoardLists.AddAsync(boardList);
+
+            await dbContext.ActivityLogs.AddAsync(new ActivityLog
+            {
+                BoardListId = boardList.Id,
+                Description = $"'{boardList.Title}' was created.",
+                CreatedAt = DateTime.Now,
+                ActionType = "Created"
+            });
+
             await dbContext.SaveChangesAsync();
 
             return boardList;
@@ -40,6 +49,17 @@ namespace PersonalProjectApi.Repositories.ListRepositories
                 return null;
             }
 
+            // Title changed
+            if (boardList.Title != listDomain.Title)
+            {
+                await dbContext.ActivityLogs.AddAsync(new ActivityLog
+                {
+                    BoardListId = listDomain.Id,
+                    Description = $"List tittle was changed from '{listDomain.Title}' to '{boardList.Title}'",
+                    ActionType = "TitleChanged",
+                });
+            }
+
             listDomain.Title = boardList.Title;
             listDomain.Position = boardList.Position;
 
@@ -50,12 +70,38 @@ namespace PersonalProjectApi.Repositories.ListRepositories
 
         public async Task<Boolean> DeleteListAsync(Guid id)
         {
-            var deletedLists = await dbContext.BoardLists.Where(l => l.Id == id).ExecuteDeleteAsync();
+            var deletedList = await dbContext.BoardLists.FindAsync(id);
 
-            if (deletedLists == 0)
+            if (deletedList == null)
             {
                 return false;
             }
+
+            var cardIds = await dbContext.Cards
+                .Where(c => c.BoardListId == id)
+                .Select(c => c.Id)
+                .ToListAsync();
+
+            if (cardIds.Any())
+            {
+                await dbContext.ActivityLogs
+                    .Where(log => log.CardId != null && cardIds.Contains(log.CardId.Value))
+                    .ExecuteUpdateAsync(s => s.SetProperty(l => l.CardId, (Guid?)null));
+            }
+
+            await dbContext.ActivityLogs
+                .Where(log => log.BoardListId == id)
+                .ExecuteUpdateAsync(s => s.SetProperty(l => l.BoardListId, (Guid?)null));
+
+            await dbContext.ActivityLogs.AddAsync(new ActivityLog
+            {
+                BoardListId = null,
+                Description = $"You deleted '{deletedList.Title}' list.",
+                ActionType = "Deleted",
+            });
+
+            dbContext.BoardLists.Remove(deletedList);
+            await dbContext.SaveChangesAsync();
 
             return true;
         }

@@ -29,7 +29,7 @@
         @else {
         <div class="gap-3 w-80 shrink-0 bg-white">
             <div class="flex w-75 h-12 bg-gray-100 border border-gray-300 rounded-xs shadow-xs">
-                <input [(ngModel)]="newName" class="px-4 w-full h-full font-semibold text-base" type="text">
+                <input maxlength="20" [(ngModel)]="newName" class="px-4 w-full h-full font-semibold text-base" type="text">
             </div>
             <div class="flex inline-flex items-center w-full shrink-0 gap-2 py-3">
                 <button (click)="Save()" type="submit" class="bg-slate-500 w-36 h-10 rounded-md

@@ -1,7 +1,8 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BoardListDto, CardDto } from "./board-model";
-import { forkJoin } from "rxjs";
+import { forkJoin, Subject } from "rxjs";
+import { ActivityLog } from "./activity-log";
 
 @Injectable ({
     providedIn: 'root'
@@ -9,8 +10,18 @@ import { forkJoin } from "rxjs";
 
 export class BoardService {
     private http = inject(HttpClient);
+    public logsUpdated = new Subject<void>();
 
     apiUrl = "https://localhost:7140/api";
+
+    getLogs(cardId?: string, skip: number = 0, take: number = 10){
+        let url = `${this.apiUrl}/Logs?skip=${skip}&take=${take}`;
+
+        if (cardId){
+            url += `&cardId=${cardId}`
+        }
+        return this.http.get<ActivityLog[]>(url);
+    }
 
     getBoardData(){
         return forkJoin ({

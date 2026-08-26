@@ -65,6 +65,7 @@ export class Board implements OnInit {
 
         this.newListTitle = '';
         this.isAddingList = false;
+        this.boardService.logsUpdated.next();
       },
       error: (err: any) => console.error("Something bad with backend", err),
     });
@@ -107,9 +108,7 @@ export class Board implements OnInit {
     this.boardService.updateCard(updatedCard.id, updatedCard).subscribe({
       next: (updatedCardFromDb) => {
         this.boardLists.update(lists => lists.map(list => {
-          if (card.listId === list.id) {
-            return {...list, cards: list.cards.filter(c => c.id !== card.id)};
-          }
+          const updatedCards = list.cards.filter(c => c.id !== card.id);
 
           if (desiredListId === list.id){
             const mappedCard: CardItem = {
@@ -117,7 +116,7 @@ export class Board implements OnInit {
               listId: desiredListId
             };
 
-            const newCards = [...list.cards, mappedCard];
+            const newCards = [...updatedCards, mappedCard];
 
             // Sorting this array by datetime
             newCards.sort((x, y) => {
@@ -127,9 +126,9 @@ export class Board implements OnInit {
             });
             return {...list, cards: newCards};
           };
-
-          return list;
+          return { ...list, cards: updatedCards };
         }));
+        this.boardService.logsUpdated.next();
       },
       error: (err) => console.error("Smthing wrong with backend or couldnt find card in DB.", err),
     });
@@ -138,10 +137,13 @@ export class Board implements OnInit {
   DeleteCard(listId: string, cardId: string){
     this.boardService.deleteCard(cardId).subscribe({
       next: () => {
-        this.boardLists.update(lists => lists.map(list => list.id === listId ? {
-        ...list, cards: list.cards.filter(c => c.id !== cardId)}
-        : list
-        ));
+        this.boardLists.update(lists => 
+            lists.map(list => ({
+                ...list,
+                cards: list.cards.filter(c => c.id !== cardId)
+            }))
+        );
+        this.boardService.logsUpdated.next();
       },
       error: (err: any) => console.error("Smth wrong with backend.", err),
     })
@@ -190,6 +192,7 @@ export class Board implements OnInit {
               return updatedLists;
             });
 
+            this.boardService.logsUpdated.next();
             this.isEditingCardData = undefined;
             this.listId = '';
             this.isCardModal = false;
@@ -228,6 +231,7 @@ export class Board implements OnInit {
               return list;
             }))
 
+            this.boardService.logsUpdated.next();
             this.isCardModal = false;
             this.listId = ''
           },
@@ -263,6 +267,7 @@ export class Board implements OnInit {
           }
           return list;
         }));
+        this.boardService.logsUpdated.next();
       },
       error: (err: any) => console.error("Smthing wrong with backend or invalid id.", err),
     });
@@ -272,6 +277,7 @@ export class Board implements OnInit {
     this.boardService.deleteList(listId).subscribe({
       next: () => {
         this.boardLists.update(lists => lists.filter(list => list.id !== listId));
+        this.boardService.logsUpdated.next();
       },
       error: (err) => console.error("Something bad with backend", err),
     });

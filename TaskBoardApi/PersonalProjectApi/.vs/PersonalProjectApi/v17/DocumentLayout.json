@@ -3,16 +3,112 @@
   "WorkspaceRootPath": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\listrepositories\\sqllistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\listrepositories\\sqllistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\data\\taskboarddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\data\\taskboarddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\cardsrepositories\\sqlcardsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\cardsrepositories\\sqlcardsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\activitylogdtos\\activitylogdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\activitylogdtos\\activitylogdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\domain\\activitylog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\domain\\activitylog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\activitylogrepositories\\sqlactivitylogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\activitylogrepositories\\sqlactivitylogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\carddtos\\updatecarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\carddtos\\updatecarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\listrepositories\\ilistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\listrepositories\\ilistsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260826002326_AddListLogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PersonalProjectApi\\Migrations\\20260826002326_AddListLogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\controllers\\logscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\controllers\\logscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\activitylogrepositories\\iactivitylogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\activitylogrepositories\\iactivitylogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\controllers\\cardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\controllers\\cardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825191306_MakeCardIdNullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PersonalProjectApi\\Migrations\\20260825191306_MakeCardIdNullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\domain\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\domain\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\controllers\\listscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\controllers\\listscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\repositories\\cardsrepositories\\icardsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\repositories\\cardsrepositories\\icardsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\domain\\boardlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\domain\\boardlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825175224_AddActivityLogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PersonalProjectApi\\Migrations\\20260825175224_AddActivityLogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\boardlistsdto\\boardlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\boardlistsdto\\boardlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\carddtos\\carddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\carddtos\\carddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\models\\dto\\carddtos\\addcardrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\models\\dto\\carddtos\\addcardrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\migrations\\20260822164743_changeprioritytoenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\migrations\\20260822164743_changeprioritytoenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\migrations\\20260821075850_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\migrations\\20260821075850_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\migrations\\20260822164958_changepriorityincards.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\migrations\\20260822164958_changepriorityincards.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|c:\\works\\apps\\personalproject\\taskboardapi\\personalprojectapi\\personalprojectapi\\migrations\\20260825084935_addinglistposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{067AC465-8E9D-467A-8D5A-3AEF3E13363C}|PersonalProjectApi\\PersonalProjectApi.csproj|solutionrelative:personalprojectapi\\migrations\\20260825084935_addinglistposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,41 +143,345 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "PersonalProjectApi\\Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "PersonalProjectApi\\Controllers\\WeatherForecastController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Title": "SQLListsRepository.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Repositories\\ListRepositories\\SQLListsRepository.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAqwFgAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-27T07:53:56.257Z",
+              "WhenOpened": "2026-08-22T10:34:23.456Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WeatherForecast.cs",
-              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\WeatherForecast.cs",
-              "RelativeDocumentMoniker": "PersonalProjectApi\\WeatherForecast.cs",
-              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\WeatherForecast.cs",
-              "RelativeToolTip": "PersonalProjectApi\\WeatherForecast.cs",
+              "DocumentIndex": 7,
+              "Title": "IListsRepository.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\IListsRepository.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\ListRepositories\\IListsRepository.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ListRepositories\\IListsRepository.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Repositories\\ListRepositories\\IListsRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-27T07:53:52.392Z",
+              "WhenOpened": "2026-08-22T10:33:20.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SQLActivityLogRepository.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ActivityLogRepositories\\SQLActivityLogRepository.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\ActivityLogRepositories\\SQLActivityLogRepository.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ActivityLogRepositories\\SQLActivityLogRepository.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Repositories\\ActivityLogRepositories\\SQLActivityLogRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBoAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T18:47:12.055Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "SQLCardsRepository.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\SQLCardsRepository.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\CardsRepositories\\SQLCardsRepository.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\SQLCardsRepository.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Repositories\\CardsRepositories\\SQLCardsRepository.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAYwIQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T08:29:22.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UpdateCardDto.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\UpdateCardDto.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\UpdateCardDto.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\UpdateCardDto.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\UpdateCardDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T09:56:11.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaskBoardDbContext.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Data\\TaskBoardDbContext.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Data\\TaskBoardDbContext.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Data\\TaskBoardDbContext.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Data\\TaskBoardDbContext.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAqwEkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-20T16:31:11.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ActivityLogDto.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\ActivityLogDtos\\ActivityLogDto.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\ActivityLogDtos\\ActivityLogDto.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\ActivityLogDtos\\ActivityLogDto.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Models\\DTO\\ActivityLogDtos\\ActivityLogDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T18:40:01.234Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ActivityLog.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\Domain\\ActivityLog.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\Domain\\ActivityLog.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\Domain\\ActivityLog.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Models\\Domain\\ActivityLog.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T17:42:51.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20260826002326_AddListLogs.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260826002326_AddListLogs.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260826002326_AddListLogs.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260826002326_AddListLogs.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Migrations\\20260826002326_AddListLogs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-26T00:23:26.378Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LogsController.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\LogsController.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Controllers\\LogsController.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\LogsController.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Controllers\\LogsController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAADgvxMAAACCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T18:44:25.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IActivityLogRepository.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ActivityLogRepositories\\IActivityLogRepository.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\ActivityLogRepositories\\IActivityLogRepository.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\ActivityLogRepositories\\IActivityLogRepository.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Repositories\\ActivityLogRepositories\\IActivityLogRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T18:47:36.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Program.cs",
               "RelativeDocumentMoniker": "PersonalProjectApi\\Program.cs",
               "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Program.cs",
               "RelativeToolTip": "PersonalProjectApi\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAqwCQAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-27T07:53:47.326Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Card.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\Domain\\Card.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\Domain\\Card.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\Domain\\Card.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Models\\Domain\\Card.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-20T14:32:51.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CardsController.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\CardsController.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Controllers\\CardsController.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\CardsController.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Controllers\\CardsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAABxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T08:20:00.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "20260825191306_MakeCardIdNullable.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825191306_MakeCardIdNullable.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260825191306_MakeCardIdNullable.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825191306_MakeCardIdNullable.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Migrations\\20260825191306_MakeCardIdNullable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T19:13:06.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ListsController.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\ListsController.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Controllers\\ListsController.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Controllers\\ListsController.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Controllers\\ListsController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T10:32:04.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ICardsRepository.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Repositories\\CardsRepositories\\ICardsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T08:27:33.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "20260825175224_AddActivityLogs.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825175224_AddActivityLogs.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260825175224_AddActivityLogs.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825175224_AddActivityLogs.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Migrations\\20260825175224_AddActivityLogs.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T17:52:24.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "BoardList.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\Domain\\BoardList.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\Domain\\BoardList.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\Domain\\BoardList.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Models\\Domain\\BoardList.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-20T15:52:26.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "CardDto.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\CardDto.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\CardDto.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\CardDto.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\CardDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T09:07:51.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "BoardListDto.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\BoardListsDto\\BoardListDto.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\BoardListsDto\\BoardListDto.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\BoardListsDto\\BoardListDto.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Models\\DTO\\BoardListsDto\\BoardListDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T10:29:14.561Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "20260825084935_AddingListPosition.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Migrations\\20260825084935_AddingListPosition.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T08:49:35.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AddCardRequestDto.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\AddCardRequestDto.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\AddCardRequestDto.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Models\\DTO\\CardDTOs\\AddCardRequestDto.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Models\\DTO\\CardDTOs\\AddCardRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T15:26:57.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "20260822164743_ChangePriorityToEnum.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260822164743_ChangePriorityToEnum.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260822164743_ChangePriorityToEnum.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260822164743_ChangePriorityToEnum.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Migrations\\20260822164743_ChangePriorityToEnum.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T16:47:44.083Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "20260822164958_ChangePriorityInCards.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260822164958_ChangePriorityInCards.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260822164958_ChangePriorityInCards.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260822164958_ChangePriorityInCards.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Migrations\\20260822164958_ChangePriorityInCards.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-22T16:49:58.9Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "20260821075850_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260821075850_InitialCreate.cs",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\Migrations\\20260821075850_InitialCreate.cs",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\Migrations\\20260821075850_InitialCreate.cs",
+              "RelativeToolTip": "PersonalProjectApi\\Migrations\\20260821075850_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-21T07:58:50.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\appsettings.json",
+              "RelativeDocumentMoniker": "PersonalProjectApi\\appsettings.json",
+              "ToolTip": "C:\\Works\\Apps\\PersonalProject\\TaskBoardApi\\PersonalProjectApi\\PersonalProjectApi\\appsettings.json",
+              "RelativeToolTip": "PersonalProjectApi\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-20T17:03:55.902Z"
             }
           ]
         }

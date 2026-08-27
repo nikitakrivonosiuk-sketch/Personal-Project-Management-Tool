@@ -1,0 +1,64 @@
+@if (listData){
+    <div class="flex flex-col gap-3 w-80 shrink-0 p-2 bg-white rounded-xl">
+    
+        @if(!isEditing){
+        <div class="flex items-center justify-between w-full border-t-2 border-b-2 py-2 border-gray-200">
+            <h2 class=" text-lg font-medium"> {{listData.title}} </h2>
+            
+            <div class="flex items-center gap-2">
+                <span class="text-base font-medium"> {{listData.cards.length.toString()}} </span>
+
+                <app-context-menu>
+                    <button (click)="onEditListClick()" type="button"
+                        class="flex items-center gap-2 w-full px-2.5 py-1.5 text-xs font-semibold text-gray-700 bg-gray-50 
+                                                        hover:bg-gray-100 rounded-lg transition-colors cursor-pointer text-left">
+                        <img src="edit-icon.png" alt="edit-icon" class="w-5 h-5 object-contain shrink-0">
+                        <span class="text-sm"> Edit </span>
+                    </button>
+        
+                    <button (click)="DeleteList()" type="submit"
+                        class="flex items-center gap-2 w-full px-2.5 py-1.5 text-xs font-semibold text-red-600 bg-gray-50 
+                                                        hover:bg-red-100 rounded-lg transition-colors cursor-pointer text-left">
+                        <img src="delete-icon.png" alt="delete-icon" class="w-5 h-5 object-contain shrink-0">
+                        <span class="text-sm"> Delete </span>
+                    </button>
+                </app-context-menu>
+            </div>
+        </div>
+        }
+        @else {
+        <div class="gap-3 w-80 shrink-0 bg-white">
+            <div class="flex w-75 h-12 bg-gray-100 border border-gray-300 rounded-xs shadow-xs">
+                <input maxlength="20" [(ngModel)]="newName" class="px-4 w-full h-full font-semibold text-base" type="text">
+            </div>
+            <div class="flex inline-flex items-center w-full shrink-0 gap-2 py-3">
+                <button (click)="Save()" type="submit" class="bg-slate-500 w-36 h-10 rounded-md
+                hover:bg-slate-600 active:bg-slate-500 cursor-pointer">
+                    <p class="text-white font-medium"> Save</p>
+                </button>
+
+                <button (click)="isEditing = false" type="submit" class="bg-white w-36 h-10 rounded-md border border-gray-200
+                hover:bg-gray-100 active:bg-gray-200 cursor-pointer">
+                    <p class="text-black font-medium"> Cancel</p>
+                </button>
+            </div>
+        </div>
+        }
+    
+        <!-- Add card button -->
+        <button (click)="onAddCardClick()" type="submit" class="inline-flex gap-6 items-center p-2 font-medium
+        border-dashed bg-white border border-gray-400 rounded-md shadow-sm hover:bg-gray-100 hover:text-gray-900 transition-colors
+        active:bg-gray-300 cursor-pointer">
+            <img src="add-icon.png" alt="Add icon" class="w-6 h-6 object-contain">
+            <span> Add new card </span>
+        </button>
+    
+        <div class="flex flex-col gap-2">
+            @for (card of listData.cards; track card.id) {
+                <app-card [cardData]="card"
+                          (cardAction)="onHandleCard($event)"
+                          [lists]="lists"/> 
+            }
+        </div>
+    </div>
+}

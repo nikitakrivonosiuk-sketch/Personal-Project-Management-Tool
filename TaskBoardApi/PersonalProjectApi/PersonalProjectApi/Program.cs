@@ -1,10 +1,40 @@
+using Microsoft.EntityFrameworkCore;
+using PersonalProjectApi.Data;
+using PersonalProjectApi.Repositories.ActivityLogRepositories;
+using PersonalProjectApi.Repositories.CardsRepositories;
+using PersonalProjectApi.Repositories.ListRepositories;
+
 var builder = WebApplication.CreateBuilder(args);
+
+const string CORSOpenPolicy = "OpenCORSPolicy";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+      name: CORSOpenPolicy,
+      builder => { builder
+          .WithOrigins("*")
+          .AllowAnyHeader()
+          .AllowAnyMethod();
+      });
+});
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+});
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddDbContext<TaskBoardDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("TaskBoardConnectionString")));
+
+builder.Services.AddScoped<ICardsRepository, SQLCardsRepository>();
+builder.Services.AddScoped<IListsRepository, SQLListsRepository>();
+builder.Services.AddScoped<IActivityLogRepository, SQLActivityLogRepository>();
 
 var app = builder.Build();
 
@@ -15,6 +45,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(CORSOpenPolicy);
 
 app.UseAuthorization();
 

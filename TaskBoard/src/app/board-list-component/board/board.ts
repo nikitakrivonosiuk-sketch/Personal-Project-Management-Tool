@@ -34,6 +34,8 @@ export class Board implements OnInit {
     const boardId = this.route.snapshot.paramMap.get('id');
 
     if (boardId){
+      this.boardService.activeBoardId.set(boardId);
+
       this.boardService.getBoardData(boardId).subscribe({
         next: (data) => {
           this.boardLists.set(data.boardLists.map(list => ({
@@ -48,12 +50,20 @@ export class Board implements OnInit {
             description: c.description || "",
             dueDate: c.dueDate || "",
             priority: (c.priority || 'Low') as TaskPriority,
-          }))
+          })).sort((x, y) => {
+            if(!x.dueDate) return 1;
+            if (!y.dueDate) return -1;
+            return new Date(x.dueDate).getTime() - new Date(y.dueDate).getTime();
+          })
         })));
         },
         error: err => console.error("Бекенд ліг або CORS не пускає:", err),
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.boardService.activeBoardId.set(null);
   }
 
   onAddListClick(){

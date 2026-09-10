@@ -30,9 +30,10 @@ namespace PersonalProjectApi.Repositories.ListRepositories
             await dbContext.ActivityLogs.AddAsync(new ActivityLog
             {
                 BoardListId = boardList.Id,
+                BoardId = boardList.BoardId,
                 Description = $"'{boardList.Title}' was created.",
                 CreatedAt = DateTime.Now,
-                ActionType = "Created"
+                ActionType = "ListCreated"
             });
 
             await dbContext.SaveChangesAsync();
@@ -55,6 +56,7 @@ namespace PersonalProjectApi.Repositories.ListRepositories
                 await dbContext.ActivityLogs.AddAsync(new ActivityLog
                 {
                     BoardListId = listDomain.Id,
+                    BoardId = listDomain.BoardId,
                     Description = $"List tittle was changed from '{listDomain.Title}' to '{boardList.Title}'",
                     ActionType = "TitleChanged",
                 });
@@ -93,9 +95,12 @@ namespace PersonalProjectApi.Repositories.ListRepositories
                 .Where(log => log.BoardListId == id)
                 .ExecuteUpdateAsync(s => s.SetProperty(l => l.BoardListId, (Guid?)null));
 
+            var list = await dbContext.BoardLists.FindAsync(id);
+
             await dbContext.ActivityLogs.AddAsync(new ActivityLog
             {
                 BoardListId = null,
+                BoardId = list?.BoardId,
                 Description = $"You deleted '{deletedList.Title}' list.",
                 ActionType = "Deleted",
             });

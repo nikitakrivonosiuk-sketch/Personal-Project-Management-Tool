@@ -17,9 +17,12 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
         {
             await dbContext.Cards.AddAsync(card);
 
+            var list = await dbContext.BoardLists.FindAsync(card.BoardListId);
+
             var log = new ActivityLog
             {
                 CardId = card.Id,
+                BoardId = list?.BoardId,
                 ActionType = "Created",
                 Description = $"You created '{card.Title}' card"
             };
@@ -33,7 +36,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
         {
             var cardsDomain = await dbContext.Cards
                 .Include(c => c.BoardList)
-                .OrderBy(c => c.DueDate)
+                .OrderByDescending(c => c.DueDate)
                 .ToListAsync();
             return cardsDomain;
         }
@@ -47,6 +50,8 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
                 return null;
             }
 
+            var list = await dbContext.BoardLists.FindAsync(card.BoardListId);
+
             // List changed
             if (cardDomain.BoardListId != card.BoardListId)
             {
@@ -56,6 +61,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
                 var moveLog = new ActivityLog
                 {
                     CardId = cardDomain.Id,
+                    BoardId = list?.BoardId,
                     ActionType = "Moved",
                     Description = $"You moved '{cardDomain.Title}' from {newList?.Title} to {oldList?.Title}",
                 };
@@ -127,9 +133,12 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
                            .Where(log => log.CardId == id)
                            .ExecuteUpdateAsync(s => s.SetProperty(l => l.CardId, (Guid?)null));
 
+            var list = await dbContext.BoardLists.FindAsync(id);
+
             var deleteLog = new ActivityLog
             {
                 CardId = id,
+                BoardId = list?.BoardId,
                 ActionType = "Deleted",  
                 Description = $"You deleted '{existingCard.Title}'",
             };

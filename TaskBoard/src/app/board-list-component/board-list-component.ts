@@ -62,6 +62,7 @@ export class BoardListComponent implements OnInit {
   onSaveTitle(board: BoardDto){
     if (this.changedBoardTitle === ''){
       alert("Enter the title of your board");
+      return;
     }
 
     const boardToUpdate = {...board, title: this.changedBoardTitle};

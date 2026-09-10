@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
-import { Board } from "../board-list-component/board/board";
+import { Component, inject, input, signal } from '@angular/core';
 import { HistoryBar } from "./history-bar/history-bar";
+import { BoardService } from '../board-list-component/board/board-service';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +9,9 @@ import { HistoryBar } from "./history-bar/history-bar";
   styleUrl: './header.css',
 })
 export class Header {
+  boardService = inject(BoardService);
+  
+  activeBoardId = this.boardService.activeBoardId; 
   historyState = signal(false);
 
   toggle(){

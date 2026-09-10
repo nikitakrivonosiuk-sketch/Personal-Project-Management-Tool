@@ -15,7 +15,7 @@
                 @if (editingBoardId === board.id){
                     <div class="flex justify-between w-full" (click)="$event.stopPropagation()">
                         <input [(ngModel)]="changedBoardTitle" type="text" placeholder="Type new title here..." (blur)="cancelEdit()" autofocus
-                        class="text-lg font-semibold border border-dashed rounded-md p-0.5 border-gray-300">
+                        class="text-lg font-semibold border border-dashed rounded-md p-0.5 border-gray-300 w-45">
 
                         <button type="button" (mousedown)="onSaveTitle(board)" class="bg-gray-200 text-base font-base cursor-pointer hover:bg-gray-300 w-27 ml-3 rounded-lg">
                             Save

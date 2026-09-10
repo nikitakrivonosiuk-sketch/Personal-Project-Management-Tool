@@ -83,13 +83,25 @@ namespace PersonalProjectApi.Data
                 .HasOne(a => a.BoardList)
                 .WithMany()
                 .HasForeignKey(a => a.BoardListId)
-                .OnDelete(DeleteBehavior.NoAction); 
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ActivityLog>()
                 .HasOne(a => a.Card)
                 .WithMany()
                 .HasForeignKey(a => a.CardId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<BoardList>()
+                .HasOne(bl => bl.Board)
+                .WithMany(b => b.BoardLists)
+                .HasForeignKey(bl => bl.BoardId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Card>()
+                .HasOne(c => c.BoardList)
+                .WithMany(bl => bl.Cards)
+                .HasForeignKey(c => c.BoardListId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

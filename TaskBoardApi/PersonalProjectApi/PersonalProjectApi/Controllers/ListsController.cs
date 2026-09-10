@@ -19,7 +19,7 @@ namespace PersonalProjectApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllLists()
+        public async Task<IActionResult> GetLists()
         {
             var listsDomain = await _listsRepository.GetAllBoardListsAsync();
 
@@ -34,11 +34,12 @@ namespace PersonalProjectApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateList([FromBody] BoardListDto boardListDto)
+        public async Task<IActionResult> CreateList([FromBody] CreateListRequestDto requestDto)
         {
             var listDomain = new BoardList
             {
-                Title = boardListDto.Title,
+                Title = requestDto.Title,
+                BoardId = requestDto.BoardId,
             };
 
             listDomain = await _listsRepository.CreateListAsync(listDomain);

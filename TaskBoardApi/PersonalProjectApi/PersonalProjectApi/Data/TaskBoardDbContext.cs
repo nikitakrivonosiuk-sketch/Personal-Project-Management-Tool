@@ -13,27 +13,39 @@ namespace PersonalProjectApi.Data
         public DbSet<BoardList> BoardLists { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
+        public DbSet<Board> Boards { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Board>().HasData(
+                new Board()
+                {
+                    Id = Guid.Parse("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
+                    Title = "My Tasks",
+                    CreatedAt = DateTime.Now,
+                });
+
             modelBuilder.Entity<BoardList>().HasData(
                 new BoardList()
                 {
                     Id = Guid.Parse("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
+                    BoardId = Guid.Parse("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
                     Title = "To Do",
                     Position = 0,
                 },
                 new BoardList()
                 {
                     Id = Guid.Parse("faa6be83-b7c5-4130-98a3-c6fa0982c67f"),
+                    BoardId = Guid.Parse("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
                     Title = "In Progress",
                     Position = 1,
                 },
                 new BoardList()
                 {
                     Id = Guid.Parse("d009636a-b61a-444d-a186-40aae85263c8"),
+                    BoardId = Guid.Parse("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
                     Title = "Finished",
                     Position = 2,
                 });

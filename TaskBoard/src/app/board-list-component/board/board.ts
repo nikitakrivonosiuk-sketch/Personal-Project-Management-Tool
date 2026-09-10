@@ -7,7 +7,7 @@ import { CardActionEvent, CardItem, TaskPriority } from './list/card/card-item';
 import { CardViewModal } from "./card-view-modal/card-view-modal";
 import { BoardService } from './board-service';
 import { BoardListDto, CardDto } from './board-model';
-import { Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -18,6 +18,7 @@ import { Title } from '@angular/platform-browser';
 export class Board implements OnInit {
 
   private boardService = inject(BoardService);
+  private route = inject(ActivatedRoute);
 
   boardLists = signal<ListItem[]>([]);
 
@@ -30,17 +31,17 @@ export class Board implements OnInit {
   isViewingCard?: CardItem;
 
   ngOnInit(){
-    this.boardService.getBoardData().subscribe({
-      next: (data) => {
-        this.boardLists.set(data.lists.map(list => 
-        ({
+    const boardId = this.route.snapshot.paramMap.get('id');
+
+    if (boardId){
+      this.boardService.getBoardData(boardId).subscribe({
+        next: (data) => {
+          this.boardLists.set(data.boardLists.map(list => ({
           id: list.id,
+          boardId: list.boardId,
           title: list.title,
           position: list.position,
-
-          cards: data.cards
-          .filter(c => c.boardListId === list.id)
-          .map(c => ({
+          cards: list.cards.map(c => ({
             id: c.id,
             listId: c.boardListId,
             title: c.title,
@@ -49,14 +50,23 @@ export class Board implements OnInit {
             priority: (c.priority || 'Low') as TaskPriority,
           }))
         })));
-      },
-      error: err => console.error("Бекенд ліг або CORS не пускає:", err),
-    });
+        },
+        error: err => console.error("Бекенд ліг або CORS не пускає:", err),
+      });
+    }
   }
 
   onAddListClick(){
+    const currentBoardId = this.route.snapshot.paramMap.get('id');
+
+    if (!currentBoardId) {
+      console.error("Id is missing in routing.");
+      return;
+    }
+
     const newList = {
       title: this.newListTitle,
+      boardId: currentBoardId,
     };
 
     this.boardService.createList(newList).subscribe({
@@ -160,11 +170,21 @@ export class Board implements OnInit {
           description: cardData.description,
           dueDate: cardData.dueDate,
           priority: cardData.priority,
-          boardListId: cardData.listId          
+          boardListId: targetListId,          
         }
 
         this.boardService.updateCard(this.isEditingCardData.id, newCardData).subscribe({
           next: (updatedCard: CardDto) => {
+
+            const mappedCard: CardItem = {
+              id: updatedCard.id,
+              title: updatedCard.title,
+              description: updatedCard.description || '',
+              dueDate: updatedCard.dueDate || '',
+              priority: updatedCard.priority,
+              listId: updatedCard.boardListId 
+            };
+
             this.boardLists.update(lists => {
               let updatedLists = [...lists];
 
@@ -175,7 +195,7 @@ export class Board implements OnInit {
 
               updatedLists = updatedLists.map(list => {
                 if (list.id === targetListId){
-                  const newCardsArray = [...list.cards, updatedCard as unknown as CardItem];  
+                  const newCardsArray = [...list.cards, mappedCard];  
 
                   // Sorting this array by datetime
                   newCardsArray.sort((x, y) => {
@@ -213,10 +233,20 @@ export class Board implements OnInit {
 
         this.boardService.createCard(newCardData).subscribe({
           next: (savedCardFromDb : CardDto) => {
+
+            const mappedCard: CardItem = {
+              id: savedCardFromDb.id,
+              title: savedCardFromDb.title,
+              description: savedCardFromDb.description || '',
+              dueDate: savedCardFromDb.dueDate || '',
+              priority: savedCardFromDb.priority,
+              listId: savedCardFromDb.boardListId
+            };
+
             this.boardLists.update(lists => lists.map(list => {
 
               if (list.id === targetListId){
-                const newCardsArray = [...list.cards, savedCardFromDb as unknown as CardItem];  
+                const newCardsArray = [...list.cards, mappedCard];  
 
                 // Sorting this array by datetime
 

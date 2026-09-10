@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BoardListDto, CardDto } from "./board-model";
+import { BoardDto, BoardListDto, CardDto, CreatingBoardRequestDto } from "./board-model";
 import { forkJoin, Subject } from "rxjs";
 import { ActivityLog } from "./activity-log";
 
@@ -23,11 +23,8 @@ export class BoardService {
         return this.http.get<ActivityLog[]>(url);
     }
 
-    getBoardData(){
-        return forkJoin ({
-            lists: this.http.get<BoardListDto[]>(`${this.apiUrl}/Lists`),
-            cards: this.http.get<CardDto[]>(`${this.apiUrl}/Cards`)
-        });
+    getBoardData(boardId: string){
+        return this.http.get<BoardDto>(`${this.apiUrl}/Boards/${boardId}`);
     }
 
     // Card functions
@@ -54,5 +51,26 @@ export class BoardService {
 
     deleteList(listId: string){
         return this.http.delete(`${this.apiUrl}/Lists/${listId}`, {responseType: 'text'});
+    }
+
+    // Board actions
+    getBoards(){
+        return this.http.get<BoardDto[]>(`${this.apiUrl}/Boards`);
+    }
+
+    getBoardById(boardId: string) {
+        return this.http.get<BoardDto>(`${this.apiUrl}/Boards/${boardId}`);
+    }
+
+    createBoard(boardDto: CreatingBoardRequestDto){
+        return this.http.post<BoardDto>(`${this.apiUrl}/Boards`, boardDto);
+    }
+
+    updateBoard(board: BoardDto){
+        return this.http.put<BoardDto>(`${this.apiUrl}/Boards/${board.id}`, board);
+    }
+
+    deleteBoard(id: string){
+        return this.http.delete(`${this.apiUrl}/Boards/${id}`, {responseType: 'text'});
     }
 }

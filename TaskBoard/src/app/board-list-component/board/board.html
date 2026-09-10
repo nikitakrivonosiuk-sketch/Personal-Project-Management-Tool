@@ -1,4 +1,4 @@
-<div class="flex gap-3 items-start overflow-x-auto min-h-screen bg-white">
+<div class="flex p-2 gap-3 items-start overflow-x-auto min-h-screen bg-white">
     @for (list of boardLists(); track list.id) {
         <app-list [listData]="list"
                   (deleteList)="deleteList(list.id)"

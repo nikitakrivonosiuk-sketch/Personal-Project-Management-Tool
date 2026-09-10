@@ -106,7 +106,6 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
             cardDomain.Title = card.Title;
             cardDomain.Description = card.Description;
             cardDomain.DueDate = card.DueDate;
-            cardDomain.BoardList = card.BoardList;
             cardDomain.Priority = card.Priority;
             cardDomain.BoardListId = card.BoardListId;
 

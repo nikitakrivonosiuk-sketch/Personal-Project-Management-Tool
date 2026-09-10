@@ -16,7 +16,7 @@
                     <img class="w-4 h-4 object-contain opacity-50 " src="list-icon.png" alt="list icon">
                     List
                 </span>
-                <select class="border border-gray-200 rounded-md bg-gray-100 w-40 p-2 focus:border-gray-300 outline-none"
+                <select name="listId" class="border border-gray-200 rounded-md bg-gray-100 w-40 p-2 focus:border-gray-300 outline-none"
                     [(ngModel)]="cardModel.listId" required>
                     @for (list of lists; track list.id) {
                     <option [value]="list.id" class="bg-gray-100">{{list.title}}</option>

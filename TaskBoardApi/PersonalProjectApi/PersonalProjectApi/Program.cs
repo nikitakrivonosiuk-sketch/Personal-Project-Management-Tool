@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PersonalProjectApi.Data;
 using PersonalProjectApi.Repositories.ActivityLogRepositories;
+using PersonalProjectApi.Repositories.BoardRepository;
 using PersonalProjectApi.Repositories.CardsRepositories;
 using PersonalProjectApi.Repositories.ListRepositories;
 
@@ -35,6 +36,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("TaskBoardConnect
 builder.Services.AddScoped<ICardsRepository, SQLCardsRepository>();
 builder.Services.AddScoped<IListsRepository, SQLListsRepository>();
 builder.Services.AddScoped<IActivityLogRepository, SQLActivityLogRepository>();
+builder.Services.AddScoped<IBoardRepository,  SQLBoardsRepository>();
 
 var app = builder.Build();
 

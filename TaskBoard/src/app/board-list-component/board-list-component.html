@@ -1,0 +1,76 @@
+<div class="p-5">
+
+    <h2 class="text-black text-2xl font-semibold mb-4">
+        Your boards:
+    </h2>
+
+    <div class="grid grid-cols-4 gap-4">
+        @for (board of boards(); track board.id) {
+        <div [routerLink]="['/boards', board.id]" class="group relative w-90 h-60 border shadow-sm rounded-xl overflow-hidden
+            transition-transform duration-300 ease-out hover:scale-105 hover:shadow-md z-0 hover:z-10 cursor-pointer">
+            <img src="board-background.png" alt="background image" class="object-cover">
+
+            <div class="absolute flex justify-between inset-x-0 bottom-0 w-full h-10 bg-white p-1 px-3 z-10">
+
+                @if (editingBoardId === board.id){
+                    <div class="flex justify-between w-full" (click)="$event.stopPropagation()">
+                        <input [(ngModel)]="changedBoardTitle" type="text" placeholder="Type new title here..." (blur)="cancelEdit()" autofocus
+                        class="text-lg font-semibold border border-dashed rounded-md p-0.5 border-gray-300">
+
+                        <button type="button" (mousedown)="onSaveTitle(board)" class="bg-gray-200 text-base font-base cursor-pointer hover:bg-gray-300 w-27 ml-3 rounded-lg">
+                            Save
+                        </button>
+                    </div>
+                }
+                @else {
+                    <h3 class="text-lg font-semibold">{{board.title}}</h3>
+                }
+
+                <app-context-menu (click)="$event.stopPropagation()">
+                    <button type="button" (click)="titleChange(board)"
+                        class="flex items-center gap-2 w-full px-2.5 py-1.5 text-xs font-semibold text-gray-700 bg-gray-50 
+                                                hover:bg-gray-100 rounded-lg transition-colors cursor-pointer text-left">
+                        <img src="edit-icon.png" alt="edit-icon" class="w-5 h-5 object-contain shrink-0">
+                        <span class="text-sm"> Edit Title </span>
+                    </button>
+                    <button type="button" (click)="boardDelete(board.id)"
+                        class="flex items-center gap-2 w-full px-2.5 py-1.5 text-xs font-semibold text-red-600 bg-gray-50 
+                                                hover:bg-red-100 rounded-lg transition-colors cursor-pointer text-left">
+                        <img src="delete-icon.png" alt="delete-icon" class="w-5 h-5 object-contain shrink-0">
+                        <span class="text-sm"> Delete </span>
+                    </button>
+                </app-context-menu>
+            </div>
+        </div>
+        }
+
+        @if (!isAddingBoard){
+        <div (click)="onAddBoardClick()" class="group w-90 h-60 border border-black border-dashed shadow-sm rounded-xl overflow-hidden
+            transition-transform duration-300 ease-out hover:scale-105 hover:shadow-md z-0 hover:z-10 cursor-pointer">
+            <img src="add-board.png" alt="background image" class="object-cover w-full h-full mt-2 opacity-75">
+        </div>
+        }
+        @else {
+        <div class="flex flex-col group gap-5 p-3 w-90 h-60 border border-black border-dashed shadow-sm rounded-xl overflow-hidden
+            transition-transform duration-300 ease-out hover:scale-105 hover:shadow-md z-0 hover:z-10">
+            <h2 class="text-2xl">
+                Enter a title for board:
+            </h2>
+            <input [(ngModel)]="newBoardTitle" type="text" class="border text-3xl border-gray-200 h-15 w-full rounded-md"
+                placeholder="Type here...">
+
+            <div class="flex justify-between w-full mt-3">
+                <button (click)="onCreate()" type="button" class="w-40 h-12 text-2xl font-base rounded-md bg-gray-500 text-white cursor-pointer 
+                    hover:bg-gray-400 ">
+                    Create
+                </button>
+                <button (click)="close()" class="w-40 h-12 text-2xl font-base rounded-md bg-gray-200 text-gray-500 cursor-pointer 
+                    hover:bg-gray-100 ">
+                    Cancel
+                </button>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CardItem } from '../list/card/card-item';
 import { ListItem } from '../list/list-item';
@@ -9,7 +9,7 @@ import { ListItem } from '../list/list-item';
   templateUrl: './card-modal.html',
   styleUrl: './card-modal.css',
 })
-export class CardModal implements OnInit {
+export class CardModal implements OnChanges {
   @Input() cardData?: CardItem;
   @Input() currentListId?: string;
   @Input() lists?: ListItem[];
@@ -18,12 +18,12 @@ export class CardModal implements OnInit {
 
   cardModel: Partial<CardItem> = {
     title: '',
-    listId: this.currentListId || '',
+    listId: '',
     description: '',
     priority: 'Low',
   };
 
-  ngOnInit(){
+  ngOnChanges(changes: SimpleChanges){
     if (this.cardData){
       this.cardModel = {...this.cardData}
 
@@ -32,8 +32,15 @@ export class CardModal implements OnInit {
     }
     }
     else if(this.currentListId) {
-      this.cardModel.listId = this.currentListId;
+      this.cardModel = {
+        title: '',
+        description: '',
+        priority: 'Low',
+        listId: this.currentListId
+      };
     }
+
+    console.log(this.cardData)
   }
 
   onSave(){
@@ -49,7 +56,7 @@ export class CardModal implements OnInit {
       alert("Please enter the card name.")
       return;
     }
-    if(!this.cardModel.listId){
+    if(this.cardModel.listId === ''){
       alert("Please choose the list.")
       return;
     }

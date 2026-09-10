@@ -1,5 +1,84 @@
 [
   {
+    "ContainingType": "PersonalProjectApi.Controllers.BoardsController",
+    "Method": "GetAllBoards",
+    "RelativePath": "api/Boards",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.BoardsController",
+    "Method": "CreateBoard",
+    "RelativePath": "api/Boards",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "creatingRequestDto",
+        "Type": "PersonalProjectApi.Models.DTO.BoardsDto.CreatingBoardDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.BoardsController",
+    "Method": "GetBoard",
+    "RelativePath": "api/Boards/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.BoardsController",
+    "Method": "UpdateBoard",
+    "RelativePath": "api/Boards/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestDto",
+        "Type": "PersonalProjectApi.Models.DTO.BoardsDto.UpdateBoardRequestDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PersonalProjectApi.Controllers.BoardsController",
+    "Method": "DeleteBoard",
+    "RelativePath": "api/Boards/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PersonalProjectApi.Controllers.CardsController",
     "Method": "GetAllCards",
     "RelativePath": "api/Cards",
@@ -64,7 +143,7 @@
   },
   {
     "ContainingType": "PersonalProjectApi.Controllers.ListsController",
-    "Method": "GetAllLists",
+    "Method": "GetLists",
     "RelativePath": "api/Lists",
     "HttpMethod": "GET",
     "IsController": true,
@@ -81,8 +160,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "boardListDto",
-        "Type": "PersonalProjectApi.Models.DTO.BoardListsDto.BoardListDto",
+        "Name": "requestDto",
+        "Type": "PersonalProjectApi.Models.DTO.BoardListsDto.CreateListRequestDto",
         "IsRequired": true
       }
     ],

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { Board } from "../board/board";
+import { Board } from "../board-list-component/board/board";
 import { HistoryBar } from "./history-bar/history-bar";
 
 @Component({

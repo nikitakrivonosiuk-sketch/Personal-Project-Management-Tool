@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, input, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Card } from './card/card';
 import { ListItem } from './list-item';
@@ -38,7 +38,6 @@ export class List {
 
     // Saving to db.
     this.updateList.emit(this.listData);
-
     this.isEditing = false;
   }
 

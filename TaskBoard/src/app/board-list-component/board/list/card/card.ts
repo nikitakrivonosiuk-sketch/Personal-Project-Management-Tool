@@ -21,7 +21,6 @@ export class Card {
 
   onViewCard(){
     this.cardAction.emit({cardAction: 'view', card: this.cardData});
-    console.log("Worked");
   }
 
   onDeleteCard(){

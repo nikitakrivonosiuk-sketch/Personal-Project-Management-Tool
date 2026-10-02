@@ -1,7 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CardItem } from '../list/card/card-item';
 import { ListItem } from '../list/list-item';
+import { Store } from '@ngrx/store';
+import { showToast } from '../../../toast.service/toast.action';
+import { ToastType } from '../../../toast.service/toast.reducer';
+import { CardValidator } from './card.validator';
+import { ToastService } from '../../../toast.service/toast.service';
 
 @Component({
   selector: 'app-card-modal',
@@ -15,6 +20,8 @@ export class CardModal implements OnChanges {
   @Input() lists?: ListItem[];
   @Output() isOpened = new EventEmitter<boolean>();
   @Output() savedCard = new EventEmitter<Partial<CardItem>>();
+
+  private toaster = inject(ToastService);
 
   cardModel: Partial<CardItem> = {
     title: '',
@@ -39,28 +46,18 @@ export class CardModal implements OnChanges {
         listId: this.currentListId
       };
     }
-
-    console.log(this.cardData)
   }
 
   onSave(){
-    if(!this.cardModel.title?.trim()){
-      alert("Please enter the card name.")
-      return;
+    const validated = CardValidator.validate(this.cardModel);
+
+    if (validated === null){
+      this.savedCard.emit(this.cardModel);
+      this.toaster.success('Card was saved succesfully!');
     }
-    if(!this.cardModel.dueDate){
-      alert("Please enter the date.")
-      return;
+    else {
+      this.toaster.warning(validated);
     }
-    if(!this.cardModel.priority){
-      alert("Please enter the card name.")
-      return;
-    }
-    if(this.cardModel.listId === ''){
-      alert("Please choose the list.")
-      return;
-    }
-    this.savedCard.emit(this.cardModel);
   }
 
   close(){

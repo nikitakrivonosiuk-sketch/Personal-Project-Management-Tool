@@ -4,6 +4,7 @@ import { BoardDto, CreatingBoardRequestDto } from './board/board-model';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ContextMenu } from "./board/context-menu/context-menu";
+import { ToastService } from '../toast.service/toast.service';
 @Component({
   selector: 'app-board-list-component',
   imports: [RouterLink, FormsModule, ContextMenu],
@@ -16,6 +17,7 @@ export class BoardListComponent implements OnInit {
   newBoardTitle: string = '';
   changedBoardTitle: string = '';
 
+  private toaster = inject(ToastService);
 
   private boardService = inject(BoardService);
   boards = signal<BoardDto[]>([]);

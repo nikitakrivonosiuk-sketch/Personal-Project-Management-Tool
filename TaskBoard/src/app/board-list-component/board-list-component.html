@@ -30,13 +30,13 @@
                     <button type="button" (click)="titleChange(board)"
                         class="flex items-center gap-2 w-full px-2.5 py-1.5 text-xs font-semibold text-gray-700 bg-gray-50 
                                                 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer text-left">
-                        <img src="edit-icon.png" alt="edit-icon" class="w-5 h-5 object-contain shrink-0">
+                        <span class="material-symbols-outlined [font-variation-settings:'wght'_300]">edit_square</span>
                         <span class="text-sm"> Edit Title </span>
                     </button>
                     <button type="button" (click)="boardDelete(board.id)"
                         class="flex items-center gap-2 w-full px-2.5 py-1.5 text-xs font-semibold text-red-600 bg-gray-50 
                                                 hover:bg-red-100 rounded-lg transition-colors cursor-pointer text-left">
-                        <img src="delete-icon.png" alt="delete-icon" class="w-5 h-5 object-contain shrink-0">
+                        <span class="material-symbols-outlined [font-variation-settings:'wght'_400]">delete</span>
                         <span class="text-sm"> Delete </span>
                     </button>
                 </app-context-menu>
@@ -46,8 +46,8 @@
 
         @if (!isAddingBoard){
         <div (click)="onAddBoardClick()" class="group w-90 h-60 border border-black border-dashed shadow-sm rounded-xl overflow-hidden
-            transition-transform duration-300 ease-out hover:scale-105 hover:shadow-md z-0 hover:z-10 cursor-pointer">
-            <img src="add-board.png" alt="background image" class="object-cover w-full h-full mt-2 opacity-75">
+            transition-transform duration-300 ease-out hover:scale-105 hover:shadow-md z-0 hover:z-10 cursor-pointer text-center">
+            <span class="material-symbols-outlined [font-variation-settings:'wght'_500] mt-27 scale-400 opacity-70">add_2</span>
         </div>
         }
         @else {

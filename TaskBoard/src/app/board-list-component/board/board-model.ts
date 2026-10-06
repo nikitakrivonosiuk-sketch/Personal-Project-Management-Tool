@@ -1,5 +1,4 @@
-import { TaskPriority } from "./list/card/card-item";
-import { ListItem } from "./list/list-item";
+import { Priority } from "./list/card/card-item";
 
 export interface BoardListDto {
     id: string;
@@ -21,7 +20,7 @@ export interface CardDto {
     dueDate?: string;
     boardListId: string;
     boardTitle: string;
-    priority: TaskPriority;
+    priority: Priority;
 }
 
 export interface CreatingBoardRequestDto {

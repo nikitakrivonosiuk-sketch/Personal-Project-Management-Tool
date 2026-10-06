@@ -3,7 +3,8 @@ import { CardItem } from '../list/card/card-item';
 import { DatePipe } from '@angular/common';
 import { ListItem } from '../list/list-item';
 import { ActivityLog } from '../activity-log';
-import { BoardService } from '../board-service';
+import { BoardService } from '../../../services/board-service';
+import { ToastService } from '../../../services/toast.service/toast.service';
 
 @Component({
   selector: 'app-card-view-modal',
@@ -17,6 +18,8 @@ export class CardViewModal implements OnInit {
   @Input({required: true}) cardInfo!: CardItem;
   @Input({required: true}) lists!: ListItem[]; 
   cardList: string = '';
+
+  toaster = inject(ToastService);
 
   cardLogs = signal<ActivityLog[]>([]);
   skip: number = 0;
@@ -47,7 +50,7 @@ export class CardViewModal implements OnInit {
           this.cardLogs.update(oldLogs => [...oldLogs, ...loadedLogs]);
         }
       },
-      error: (err) => console.error("Backend is imposter", err),
+      error: (err) => this.toaster.error('Something went wrong with backend.'),
     });
   }
   

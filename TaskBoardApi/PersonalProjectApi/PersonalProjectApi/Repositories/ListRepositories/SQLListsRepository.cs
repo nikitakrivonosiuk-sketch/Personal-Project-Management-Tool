@@ -15,7 +15,7 @@ namespace PersonalProjectApi.Repositories.ListRepositories
 
         public async Task<List<BoardList>> GetAllBoardListsAsync()
         {
-            var listsDomain = await dbContext.BoardLists.OrderBy(l => l.Position).ToListAsync();
+            var listsDomain = await dbContext.BoardLists.OrderByDescending(l => l.Position).ToListAsync();
 
             return listsDomain;
         }

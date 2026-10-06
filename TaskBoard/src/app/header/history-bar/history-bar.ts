@@ -1,6 +1,6 @@
 import { Component, inject, input, model, OnInit, signal } from '@angular/core';
 import { ActivityLog } from '../../board-list-component/board/activity-log';
-import { BoardService } from '../../board-list-component/board/board-service';
+import { BoardService } from '../../services/board-service';
 import { DatePipe } from '@angular/common';
 
 @Component({

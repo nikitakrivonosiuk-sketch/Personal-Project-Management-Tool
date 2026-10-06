@@ -36,7 +36,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
         {
             var cardsDomain = await dbContext.Cards
                 .Include(c => c.BoardList)
-                .OrderByDescending(c => c.DueDate)
+                .OrderBy(c => c.DueDate)
                 .ToListAsync();
             return cardsDomain;
         }
@@ -122,7 +122,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
 
         public async Task<Boolean> DeleteCardAsync(Guid id)
         {
-            var existingCard = await dbContext.Cards.FindAsync(id);
+            var existingCard = await dbContext.Cards.Include(b => b.BoardList).FirstOrDefaultAsync(c => c.Id == id);
 
             if (existingCard == null)
             {
@@ -137,8 +137,8 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
 
             var deleteLog = new ActivityLog
             {
-                CardId = id,
-                BoardId = list?.BoardId,
+                CardId = null,
+                BoardId = existingCard.BoardList?.BoardId,
                 ActionType = "Deleted",  
                 Description = $"You deleted '{existingCard.Title}'",
             };

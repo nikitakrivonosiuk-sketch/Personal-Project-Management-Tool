@@ -1,8 +1,9 @@
 import { Injectable, inject, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BoardDto, BoardListDto, CardDto, CreatingBoardRequestDto } from "./board-model";
-import { forkJoin, Subject } from "rxjs";
-import { ActivityLog } from "./activity-log";
+import { BoardDto, BoardListDto, CardDto, CreatingBoardRequestDto } from "../board-list-component/board/board-model";
+import { Subject } from "rxjs";
+import { ActivityLog } from "../board-list-component/board/activity-log";
+import { environment } from "../../environments/environment";
 
 @Injectable ({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class BoardService {
     public logsUpdated = new Subject<void>();
     activeBoardId = signal<string | null>(null);
 
-    apiUrl = "https://localhost:7140/api";
+    apiUrl = environment.apiUrl;
 
     getLogs(cardId?: string, skip: number = 0, take: number = 10){
         let url = `${this.apiUrl}/Logs?skip=${skip}&take=${take}`;

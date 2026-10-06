@@ -5,8 +5,8 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { toastReducer } from './toast.service/toast.reducer';
-import { ToastEffects } from './toast.service/toast.effects';
+import { toastReducer } from './services/toast.service/toast.reducer';
+import { ToastEffects } from './services/toast.service/toast.effects';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {

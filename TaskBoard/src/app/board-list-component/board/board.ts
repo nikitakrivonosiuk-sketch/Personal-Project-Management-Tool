@@ -3,9 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { ListItem } from './list/list-item';
 import { List } from "./list/list";
 import { CardModal } from "./card-modal/card-modal";
-import { CardActionEvent, CardItem, TaskPriority } from './list/card/card-item';
+import { CardActionEvent, CardItem, Priority } from './list/card/card-item';
 import { CardViewModal } from "./card-view-modal/card-view-modal";
-import { BoardService } from './board-service';
+import { BoardService } from '../../services/board-service';
 import { BoardListDto, CardDto } from './board-model';
 import { ActivatedRoute } from '@angular/router';
 
@@ -49,7 +49,7 @@ export class Board implements OnInit {
             title: c.title,
             description: c.description || "",
             dueDate: c.dueDate || "",
-            priority: (c.priority || 'Low') as TaskPriority,
+            priority: (c.priority || 'Low') as Priority,
           })).sort((x, y) => {
             if(!x.dueDate) return 1;
             if (!y.dueDate) return -1;
@@ -195,32 +195,29 @@ export class Board implements OnInit {
               listId: updatedCard.boardListId 
             };
 
-            this.boardLists.update(lists => {
-              let updatedLists = [...lists];
-
-              updatedLists = updatedLists.map(list => ({
-                ...list,
-                cards: list.cards.filter(cards => cards.id !== cardData.id)
-              }));
-
-              updatedLists = updatedLists.map(list => {
-                if (list.id === targetListId){
-                  const newCardsArray = [...list.cards, mappedCard];  
-
-                  // Sorting this array by datetime
-                  newCardsArray.sort((x, y) => {
-                    const dateX = x.dueDate ? new Date(x.dueDate).getTime() : Infinity;
-                    const dateY = y.dueDate ? new Date(y.dueDate).getTime() : Infinity;
-
-                    return (dateX - dateY);
-                  });
-
-                  return {...list, cards: newCardsArray};
+            this.boardLists.update((lists) =>
+              lists.map((list) => {
+                if (list.id !== targetListId) {
+                  return {
+                    ...list,
+                    cards: list.cards.filter((c) => c.id !== updatedCard.id),
+                  };
                 }
-                return list;
-              });
-              return updatedLists;
-            });
+
+                const newCardsArray = list.cards.filter((c) => c.id !== updatedCard.id);
+
+                newCardsArray.push(mappedCard);
+
+                newCardsArray.sort((a, b) => {
+                  const dateA = a.dueDate ? new Date(a.dueDate).getTime() : Infinity;
+                  const dateB = b.dueDate ? new Date(b.dueDate).getTime() : Infinity;
+
+                  return dateA - dateB;
+                });
+
+                return { ...list, cards: newCardsArray };
+              }),
+            );
 
             this.boardService.logsUpdated.next();
             this.isEditingCardData = undefined;

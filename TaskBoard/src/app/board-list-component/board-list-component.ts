@@ -1,100 +1,117 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { BoardService } from './board/board-service';
+import { BoardService } from '../services/board-service';
 import { BoardDto, CreatingBoardRequestDto } from './board/board-model';
 import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { ContextMenu } from "./board/context-menu/context-menu";
-import { ToastService } from '../toast.service/toast.service';
+import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { ContextMenu } from './board/context-menu/context-menu';
+import { ToastService } from '../services/toast.service/toast.service';
+import { checkErrors } from '../services/form-validator';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-board-list-component',
-  imports: [RouterLink, FormsModule, ContextMenu],
+  imports: [RouterLink, FormsModule, ContextMenu, ReactiveFormsModule],
   templateUrl: './board-list-component.html',
   styleUrl: './board-list-component.css',
 })
 export class BoardListComponent implements OnInit {
   isAddingBoard: boolean = false;
   editingBoardId: string | null = null;
-  newBoardTitle: string = '';
-  changedBoardTitle: string = '';
 
   private toaster = inject(ToastService);
+
+  dictionary = {
+    newTitle: 'Board title',
+    changedBoardTitle: 'Board title',
+  };
+
+  createForm = new FormGroup({
+    newTitle: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+  });
+
+  editForm = new FormGroup({
+    changedTitle: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+  });
 
   private boardService = inject(BoardService);
   boards = signal<BoardDto[]>([]);
 
-  ngOnInit(){
+  ngOnInit() {
     this.boardService.getBoards().subscribe({
-      next: (boardsListFromDb : BoardDto[]) => {
+      next: (boardsListFromDb: BoardDto[]) => {
         this.boards.set(boardsListFromDb);
       },
-      error: (err: any) => console.error("Something wrong with server.", err),
+      error: (err: any) => this.toaster.error('Something went wrong with backend.'),
     });
   }
 
-  onCreate(){
-    if (this.newBoardTitle === '') {
-      alert("You need to enter a title to your board");
+  onCreate() {
+    const isValid = checkErrors(this.createForm, this.dictionary);
+    if (isValid !== null) {
+      this.toaster.warning(isValid);
       return;
     }
 
     const boardValue: CreatingBoardRequestDto = {
-      title: this.newBoardTitle,
+      title: this.createForm.value.newTitle as string,
     };
 
     this.boardService.createBoard(boardValue).subscribe({
       next: (boardFormDb: BoardDto) => {
-        this.boards.update(board => [...board, boardFormDb]);
+        this.boards.update((board) => [...board, boardFormDb]);
       },
-      error: (err: any) => console.error("Something wrong with backend", err),
+      error: (err: any) => this.toaster.error('Something went wrong with backend.'),
     });
 
     this.isAddingBoard = false;
-    this.newBoardTitle = '';
+    this.createForm.patchValue({ newTitle: '' });
   }
 
-  titleChange(board: any){
-    this.editingBoardId = board.id; 
+  titleChange(board: any) {
+    this.editingBoardId = board.id;
   }
 
   cancelEdit() {
     this.editingBoardId = null;
-    this.changedBoardTitle = '';
+    this.editForm.patchValue({ changedTitle: '' });
   }
 
-  onSaveTitle(board: BoardDto){
-    if (this.changedBoardTitle === ''){
-      alert("Enter the title of your board");
+  onSaveTitle(board: BoardDto) {
+    const isValid = checkErrors(this.editForm, this.dictionary);
+    if (isValid !== null) {
+      this.toaster.warning(isValid);
       return;
     }
 
-    const boardToUpdate = {...board, title: this.changedBoardTitle};
+    const boardToUpdate = { ...board, title: this.editForm.value.changedTitle as string};
 
     this.boardService.updateBoard(boardToUpdate).subscribe({
-      next: (updatedBoardFromDb : BoardDto) => {
-        this.boards.update(boards => 
-          boards.map(b => b.id === updatedBoardFromDb.id ? updatedBoardFromDb : b));
+      next: (updatedBoardFromDb: BoardDto) => {
+        this.boards.update((boards) =>
+          boards.map((b) => (b.id === updatedBoardFromDb.id ? updatedBoardFromDb : b)),
+        );
 
         this.editingBoardId = null;
       },
-      error: (err : any) => console.error("Something wrong with backend.", err),
-    })
-  }
-
-  boardDelete(id: string){
-    this.boardService.deleteBoard(id).subscribe({
-      next: () => {
-        this.boards.update(board => board.filter(b => b.id !== id));
-      },
-      error: (err: any) => console.error("Something wrong with back."),
+      error: (err: any) => this.toaster.error('Something went wrong with backend.'),
     });
   }
 
-  onAddBoardClick(){
+  boardDelete(id: string) {
+    this.boardService.deleteBoard(id).subscribe({
+      next: () => {
+        this.boards.update((board) => board.filter((b) => b.id !== id));
+      },
+      error: (err: any) => this.toaster.error('Something went wrong with backend.'),
+    });
+  }
+
+  onAddBoardClick() {
     this.isAddingBoard = true;
   }
 
-  close(){
+  close() {
     this.isAddingBoard = false;
-    this.newBoardTitle = '';
+    this.createForm.patchValue({ newTitle: '' });
   }
 }

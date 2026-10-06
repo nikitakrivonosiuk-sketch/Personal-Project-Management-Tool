@@ -1,16 +1,13 @@
 import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CardItem } from '../list/card/card-item';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CardItem, Priority } from '../list/card/card-item';
 import { ListItem } from '../list/list-item';
-import { Store } from '@ngrx/store';
-import { showToast } from '../../../toast.service/toast.action';
-import { ToastType } from '../../../toast.service/toast.reducer';
-import { CardValidator } from './card.validator';
-import { ToastService } from '../../../toast.service/toast.service';
+import { ToastService } from '../../../services/toast.service/toast.service';
+import { checkErrors } from '../../../services/form-validator';
 
 @Component({
   selector: 'app-card-modal',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './card-modal.html',
   styleUrl: './card-modal.css',
 })
@@ -23,45 +20,58 @@ export class CardModal implements OnChanges {
 
   private toaster = inject(ToastService);
 
-  cardModel: Partial<CardItem> = {
-    title: '',
-    listId: '',
-    description: '',
-    priority: 'Low',
-  };
+  cardForm = new FormGroup({
+    title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    listId: new FormControl('', [Validators.required]),
+    description: new FormControl(''),
+    dueDate: new FormControl('', [Validators.required]),
+    priority: new FormControl('', [Validators.required]),
+  });
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.cardData) {
+      const formattedDate = this.cardData.dueDate
+        ? this.cardData.dueDate.toString().split('T')[0]
+        : '';
 
-  ngOnChanges(changes: SimpleChanges){
-    if (this.cardData){
-      this.cardModel = {...this.cardData}
-
-      if (this.cardModel.dueDate) {
-      this.cardModel.dueDate = this.cardModel.dueDate.toString().split('T')[0];
-    }
-    }
-    else if(this.currentListId) {
-      this.cardModel = {
-        title: '',
-        description: '',
-        priority: 'Low',
+      this.cardForm.patchValue({
+        title: this.cardData.title,
+        listId: this.cardData.listId,
+        description: this.cardData.description,
+        priority: this.cardData.priority,
+        dueDate: formattedDate,
+      });
+    } 
+    else if (this.currentListId) {
+      this.cardForm.reset();
+      this.cardForm.patchValue({ 
+        priority: Priority.Low,
         listId: this.currentListId
-      };
+      });
     }
   }
 
-  onSave(){
-    const validated = CardValidator.validate(this.cardModel);
+  onSave() {
+    const dictionary = {
+      title: 'Title',
+      listId: 'List',
+      description: 'Description',
+      dueDate: 'Due Date',
+      priority: 'Priority',
+    };
 
-    if (validated === null){
-      this.savedCard.emit(this.cardModel);
+    const isValid = checkErrors(this.cardForm, dictionary);
+
+    if (isValid === null) {
+      this.savedCard.emit(this.cardForm.value as Partial<CardItem>);
       this.toaster.success('Card was saved succesfully!');
-    }
-    else {
-      this.toaster.warning(validated);
+    } else {
+      this.toaster.warning(isValid);
     }
   }
 
-  close(){
-    this.cardModel.description = '';
+  close() {
+    this.cardForm.reset();
 
     this.isOpened.emit(false);
   }

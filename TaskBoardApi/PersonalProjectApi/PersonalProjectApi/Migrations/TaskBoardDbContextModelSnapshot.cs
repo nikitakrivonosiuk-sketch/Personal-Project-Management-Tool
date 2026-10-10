@@ -78,7 +78,7 @@ namespace PersonalProjectApi.Migrations
                         new
                         {
                             Id = new Guid("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
-                            CreatedAt = new DateTime(2026, 9, 10, 17, 53, 17, 824, DateTimeKind.Local).AddTicks(9273),
+                            CreatedAt = new DateTime(2026, 10, 8, 22, 49, 2, 417, DateTimeKind.Local).AddTicks(874),
                             Title = "My Tasks"
                         });
                 });
@@ -172,7 +172,7 @@ namespace PersonalProjectApi.Migrations
                             Id = new Guid("aa94bb74-7c70-4fa8-89ab-de6148c34f98"),
                             BoardListId = new Guid("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
                             Description = "Go to the gym and eat well after that.",
-                            DueDate = new DateTime(2026, 9, 10, 17, 53, 17, 824, DateTimeKind.Local).AddTicks(9474),
+                            DueDate = new DateTime(2026, 10, 8, 22, 49, 2, 417, DateTimeKind.Local).AddTicks(1053),
                             Priority = 2,
                             Title = "Workout"
                         },
@@ -181,8 +181,8 @@ namespace PersonalProjectApi.Migrations
                             Id = new Guid("30e15610-ba6a-41b9-ac8d-060fd0e6fbea"),
                             BoardListId = new Guid("d009636a-b61a-444d-a186-40aae85263c8"),
                             Description = "Clean my wardrobe...",
-                            DueDate = new DateTime(2026, 9, 10, 17, 53, 17, 824, DateTimeKind.Local).AddTicks(9479),
-                            Priority = 1,
+                            DueDate = new DateTime(2026, 10, 8, 22, 49, 2, 417, DateTimeKind.Local).AddTicks(1058),
+                            Priority = 2,
                             Title = "Do household chores"
                         });
                 });

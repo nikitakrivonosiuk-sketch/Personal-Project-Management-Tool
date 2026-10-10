@@ -1,8 +1,8 @@
 import { Injectable, inject, signal } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { BoardDto, BoardListDto, CardDto, CreatingBoardRequestDto } from "../board-list-component/board/board-model";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { BoardDto, BoardListDto, CardDto, CreatingBoardRequestDto } from "../models/board-models";
 import { Subject } from "rxjs";
-import { ActivityLog } from "../board-list-component/board/activity-log";
+import { ActivityLog } from "../models/activity-log.model";
 import { environment } from "../../environments/environment";
 
 @Injectable ({
@@ -16,21 +16,16 @@ export class BoardService {
 
     apiUrl = environment.apiUrl;
 
-    getLogs(cardId?: string, skip: number = 0, take: number = 10){
-        let url = `${this.apiUrl}/Logs?skip=${skip}&take=${take}`;
+    getLogs(filters: {boardId?: string, listId?: string, cardId?: string, skip?: number, take?: number}){
+        let params = new HttpParams();
 
-        if (cardId){
-            url += `&cardId=${cardId}`
-        }
-        return this.http.get<ActivityLog[]>(url);
-    }
+        Object.entries(filters).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+                params = params.set(key, value.toString());
+            }
+        });
 
-    getBoardLogs(boardId: string, skip: number = 0, take: number = 10){
-        return this.http.get<ActivityLog[]>(`${this.apiUrl}/Logs/${boardId}/logs?skip=${skip}&take=${take}`);
-    }
-
-    getBoardData(boardId: string){
-        return this.http.get<BoardDto>(`${this.apiUrl}/Boards/${boardId}`);
+        return this.http.get<ActivityLog[]>(`${this.apiUrl}/Logs`, {params});
     }
 
     // Card functions

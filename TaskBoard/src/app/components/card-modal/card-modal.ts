@@ -1,9 +1,9 @@
 import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CardItem, Priority } from '../list/card/card-item';
-import { ListItem } from '../list/list-item';
-import { ToastService } from '../../../services/toast.service/toast.service';
-import { checkErrors } from '../../../services/form-validator';
+import { CardItem, Priority } from '../../models/card.models';
+import { ListItem } from '../../models/list-model';
+import { ToastService } from '../../services/toast.service/toast.service';
+import { checkErrors } from '../../services/form-validator';
 
 @Component({
   selector: 'app-card-modal',
@@ -64,7 +64,6 @@ export class CardModal implements OnChanges {
 
     if (isValid === null) {
       this.savedCard.emit(this.cardForm.value as Partial<CardItem>);
-      this.toaster.success('Card was saved succesfully!');
     } else {
       this.toaster.warning(isValid);
     }

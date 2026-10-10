@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardActionEvent, CardItem } from './card-item';
+import { CardActionEvent, CardItem } from '../../models/card.models';
 import { DatePipe, NgClass } from '@angular/common';
-import { ContextMenu } from "../../context-menu/context-menu";
-import { ListItem } from '../list-item';
-import { Priority } from './card-item';
+import { ContextMenu } from "../context-menu/context-menu";
+import { ListItem } from '../../models/list-model';
+import { Priority } from '../../models/card.models';
 
 @Component({
   selector: 'app-card',

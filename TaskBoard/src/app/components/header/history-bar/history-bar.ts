@@ -1,6 +1,6 @@
 import { Component, inject, input, model, OnInit, signal } from '@angular/core';
-import { ActivityLog } from '../../board-list-component/board/activity-log';
-import { BoardService } from '../../services/board-service';
+import { ActivityLog } from '../../../models/activity-log.model';
+import { BoardService } from '../../../services/board-service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -31,7 +31,8 @@ export class HistoryBar implements OnInit{
       this.skip = 0;
     }
 
-    this.httpService.getBoardLogs(this.boardId(), this.skip, this.take).subscribe({
+    this.httpService.getLogs({boardId:this.boardId(), skip: this.skip, take: this.take}).subscribe(
+    {
       next: (logs: ActivityLog[]) => {
         if (reset) {
           this.activityLogs.set(logs);

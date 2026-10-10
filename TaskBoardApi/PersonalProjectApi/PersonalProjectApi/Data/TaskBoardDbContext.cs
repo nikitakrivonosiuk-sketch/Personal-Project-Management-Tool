@@ -58,7 +58,7 @@ namespace PersonalProjectApi.Data
                     Description = "Make an DB with all necesary data, connect it with API and front. Test it.",
                     BoardListId = Guid.Parse("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
                     DueDate = new DateTime(2026, 8, 30, 18, 0, 30),
-                    Priority = TaskPriority.High,
+                    Priority = Priority.High,
                 },
                 new Card()
                 {
@@ -67,7 +67,7 @@ namespace PersonalProjectApi.Data
                     Description = "Go to the gym and eat well after that.",
                     BoardListId = Guid.Parse("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
                     DueDate = DateTime.Now,
-                    Priority = TaskPriority.Medium,
+                    Priority = Priority.Medium,
                 },
                 new Card()
                 {
@@ -76,7 +76,7 @@ namespace PersonalProjectApi.Data
                     Description = "Clean my wardrobe...",
                     BoardListId = Guid.Parse("d009636a-b61a-444d-a186-40aae85263c8"),
                     DueDate = DateTime.Now,
-                    Priority = TaskPriority.Low,
+                    Priority = Priority.Medium,
                 }
             );
             modelBuilder.Entity<ActivityLog>()

@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { BoardService } from '../services/board-service';
-import { BoardDto, CreatingBoardRequestDto } from './board/board-model';
+import { BoardService } from '../../services/board-service';
+import { BoardDto, CreatingBoardRequestDto } from '../../models/board-models';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { ContextMenu } from './board/context-menu/context-menu';
-import { ToastService } from '../services/toast.service/toast.service';
-import { checkErrors } from '../services/form-validator';
+import { ContextMenu } from '../context-menu/context-menu';
+import { ToastService } from '../../services/toast.service/toast.service';
+import { checkErrors } from '../../services/form-validator';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({

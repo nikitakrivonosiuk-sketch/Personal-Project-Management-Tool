@@ -1,6 +1,6 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { HistoryBar } from "./history-bar/history-bar";
-import { BoardService } from '../services/board-service';
+import { BoardService } from '../../services/board-service';
 
 @Component({
   selector: 'app-header',

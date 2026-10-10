@@ -1,4 +1,4 @@
-import { Priority } from "./list/card/card-item";
+import { Priority } from "./card.models";
 
 export interface BoardListDto {
     id: string;
@@ -19,8 +19,15 @@ export interface CardDto {
     description?: string;
     dueDate?: string;
     boardListId: string;
-    boardTitle: string;
     priority: Priority;
+}
+
+export interface CreateCardRequestDto{
+    title: string;
+    description?: string;
+    dueDate: string;
+    priority: Priority;
+    boardListId: string;
 }
 
 export interface CreatingBoardRequestDto {

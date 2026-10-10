@@ -7,6 +7,6 @@ export const showToast = createAction(
 )
 
 export const removeToast = createAction(
-  '[toastMessage] Remove ',
+  '[toastMessage] Remove',
   props<{id: string}>()
 )

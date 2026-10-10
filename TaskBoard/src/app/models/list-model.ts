@@ -1,4 +1,4 @@
-import { CardItem } from "./card/card-item";
+import { CardItem } from "./card.models";
 
 export interface ListItem {
     id: string;
@@ -7,3 +7,4 @@ export interface ListItem {
     position: number;
     cards: CardItem[];
 }
+

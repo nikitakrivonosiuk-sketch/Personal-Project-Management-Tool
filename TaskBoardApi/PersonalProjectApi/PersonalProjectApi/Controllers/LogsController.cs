@@ -16,10 +16,15 @@ namespace PersonalProjectApi.Controllers
             _activityLogRepository = logRepository;
         }
 
-        [HttpGet("{boardId:guid}/logs")]
-        public async Task<IActionResult> GetBoardLogs([FromRoute] Guid boardId, [FromQuery] int skip = 0, [FromQuery] int take = 10)
+        [HttpGet]
+        public async Task<IActionResult> GetLogs(
+        [FromQuery] Guid? boardId,
+        [FromQuery] Guid? listId,
+        [FromQuery] Guid? cardId,
+        [FromQuery] int skip = 0,
+        [FromQuery] int take = 10)
         {
-            var logs = await _activityLogRepository.GetLogsAsync(boardId: boardId, skip: skip, take: take);
+            var logs = await _activityLogRepository.GetLogsAsync(boardId, listId, cardId, skip, take);
 
             var logsDto = logs.Select(log => new ActivityLogDto
             {
@@ -34,6 +39,5 @@ namespace PersonalProjectApi.Controllers
 
             return Ok(logsDto);
         }
-
     }
 }

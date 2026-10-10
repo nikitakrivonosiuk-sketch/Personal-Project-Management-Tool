@@ -1,9 +1,9 @@
 import { Component, EventEmitter, inject, input, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Card } from './card/card';
-import { ListItem } from './list-item';
-import { ContextMenu } from "../context-menu/context-menu";
-import { CardActionEvent, CardActionType } from './card/card-item';
+import { Card } from '../card/card';
+import { ListItem } from '../../models/list-model';
+import { ContextMenu } from '../context-menu/context-menu';
+import { CardActionEvent } from '../../models/card.models';
 
 
 @Component({

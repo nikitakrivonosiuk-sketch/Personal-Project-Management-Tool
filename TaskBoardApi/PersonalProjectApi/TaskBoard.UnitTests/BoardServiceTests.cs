@@ -44,7 +44,7 @@ public class BoardServiceTests
     public async Task CreateCard_ReturnsOk_WhenDataIsValid()
     {
         // Arrange
-        var newCardDto = new AddCardRequestDto { Title = "New Task", Priority = TaskPriority.High };
+        var newCardDto = new AddCardRequestDto { Title = "New Task", Priority = Priority.High };
         var expectedCard = new Card { Id = Guid.NewGuid(), Title = "New Task" };
 
         // Кажемо моку: якщо викличуть метод створення з БУДЬ-ЯКОЮ карткою, повертай наш expectedCard

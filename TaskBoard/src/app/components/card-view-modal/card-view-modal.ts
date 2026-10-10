@@ -1,10 +1,10 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output, signal } from '@angular/core';
-import { CardItem } from '../list/card/card-item';
+import { CardItem } from '../../models/card.models';
 import { DatePipe } from '@angular/common';
-import { ListItem } from '../list/list-item';
-import { ActivityLog } from '../activity-log';
-import { BoardService } from '../../../services/board-service';
-import { ToastService } from '../../../services/toast.service/toast.service';
+import { ListItem } from '../../models/list-model';
+import { ActivityLog } from '../../models/activity-log.model';
+import { BoardService } from '../../services/board-service';
+import { ToastService } from '../../services/toast.service/toast.service';
 
 @Component({
   selector: 'app-card-view-modal',
@@ -41,7 +41,7 @@ export class CardViewModal implements OnInit {
       this.skip = 0;
     }
 
-    this.httpService.getLogs(this.cardInfo.id, this.skip, this.take).subscribe({
+    this.httpService.getLogs({cardId: this.cardInfo.id, skip: this.skip, take: this.take}).subscribe({
       next: (loadedLogs: ActivityLog[]) => {
         if(reset){
           this.cardLogs.set(loadedLogs);

@@ -1,8 +1,8 @@
 import { Component, inject} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectToasts } from '../toast.reducer';
-import { removeToast } from '../toast.action';
 import { AsyncPipe } from '@angular/common';
+import { selectToasts, ToastType } from '../../services/toast.service/toast.reducer';
+import { removeToast } from '../../services/toast.service/toast.action';
 
 @Component({
   selector: 'app-toast',
@@ -20,10 +20,10 @@ export class ToastComponent {
     this.store.dispatch(removeToast({id}))
   }
 
-  iconMap: Record<number, string> = {
-    0: 'error',
-    1: 'warning',
-    2: 'check_circle',
-    3: 'info',
+  iconMap: Record<ToastType, string> = {
+    [ToastType.Error]: 'error',
+    [ToastType.Warning]: 'warning',
+    [ToastType.Success]: 'check_circle',
+    [ToastType.Info]: 'info',
   }
 }

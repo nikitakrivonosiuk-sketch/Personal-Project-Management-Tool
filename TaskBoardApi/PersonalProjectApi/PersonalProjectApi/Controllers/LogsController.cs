@@ -25,19 +25,7 @@ namespace PersonalProjectApi.Controllers
         [FromQuery] int take = 10)
         {
             var logs = await _activityLogRepository.GetLogsAsync(boardId, listId, cardId, skip, take);
-
-            var logsDto = logs.Select(log => new ActivityLogDto
-            {
-                Id = log.Id,
-                CardId = log.CardId,
-                BoardListId = log.BoardListId,
-                BoardId = log.BoardId,
-                ActionType = log.ActionType,
-                Description = log.Description,
-                CreatedAt = log.CreatedAt,
-            }).ToList();
-
-            return Ok(logsDto);
+            return Ok(logs);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace PersonalProjectApi.Repositories.BoardRepository
             await dbContext.ActivityLogs.AddAsync(new ActivityLog
             {
                 Description = $"Board '{board.Title}' was created.",
-                ActionType = "BoardCreated",
+                ActionType = ActionType.BoardCreated,
                 BoardId = board.Id,
             });
 
@@ -53,17 +53,18 @@ namespace PersonalProjectApi.Repositories.BoardRepository
 
             if (boardDomain == null)
             {
-                return null;
+                throw new KeyNotFoundException($"Board with id {board.Id} was not found.");
             }
                 
-            boardDomain.Title = board.Title;
 
             await dbContext.ActivityLogs.AddAsync(new ActivityLog
             {
                 Description = $"Board title changed from {board.Title} to {boardDomain.Title} was created.",
-                ActionType = "BoardCreated",
+                ActionType = ActionType.BoardRenamed,
                 BoardId = board.Id,
             });
+
+            boardDomain.Title = board.Title;
 
             await dbContext.SaveChangesAsync();
             return boardDomain;
@@ -103,7 +104,7 @@ namespace PersonalProjectApi.Repositories.BoardRepository
             await dbContext.ActivityLogs.AddAsync(new ActivityLog
             {
                 Description = $"Board {board.Id} was deleted.",
-                ActionType = "BoardDeleted",
+                ActionType = ActionType.BoardDeleted,
                 BoardId = board.Id,
             });
 

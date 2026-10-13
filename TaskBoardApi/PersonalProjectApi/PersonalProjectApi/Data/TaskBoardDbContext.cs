@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PersonalProjectApi.Models;
 using PersonalProjectApi.Models.Domain;
 
 namespace PersonalProjectApi.Data
@@ -18,6 +19,23 @@ namespace PersonalProjectApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property("Id")
+                        .HasDefaultValueSql("NEWSEQUANTIALID()");
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property("CreatedAt")
+                        .HasDefaultValueSql("GetDate()");
+                }
+            }
+
+            modelBuilder.Entity<ActivityLog>()
+                .Property(x => x.ActionType)
+                .HasConversion<string>();
 
             modelBuilder.Entity<Board>().HasData(
                 new Board()

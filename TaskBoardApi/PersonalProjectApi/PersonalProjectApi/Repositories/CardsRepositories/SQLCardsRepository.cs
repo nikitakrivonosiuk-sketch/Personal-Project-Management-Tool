@@ -23,7 +23,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
             {
                 CardId = card.Id,
                 BoardId = list?.BoardId,
-                ActionType = "Created",
+                ActionType = ActionType.CardCreated,
                 Description = $"You created '{card.Title}' card"
             };
 
@@ -47,7 +47,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
 
             if (cardDomain == null)
             {
-                return null;
+                throw new KeyNotFoundException($"Card with id {Id} was not found.");
             }
 
             var list = await dbContext.BoardLists.FindAsync(card.BoardListId);
@@ -62,7 +62,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
                 {
                     CardId = cardDomain.Id,
                     BoardId = list?.BoardId,
-                    ActionType = "Moved",
+                    ActionType = ActionType.CardMoved,
                     Description = $"You moved '{cardDomain.Title}' from {newList?.Title} to {oldList?.Title}",
                 };
 
@@ -74,7 +74,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
                 await dbContext.ActivityLogs.AddAsync(new ActivityLog
                 {
                     CardId= cardDomain.Id,
-                    ActionType = "TitleChanged",
+                    ActionType = ActionType.CardTitleEdited,
                     Description = $"You renamed this card from '{card.Title}' to '{cardDomain.Title}'",
                 });
             }
@@ -84,7 +84,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
                 await dbContext.ActivityLogs.AddAsync(new ActivityLog
                 {
                     CardId = cardDomain.Id,
-                    ActionType = "PriorityChanged",
+                    ActionType = ActionType.CardPriorityEdited,
                     Description = $"You changed priority from '{cardDomain.Priority}' to '{card.Priority}'",
                 });
             }
@@ -94,7 +94,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
                 await dbContext.ActivityLogs.AddAsync(new ActivityLog
                 {
                     CardId = cardDomain.Id,
-                    ActionType = "DueDateChanged",
+                    ActionType = ActionType.CardDueDateEdited,
                     Description = $"You changed due date from '{card.DueDate}' to '{cardDomain.DueDate}'",
                 });
             }
@@ -104,7 +104,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
                 await dbContext.ActivityLogs.AddAsync(new ActivityLog
                 {
                     CardId = cardDomain.Id,
-                    ActionType = "DescriptionChanged",
+                    ActionType = ActionType.CardDescriptionEdited,
                     Description = $"You changed description of '{cardDomain.Title}' card",
                 });
             }
@@ -139,7 +139,7 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
             {
                 CardId = null,
                 BoardId = existingCard.BoardList?.BoardId,
-                ActionType = "Deleted",  
+                ActionType = ActionType.CardDeleted,  
                 Description = $"You deleted '{existingCard.Title}'",
             };
 

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PersonalProjectApi.Data;
+using PersonalProjectApi.ExceptionHandler;
 using PersonalProjectApi.Repositories.ActivityLogRepositories;
 using PersonalProjectApi.Repositories.BoardRepository;
 using PersonalProjectApi.Repositories.CardsRepositories;
@@ -38,6 +39,10 @@ builder.Services.AddScoped<IListsRepository, SQLListsRepository>();
 builder.Services.AddScoped<IActivityLogRepository, SQLActivityLogRepository>();
 builder.Services.AddScoped<IBoardRepository,  SQLBoardsRepository>();
 
+//ExceptionHandlers
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,6 +50,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

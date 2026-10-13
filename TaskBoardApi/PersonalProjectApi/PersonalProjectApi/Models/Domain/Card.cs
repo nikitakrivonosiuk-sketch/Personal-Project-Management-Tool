@@ -1,8 +1,7 @@
 ﻿namespace PersonalProjectApi.Models.Domain
 {
-    public class Card
+    public class Card : BaseEntity
     {
-        public Guid Id { get; set; }
         public string Title { get; set; }
         public DateTime? DueDate { get; set; }
         public string? Description { get; set; }

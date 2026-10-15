@@ -3,6 +3,7 @@ using PersonalProjectApi.Models.DTO.BoardListsDto;
 using PersonalProjectApi.Models.DTO.BoardsDto;
 using PersonalProjectApi.Models.DTO.CardDTOs;
 using PersonalProjectApi.Repositories.BoardRepository;
+using PersonalProjectApi.Repositories.Common;
 
 namespace PersonalProjectApi.Services
 {
@@ -15,9 +16,9 @@ namespace PersonalProjectApi.Services
             _boardRepository = boardRepository;
         }
 
-        public async Task<List<Board>> GetAllBoards()
+        public async Task<List<Board>> GetAllBoards(int pageNumber, int pageSize)
         {
-            var boardsDomain = await _boardRepository.GetAllBoardsAsync();
+            var boardsDomain = await _boardRepository.GetAllBoardsAsync(pageNumber, pageSize);
 
             var boardsDto = boardsDomain.Select(b => new Board
             {

@@ -13,6 +13,7 @@
         // Navigation property
         public Card Card { get; set; }
         public BoardList BoardList { get; set; }
+        public Board Board { get; set; }
     }
 
     public enum ActionType

@@ -25,7 +25,9 @@ namespace PersonalProjectApi.Services
                 ActionType = log.ActionType,
                 Description = log.Description,
                 CreatedAt = log.CreatedAt,
-            }).ToList();
+            })
+                .OrderBy(x => x.CreatedAt)
+                .ToList();
 
             return logsDto;
         }

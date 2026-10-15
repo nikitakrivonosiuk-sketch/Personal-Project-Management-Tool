@@ -1,8 +1,9 @@
 ﻿using PersonalProjectApi.Models.Domain;
+using PersonalProjectApi.Repositories.Common;
 
 namespace PersonalProjectApi.Repositories.ListRepositories
 {
-    public interface IListsRepository
+    public interface IListsRepository : IRepository<BoardList>
     {
         Task<List<BoardList>> GetAllBoardListsAsync();
         Task<BoardList> CreateListAsync(BoardList boardList);

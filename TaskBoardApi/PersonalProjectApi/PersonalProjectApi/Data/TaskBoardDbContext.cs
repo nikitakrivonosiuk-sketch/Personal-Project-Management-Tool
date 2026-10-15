@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using PersonalProjectApi.Models;
 using PersonalProjectApi.Models.Domain;
 
@@ -16,6 +17,27 @@ namespace PersonalProjectApi.Data
         public DbSet<ActivityLog> ActivityLogs { get; set; }
         public DbSet<Board> Boards { get; set; }
 
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var auditBuilder = new AuditLogBuilder();
+
+            var modifiedEntries = ChangeTracker.Entries()
+                .Where(log => log.Entity is not ActivityLog && 
+                (log.State == EntityState.Added || log.State == EntityState.Modified || log.State == EntityState.Deleted))
+                .ToList();
+
+            foreach (var entry in modifiedEntries)
+            {
+                var logs = auditBuilder.BuildLogs(entry);
+                if (logs.Any())
+                {
+                    ActivityLogs.AddRange(logs);
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,7 +48,7 @@ namespace PersonalProjectApi.Data
                 {
                     modelBuilder.Entity(entityType.ClrType)
                         .Property("Id")
-                        .HasDefaultValueSql("NEWSEQUANTIALID()");
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
                     modelBuilder.Entity(entityType.ClrType)
                         .Property("CreatedAt")
                         .HasDefaultValueSql("GetDate()");
@@ -42,7 +64,7 @@ namespace PersonalProjectApi.Data
                 {
                     Id = Guid.Parse("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
                     Title = "My Tasks",
-                    CreatedAt = DateTime.Now,
+                    CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                 });
 
             modelBuilder.Entity<BoardList>().HasData(
@@ -84,7 +106,7 @@ namespace PersonalProjectApi.Data
                     Title = "Workout",
                     Description = "Go to the gym and eat well after that.",
                     BoardListId = Guid.Parse("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
-                    DueDate = DateTime.Now,
+                    DueDate = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     Priority = Priority.Medium,
                 },
                 new Card()
@@ -93,21 +115,14 @@ namespace PersonalProjectApi.Data
                     Title = "Do household chores",
                     Description = "Clean my wardrobe...",
                     BoardListId = Guid.Parse("d009636a-b61a-444d-a186-40aae85263c8"),
-                    DueDate = DateTime.Now,
+                    DueDate = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     Priority = Priority.Medium,
                 }
             );
-            modelBuilder.Entity<ActivityLog>()
-                .HasOne(a => a.BoardList)
-                .WithMany()
-                .HasForeignKey(a => a.BoardListId)
-                .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ActivityLog>()
-                .HasOne(a => a.Card)
-                .WithMany()
-                .HasForeignKey(a => a.CardId)
-                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ActivityLog>().Ignore(a => a.Card);
+            modelBuilder.Entity<ActivityLog>().Ignore(a => a.BoardList);
+            modelBuilder.Entity<ActivityLog>().Ignore(a => a.Board);
 
             modelBuilder.Entity<BoardList>()
                 .HasOne(bl => bl.Board)

@@ -1,60 +1,51 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using PersonalProjectApi.Controllers;
 using PersonalProjectApi.Models.Domain;
 using PersonalProjectApi.Models.DTO.CardDTOs;
 using PersonalProjectApi.Repositories.ActivityLogRepositories;
-using PersonalProjectApi.Repositories.BoardRepository;
-using PersonalProjectApi.Repositories.CardsRepositories;
-using PersonalProjectApi.Repositories.ListRepositories;
+using PersonalProjectApi.Services;
+using System.Drawing.Printing;
 using Xunit;
 
 public class BoardServiceTests
 {
-    private readonly Mock<ICardsRepository> _mockRepo;
-    private readonly CardsController _service;
+    private readonly Mock<CardsService> _mockService;
+    private readonly CardsController _controller;
 
     public BoardServiceTests()
     {
-        // Створюємо фейковий репозиторій, щоб не лізти в БД
-        _mockRepo = new Mock<ICardsRepository>();
-        _service = new CardsController(_mockRepo.Object);
+        _mockService = new Mock<CardsService>();
+        var mockLogger = Mock.Of<ILogger<CardsController>>();
+        _controller = new CardsController(_mockService.Object, mockLogger);
     }
 
     [Fact]
     public async Task DeleteCardAsync_ReturnsTrue_WhenCardExists()
     {
-        // Arrange: налаштовуємо мок, ніби картка успішно видалилась
         var cardId = Guid.NewGuid();
-        _mockRepo.Setup(repo => repo.DeleteCardAsync(cardId)).ReturnsAsync(true);
+        _mockService.Setup(s => s.DeleteCardAsync(cardId)).ReturnsAsync("Card was deleted succesfully.");
 
-        // Act: викликаємо твій публічний метод
-        var result = await _service.DeleteCard(cardId);
+        var result = await _controller.DeleteCard(cardId);
 
-        // Assert: перевіряємо, що повернувся саме OkObjectResult
         var okResult = Assert.IsType<OkObjectResult>(result);
-
-        // Assert: перевіряємо, чи повернувся очікуваний результат
         Assert.Equal("Card was deleted succesfully.", okResult.Value);
-        _mockRepo.Verify(repo => repo.DeleteCardAsync(cardId), Times.Once); // Перевіряємо, чи репо взагалі смикали
+        _mockService.Verify(s => s.DeleteCardAsync(cardId), Times.Once);
     }
 
     [Fact]
     public async Task CreateCard_ReturnsOk_WhenDataIsValid()
     {
-        // Arrange
         var newCardDto = new AddCardRequestDto { Title = "New Task", Priority = Priority.High };
-        var expectedCard = new Card { Id = Guid.NewGuid(), Title = "New Task" };
+        var expectedDto = new CardDto { Id = Guid.NewGuid(), Title = "New Task" };
 
-        // Кажемо моку: якщо викличуть метод створення з БУДЬ-ЯКОЮ карткою, повертай наш expectedCard
-        _mockRepo.Setup(repo => repo.CreateCardAsync(It.IsAny<Card>()))
-                 .ReturnsAsync(expectedCard);
+        _mockService.Setup(s => s.CreateCardAsync(It.IsAny<AddCardRequestDto>()))
+                 .ReturnsAsync(expectedDto);
 
-        // Act
-        var result = await _service.CreateCard(newCardDto);
+        var result = await _controller.CreateCard(newCardDto);
 
-        // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
         Assert.NotNull(okResult.Value);
     }
@@ -62,39 +53,32 @@ public class BoardServiceTests
     [Fact]
     public async Task UpdateCard_ReturnsOk_WhenCardIsUpdated()
     {
-        // Arrange
         var cardId = Guid.NewGuid();
         var updateDto = new UpdateCardDto { Title = "Updated Task" };
-        var updatedCard = new Card { Id = cardId, Title = "Updated Task" };
+        var expectedDto = new CardDto { Id = cardId, Title = "Updated Task" };
 
-        // Юзаємо It.IsAny для переданих даних, але айдішник фіксуємо
-        _mockRepo.Setup(repo => repo.UpdateCardAsync(cardId, It.IsAny<Card>()))
-                 .ReturnsAsync(updatedCard); // Або true, залежить від твого ICardsRepository
+        _mockService.Setup(s => s.UpdateCardAsync(cardId, It.IsAny<UpdateCardDto>()))
+                 .ReturnsAsync(expectedDto);
 
-        // Act
-        var result = await _service.UpdateCard(cardId, updateDto); // Знову ж таки, вписуй свій метод
+        var result = await _controller.UpdateCard(cardId, updateDto);
 
-        // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
         Assert.NotNull(okResult.Value);
     }
 
-    // Unit tests
-
     [Fact]
     public async Task GetAllBoards_ReturnsOk_WithData()
     {
-        // Arrange: мокаємо репозиторій дошок
-        var mockRepo = new Mock<IBoardRepository>();
-        var controller = new BoardsController(mockRepo.Object);
+        var mockBoardService = new Mock<BoardService>();
+        var mockLogger = Mock.Of<ILogger<BoardsController>>();
+        var controller = new BoardsController(mockBoardService.Object, mockLogger);
 
         var expectedBoards = new List<Board> { new Board { Id = Guid.NewGuid(), Title = "Test Board" } };
-        mockRepo.Setup(repo => repo.GetAllBoardsAsync()).ReturnsAsync(expectedBoards);
 
-        // Act
+        mockBoardService.Setup(s => s.GetAllBoards(1, 8)).ReturnsAsync(expectedBoards);
+
         var result = await controller.GetAllBoards();
 
-        // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
         Assert.NotNull(okResult.Value);
     }
@@ -102,20 +86,17 @@ public class BoardServiceTests
     [Fact]
     public async Task GetBoardLogs_ReturnsOk_WithLogs()
     {
-        // Arrange: мокаємо репозиторій логів
         var mockRepo = new Mock<IActivityLogRepository>();
-        var controller = new LogsController(mockRepo.Object);
+        var mockLogger = Mock.Of<ILogger<LogsController>>();
+        var controller = new LogsController(mockRepo.Object, mockLogger);
         var boardId = Guid.NewGuid();
 
         var expectedLogs = new List<ActivityLog> { new ActivityLog { Id = Guid.NewGuid(), Description = "Test log" } };
 
-        // Уважно з аргументами! Ти сам писав skip: 0, take: 10
         mockRepo.Setup(repo => repo.GetLogsAsync(boardId, null, null, 0, 10)).ReturnsAsync(expectedLogs);
 
-        // Act
-        var result = await controller.GetBoardLogs(boardId, 0, 10);
+        var result = await controller.GetLogs(boardId, null, null, 0, 10);
 
-        // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
         Assert.NotNull(okResult.Value);
     }
@@ -123,17 +104,15 @@ public class BoardServiceTests
     [Fact]
     public async Task DeleteList_ReturnsOk_WhenSuccessful()
     {
-        // Arrange: мокаємо репозиторій списків
-        var mockRepo = new Mock<IListsRepository>();
-        var controller = new ListsController(mockRepo.Object);
+        var mockListService = new Mock<ListService>();
+        var mockLogger = Mock.Of<ILogger<ListsController>>();
+        var controller = new ListsController(mockListService.Object, mockLogger);
         var listId = Guid.NewGuid();
 
-        mockRepo.Setup(repo => repo.DeleteListAsync(listId)).ReturnsAsync(true);
+        mockListService.Setup(s => s.DeleteListAsync(listId)).ReturnsAsync("List was deleted successfully.");
 
-        // Act
         var result = await controller.DeleteList(listId);
 
-        // Assert
         Assert.IsType<OkObjectResult>(result);
     }
 }

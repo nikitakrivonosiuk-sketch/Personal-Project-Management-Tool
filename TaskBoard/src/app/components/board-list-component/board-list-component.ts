@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class BoardListComponent implements OnInit {
   isAddingBoard: boolean = false;
   editingBoardId: string | null = null;
+  pageSize: number = 8;
+  pageNumber: number = 1;
 
   private toaster = inject(ToastService);
 
@@ -37,9 +39,21 @@ export class BoardListComponent implements OnInit {
   boards = signal<BoardDto[]>([]);
 
   ngOnInit() {
-    this.boardService.getBoards().subscribe({
+    this.boardService.getBoards(this.pageNumber, this.pageSize).subscribe({
       next: (boardsListFromDb: BoardDto[]) => {
         this.boards.set(boardsListFromDb);
+      },
+      error: (err: any) => this.toaster.error('Something went wrong with backend.'),
+    });
+
+    this.pageNumber += 1;
+  }
+
+  loadMore() {
+    this.boardService.getBoards(this.pageNumber, this.pageSize).subscribe({
+      next: (boardsListFromDb: BoardDto[]) => {
+        this.boards.update(current => [...current, ...boardsListFromDb]);
+        this.pageNumber += 1;
       },
       error: (err: any) => this.toaster.error('Something went wrong with backend.'),
     });

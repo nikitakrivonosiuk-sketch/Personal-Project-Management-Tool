@@ -2,6 +2,7 @@ import { Component, inject, input, model, OnInit, signal } from '@angular/core';
 import { ActivityLog } from '../../../models/activity-log.model';
 import { BoardService } from '../../../services/board-service';
 import { DatePipe } from '@angular/common';
+import { ToastService } from '../../../services/toast.service/toast.service';
 
 @Component({
   selector: 'app-history-bar',
@@ -14,6 +15,7 @@ export class HistoryBar implements OnInit{
   activityLogs = signal<ActivityLog[]>([]);
   isOpened = model(false);
   httpService = inject(BoardService);
+  toaster = inject(ToastService);
 
   skip = 0;
   readonly take = 10;
@@ -40,7 +42,7 @@ export class HistoryBar implements OnInit{
           this.activityLogs.update(oldLogs => [...oldLogs, ...logs]);
         }
       },
-      error: (err) => console.error("Backend is imposter.", err),
+      error: (err) => this.toaster.error("Server isn't working properly."),
     });
   }
 

@@ -55,8 +55,11 @@ export class BoardService {
     }
 
     // Board actions
-    getBoards(){
-        return this.http.get<BoardDto[]>(`${this.apiUrl}/Boards`);
+    getBoards(pageNumber: number, pageSize: number){
+        const params = new HttpParams()
+            .set('pageNumber', pageNumber)
+            .set('pageSize', pageSize);
+        return this.http.get<BoardDto[]>(`${this.apiUrl}/Boards`, {params});
     }
 
     getBoardById(boardId: string) {

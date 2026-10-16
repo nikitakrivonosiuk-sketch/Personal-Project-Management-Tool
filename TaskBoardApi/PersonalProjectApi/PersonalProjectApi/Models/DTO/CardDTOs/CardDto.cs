@@ -11,6 +11,6 @@ namespace PersonalProjectApi.Models.DTO.CardDTOs
         public Guid BoardListId { get; set; }
 
         public string BoardTitle { get; set; } = string.Empty;
-        public TaskPriority Priority { get; set; }
+        public Priority Priority { get; set; }
     }
 }

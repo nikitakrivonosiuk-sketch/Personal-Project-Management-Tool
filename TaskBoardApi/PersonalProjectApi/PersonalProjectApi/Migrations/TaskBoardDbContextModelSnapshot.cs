@@ -32,6 +32,9 @@ namespace PersonalProjectApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("BoardId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("BoardListId")
                         .HasColumnType("uniqueidentifier");
 
@@ -47,18 +50,55 @@ namespace PersonalProjectApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BoardListId");
-
-                    b.HasIndex("CardId");
-
                     b.ToTable("ActivityLogs");
+                });
+
+            modelBuilder.Entity("PersonalProjectApi.Models.Domain.Board", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetDate()");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Boards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Title = "My Tasks"
+                        });
                 });
 
             modelBuilder.Entity("PersonalProjectApi.Models.Domain.BoardList", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<Guid>("BoardId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetDate()");
 
                     b.Property<int>("Position")
                         .HasColumnType("int");
@@ -67,7 +107,12 @@ namespace PersonalProjectApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("BoardId");
 
                     b.ToTable("BoardLists");
 
@@ -75,18 +120,24 @@ namespace PersonalProjectApi.Migrations
                         new
                         {
                             Id = new Guid("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
+                            BoardId = new Guid("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Position = 0,
                             Title = "To Do"
                         },
                         new
                         {
                             Id = new Guid("faa6be83-b7c5-4130-98a3-c6fa0982c67f"),
+                            BoardId = new Guid("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Position = 1,
                             Title = "In Progress"
                         },
                         new
                         {
                             Id = new Guid("d009636a-b61a-444d-a186-40aae85263c8"),
+                            BoardId = new Guid("4637be30-a4e0-4ed0-99a6-83988fd44e00"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Position = 2,
                             Title = "Finished"
                         });
@@ -96,10 +147,16 @@ namespace PersonalProjectApi.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<Guid>("BoardListId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetDate()");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -114,6 +171,9 @@ namespace PersonalProjectApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BoardListId");
@@ -125,6 +185,7 @@ namespace PersonalProjectApi.Migrations
                         {
                             Id = new Guid("4cf6d1e5-bd29-4978-9b38-e4459c0bfa71"),
                             BoardListId = new Guid("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Make an DB with all necesary data, connect it with API and front. Test it.",
                             DueDate = new DateTime(2026, 8, 30, 18, 0, 30, 0, DateTimeKind.Unspecified),
                             Priority = 3,
@@ -134,8 +195,9 @@ namespace PersonalProjectApi.Migrations
                         {
                             Id = new Guid("aa94bb74-7c70-4fa8-89ab-de6148c34f98"),
                             BoardListId = new Guid("cffb00c7-25bb-4ee2-929a-f5b4bd9a1bfb"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Go to the gym and eat well after that.",
-                            DueDate = new DateTime(2026, 8, 26, 5, 2, 22, 591, DateTimeKind.Local).AddTicks(2420),
+                            DueDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Priority = 2,
                             Title = "Workout"
                         },
@@ -143,28 +205,23 @@ namespace PersonalProjectApi.Migrations
                         {
                             Id = new Guid("30e15610-ba6a-41b9-ac8d-060fd0e6fbea"),
                             BoardListId = new Guid("d009636a-b61a-444d-a186-40aae85263c8"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Clean my wardrobe...",
-                            DueDate = new DateTime(2026, 8, 26, 5, 2, 22, 591, DateTimeKind.Local).AddTicks(2460),
-                            Priority = 1,
+                            DueDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Priority = 2,
                             Title = "Do household chores"
                         });
                 });
 
-            modelBuilder.Entity("PersonalProjectApi.Models.Domain.ActivityLog", b =>
+            modelBuilder.Entity("PersonalProjectApi.Models.Domain.BoardList", b =>
                 {
-                    b.HasOne("PersonalProjectApi.Models.Domain.BoardList", "BoardList")
-                        .WithMany()
-                        .HasForeignKey("BoardListId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                    b.HasOne("PersonalProjectApi.Models.Domain.Board", "Board")
+                        .WithMany("BoardLists")
+                        .HasForeignKey("BoardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("PersonalProjectApi.Models.Domain.Card", "Card")
-                        .WithMany()
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("BoardList");
-
-                    b.Navigation("Card");
+                    b.Navigation("Board");
                 });
 
             modelBuilder.Entity("PersonalProjectApi.Models.Domain.Card", b =>
@@ -176,6 +233,11 @@ namespace PersonalProjectApi.Migrations
                         .IsRequired();
 
                     b.Navigation("BoardList");
+                });
+
+            modelBuilder.Entity("PersonalProjectApi.Models.Domain.Board", b =>
+                {
+                    b.Navigation("BoardLists");
                 });
 
             modelBuilder.Entity("PersonalProjectApi.Models.Domain.BoardList", b =>

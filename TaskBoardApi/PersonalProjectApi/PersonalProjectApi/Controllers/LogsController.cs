@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonalProjectApi.Models.DTO.ActivityLogDtos;
 using PersonalProjectApi.Repositories.ActivityLogRepositories;
@@ -11,26 +12,25 @@ namespace PersonalProjectApi.Controllers
     public class LogsController : ControllerBase
     {
         private readonly IActivityLogRepository _activityLogRepository;
-        public LogsController(IActivityLogRepository logRepository)
+        private readonly ILogger<LogsController> _logger;
+        public LogsController(IActivityLogRepository logRepository, ILogger<LogsController> logger)
         {
             _activityLogRepository = logRepository;
+            _logger = logger;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllLogs([FromQuery] Guid? cardId, [FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public async Task<IActionResult> GetLogs(
+        [FromQuery] Guid? boardId,
+        [FromQuery] Guid? listId,
+        [FromQuery] Guid? cardId,
+        [FromQuery] int skip = 0,
+        [FromQuery] int take = 10)
         {
-            var logsDomain = await _activityLogRepository.GetLogsAsync(cardId, skip, take);
+            _logger.LogInformation($"{nameof(GetLogs)} received request: {System.Text.Json.JsonSerializer.Serialize(new { boardId, listId, cardId, skip, take })}");
 
-            var logsDto = logsDomain.Select(log => new ActivityLogDto
-            {
-                Id = log.Id,
-                CardId = log.CardId,
-                ActionType = log.ActionType,
-                Description = log.Description,
-                CreatedAt = log.CreatedAt,
-            }).ToList();
-
-            return Ok(logsDto);
+            var logs = await _activityLogRepository.GetLogsAsync(boardId, listId, cardId, skip, take);
+            return Ok(logs);
         }
     }
 }

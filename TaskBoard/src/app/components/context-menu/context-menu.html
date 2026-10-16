@@ -1,0 +1,13 @@
+<div class="flex relative">
+    <button type="button" (click)="toggle()"
+        class="active:bg-gray-200 transition rounded-xl hover:bg-gray-100 cursor-pointer">
+        <span class="material-symbols-outlined mt-1 [font-variation-settings:'wght'_300]">more_horiz</span>
+    </button>
+
+    @if (isMenuOpen) {
+    <div
+        class="absolute right-0 top-full mt-1 z-20 w-36 p-1.5 bg-white border border-gray-200 rounded-xl shadow-lg flex flex-col gap-1">
+        <ng-content/>
+    </div>
+    }
+</div>

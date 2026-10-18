@@ -1,0 +1,68 @@
+<div class="fixed flex bg-black/30 inset-0 z-50 items-center justify-center">
+    <div class="flex flex-col rounded-xl w-150 bg-white overflow-hidden">
+
+        <div class="flex justify-end bg-slate-600">
+            <button type="button" (click)="close()" class="hover:opacity-75 h-10 px-2 cursor-pointer">
+                <span class="material-symbols-outlined object-contain text-white mt-1.5 [font-variation-settings:'wght'_300]">close</span>
+            </button>
+        </div>
+
+        <div class="flex flex-col gap-6 p-6 ">
+            <form [formGroup]="cardForm" (ngSubmit)="onSave()">
+                <input maxlength="50" placeholder="New Card" class="w-full text-black text-3xl font-bold py-2 mb-10" type="text" formControlName="title">
+    
+                <div class="grid grid-cols-[100px_1fr] gap-y-8 items-center gap-20">
+                    <!-- 1 row -->
+                    <span class="text-gray-500 font-medium items-center flex gap-2">
+                        <span class="material-symbols-outlined">menu</span>
+                        List
+                    </span>
+                    <select name="listId" class="border border-gray-200 rounded-md bg-gray-100 w-40 p-2 focus:border-gray-300 outline-none"
+                        formControlName="listId" required>
+                        @for (list of lists; track list.id) {
+                        <option [value]="list.id" class="bg-gray-100">{{list.title}}</option>
+                        }
+                    </select>
+    
+                    <!-- 2 row -->
+                    <span class="text-gray-500 font-medium items-center flex gap-2">
+                        <span class="material-symbols-outlined">calendar_today</span>
+                        Due Date
+                    </span>
+                    <input formControlName="dueDate" type="date" class="bg-gray-100 w-40 p-2 rounded-md text-sm text-sm font-base border border-gray-200">
+    
+                    <!-- 3 row -->
+                     <span class="text-gray-500 font-medium items-center flex gap-2">
+                        <span class="material-symbols-outlined">low_priority</span>
+                        Priority
+                    </span>
+                    <select class="border border-gray-200 rounded-md w-40 p-2 bg-gray-100 focus:border-gray-300 outline-none"
+                        formControlName="priority">
+                            <option value="Low" > Low </option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                    </select>
+                </div>
+    
+                <div class="mt-10">
+                    <h3 class="font-bold text-xl text-black"> Description </h3>
+                    <textarea placeholder="Write some information..." 
+                    formControlName="description"
+                    type="text" 
+                    class="w-full h-25 text-base resize-none border border-gray-300 rounded-md mt-2 opacity-80"></textarea>
+                </div>
+    
+                <div class="flex inline-flex justify-between w-full">
+                    <button type="submit" class="bg-slate-600 text-white w-60 h-10 rounded-md 
+                    hover:bg-slate-500 cursor-pointer">
+                        Save                    
+                    </button>
+                    <button (click)="close()" type="button" class="bg-white text-black w-60 h-10 rounded-md border border-gray-300
+                    hover:bg-gray-100 cursor-pointer">
+                        Cancel                   
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

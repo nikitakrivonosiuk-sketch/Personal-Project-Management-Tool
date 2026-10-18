@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonalProjectApi.Models.Domain;
 using PersonalProjectApi.Models.DTO.CardDTOs;
 using PersonalProjectApi.Repositories.CardsRepositories;
+using PersonalProjectApi.Services;
 
 namespace PersonalProjectApi.Controllers
 {
@@ -10,102 +12,49 @@ namespace PersonalProjectApi.Controllers
     [ApiController]
     public class CardsController : ControllerBase
     {
-        private readonly ICardsRepository _cardsRepository;
-        public CardsController(ICardsRepository repository)
+        private readonly CardsService _cardsService;
+        private readonly ILogger<CardsController> _logger;
+
+        public CardsController(CardsService cardsService, ILogger<CardsController> logger)
         {
-            _cardsRepository = repository;
+            _cardsService = cardsService;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllCards() 
         {
-            var cardsDomain = await _cardsRepository.GetAllCardsAsync();
+            _logger.LogInformation($"{nameof(GetAllCards)} received request.");
 
-            var cardsDto = cardsDomain.Select(card => new CardDto
-            {
-                Id = card.Id,
-                Title = card.Title,
-                Description = card.Description,
-                DueDate = card.DueDate,
-                Priority = card.Priority,
-                BoardListId = card.BoardListId,
-
-                BoardTitle = card.BoardList.Title,
-            });
-
-            return Ok(cardsDto);
+            var cards = await _cardsService.GetAllCardsAsync();
+            return Ok(cards);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateCard([FromBody] AddCardRequestDto cardRequestDto)
         {
-            var cardDomain = new Card
-            {
-                Title = cardRequestDto.Title,
-                Description = cardRequestDto.Description,
-                DueDate = cardRequestDto.DueDate,
-                Priority = cardRequestDto.Priority,
-                BoardListId= cardRequestDto.BoardListId,
-            };
+            _logger.LogInformation($"{nameof(CreateCard)} received request: {System.Text.Json.JsonSerializer.Serialize(cardRequestDto)}");
 
-            cardDomain = await _cardsRepository.CreateCardAsync(cardDomain);
-
-            var cardDto = new CardDto
-            {
-                Id = cardDomain.Id,
-                Title = cardDomain.Title,
-                Description = cardDomain.Description,
-                DueDate = cardDomain.DueDate,
-                Priority = cardDomain.Priority,
-                BoardListId = cardDomain.BoardListId
-            };
-
-            return Ok(cardDto);
+            var card = await _cardsService.CreateCardAsync(cardRequestDto); 
+            return Ok(card);
         }
 
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> UpdateCard([FromRoute] Guid id, [FromBody] UpdateCardDto cardRequestDto)
         {
-            var cardDomain = new Card
-            {
-                Title = cardRequestDto.Title,
-                Description = cardRequestDto.Description,
-                DueDate = cardRequestDto.DueDate,
-                Priority = cardRequestDto.Priority,
-                BoardListId = cardRequestDto.BoardListId
-            };
+            _logger.LogInformation($"{nameof(UpdateCard)} received request: {System.Text.Json.JsonSerializer.Serialize(cardRequestDto)}, id: {id}");
 
-            cardDomain = await _cardsRepository.UpdateCardAsync(id, cardDomain);
-
-            if (cardDomain == null)
-            {
-                return NotFound("Card was not found. Invalid Id.");
-            }
-
-            var cardDto = new CardDto
-            {
-                Id = cardDomain.Id,
-                Title = cardDomain.Title,
-                Description = cardDomain.Description,
-                DueDate = cardDomain.DueDate,
-                Priority = cardDomain.Priority,
-                BoardListId = cardDomain.BoardListId,
-            };
-
-            return Ok(cardDto);
+            var card = await _cardsService.UpdateCardAsync(id, cardRequestDto);
+            return Ok(card);
         }
 
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteCard([FromRoute] Guid id)
         {
-            var isDeleted = await _cardsRepository.DeleteCardAsync(id);
+            _logger.LogInformation($"{nameof(DeleteCard)} received request: {id}");
 
-            if (!isDeleted)
-            {
-                return NotFound("Card was not found. Invalid id.");
-            }
-            
-            return Ok("Card was deleted succesfully.");
+            var deleted = await _cardsService.DeleteCardAsync(id);
+            return Ok(deleted);
         }
     }
 }

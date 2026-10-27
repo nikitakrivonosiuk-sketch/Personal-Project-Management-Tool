@@ -1,4 +1,4 @@
-﻿using PersonalProjectApi.Models.Domain;
+﻿using PersonalProjectApi.Models.Enums;
 
 namespace PersonalProjectApi.Models.DTO.CardDTOs
 {
@@ -10,6 +10,6 @@ namespace PersonalProjectApi.Models.DTO.CardDTOs
         public string? Description { get; set; }
         public Guid BoardListId { get; set; }
 
-        public TaskPriority Priority { get; set; }
+        public Priority Priority { get; set; }
     }
 }

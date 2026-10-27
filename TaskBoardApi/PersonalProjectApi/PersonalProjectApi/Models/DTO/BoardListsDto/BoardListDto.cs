@@ -1,5 +1,4 @@
-﻿using PersonalProjectApi.Models.Domain;
-using PersonalProjectApi.Models.DTO.CardDTOs;
+﻿using PersonalProjectApi.Models.DTO.CardDTOs;
 
 namespace PersonalProjectApi.Models.DTO.BoardListsDto
 {

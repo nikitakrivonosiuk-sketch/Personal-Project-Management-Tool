@@ -1,21 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalProjectApi.Data;
 using PersonalProjectApi.Models.Domain;
+using PersonalProjectApi.Repositories.Common;
 
 namespace PersonalProjectApi.Repositories.BoardRepository
 {
-    public class SQLBoardsRepository : IBoardRepository
+    public class SQLBoardsRepository : Repository<Board>, IBoardRepository
     {
-        private readonly TaskBoardDbContext dbContext;
-        public SQLBoardsRepository(TaskBoardDbContext dbContext)
+        public SQLBoardsRepository(TaskBoardDbContext dbContext) : base(dbContext)
         {
-            this.dbContext = dbContext;
         }
 
-        public async Task<List<Board>> GetAllBoardsAsync()
+        public async Task<List<Board>> GetAllBoardsAsync(int pageNumber, int pageSize)
         {
-            var boards = await dbContext.Boards
+            var boards = await _dbSet
                 .OrderBy(b => b.CreatedAt)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
             return boards;
@@ -23,7 +24,7 @@ namespace PersonalProjectApi.Repositories.BoardRepository
 
         public async Task<Board> GetBoardAsync(Guid id)
         {
-            var board = await dbContext.Boards
+            var board = await _dbSet
                 .Include(l => l.BoardLists)
                     .ThenInclude(c => c.Cards)
                 .FirstOrDefaultAsync(b => b.Id == id);
@@ -33,45 +34,31 @@ namespace PersonalProjectApi.Repositories.BoardRepository
 
         public async Task<Board> CreateBoardAsync(Board board)
         {
-            await dbContext.Boards.AddAsync(board);
+            await _dbSet.AddAsync(board);
 
-            await dbContext.ActivityLogs.AddAsync(new ActivityLog
-            {
-                Description = $"Board '{board.Title}' was created.",
-                ActionType = "BoardCreated",
-                BoardId = board.Id,
-            });
-
-            await dbContext.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return board;
         }
 
         public async Task<Board> UpdateBoardAsync(Board board)
         {
-            var boardDomain = await dbContext.Boards.FirstOrDefaultAsync(b => board.Id == b.Id);
+            var boardDomain = await _dbSet.FirstOrDefaultAsync(b => board.Id == b.Id);
 
             if (boardDomain == null)
             {
-                return null;
+                throw new KeyNotFoundException($"Board with id {board.Id} was not found.");
             }
-                
+
             boardDomain.Title = board.Title;
 
-            await dbContext.ActivityLogs.AddAsync(new ActivityLog
-            {
-                Description = $"Board title changed from {board.Title} to {boardDomain.Title} was created.",
-                ActionType = "BoardCreated",
-                BoardId = board.Id,
-            });
-
-            await dbContext.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return boardDomain;
         }
 
         public async Task<Boolean> DeleteBoardAsync(Guid id)
         {
-            var boardDomain = await dbContext.Boards
+            var boardDomain = await _dbSet
                 .Include(b => b.BoardLists)
                 .ThenInclude(l => l.Cards)
                 .FirstOrDefaultAsync(b => b.Id == id);
@@ -81,34 +68,8 @@ namespace PersonalProjectApi.Repositories.BoardRepository
                 return false;
             }
 
-            var listIds = boardDomain.BoardLists.Select(l => l.Id).ToList();
-            var cardIds = boardDomain.BoardLists.SelectMany(l => l.Cards).Select(c => c.Id).ToList();
-
-            if (cardIds.Any())
-            {
-                await dbContext.ActivityLogs
-                    .Where(log => log.CardId != null && cardIds.Contains(log.CardId.Value))
-                    .ExecuteUpdateAsync(s => s.SetProperty(l => l.CardId, (Guid?)null));
-            }
-
-            if (listIds.Any())
-            {
-                await dbContext.ActivityLogs
-                    .Where(log => log.BoardListId != null && listIds.Contains(log.BoardListId.Value))
-                    .ExecuteUpdateAsync(s => s.SetProperty(l => l.BoardListId, (Guid?)null));
-            }
-
-            var board = await dbContext.Boards.FindAsync(id);
-
-            await dbContext.ActivityLogs.AddAsync(new ActivityLog
-            {
-                Description = $"Board {board.Id} was deleted.",
-                ActionType = "BoardDeleted",
-                BoardId = board.Id,
-            });
-
-            dbContext.Boards.Remove(boardDomain);
-            await dbContext.SaveChangesAsync();
+            _dbSet.Remove(boardDomain);
+            await _context.SaveChangesAsync();
             return true;
         }
     }

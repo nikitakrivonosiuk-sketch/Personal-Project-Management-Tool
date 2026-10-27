@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { BoardListComponent } from './board-list-component/board-list-component';
-import { Board } from './board-list-component/board/board';
+import { BoardListComponent } from './components/board-list-component/board-list-component';
+import { Board } from './components/board/board';
 
 export const routes: Routes = [
   { path: 'boards', component: BoardListComponent },

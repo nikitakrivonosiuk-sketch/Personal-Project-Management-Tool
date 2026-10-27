@@ -1,4 +1,5 @@
-﻿using PersonalProjectApi.Models.DTO.BoardListsDto;
+﻿using PersonalProjectApi.Models.Domain;
+using PersonalProjectApi.Models.DTO.BoardListsDto;
 
 namespace PersonalProjectApi.Models.DTO.BoardsDto
 {
@@ -7,6 +8,6 @@ namespace PersonalProjectApi.Models.DTO.BoardsDto
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
-        public List<BoardListDto> BoardLists { get; set; }
+        public List<BoardListDto> BoardLists { get; set; } = new List<BoardListDto>();
     }
 }

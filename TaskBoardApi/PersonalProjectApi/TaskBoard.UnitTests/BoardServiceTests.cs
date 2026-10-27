@@ -5,6 +5,7 @@ using Moq;
 using PersonalProjectApi.Controllers;
 using PersonalProjectApi.Models.Domain;
 using PersonalProjectApi.Models.DTO.CardDTOs;
+using PersonalProjectApi.Models.Enums;
 using PersonalProjectApi.Repositories.ActivityLogRepositories;
 using PersonalProjectApi.Services;
 using System.Drawing.Printing;

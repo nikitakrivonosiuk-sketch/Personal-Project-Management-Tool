@@ -1,4 +1,4 @@
-﻿using PersonalProjectApi.Models.Domain;
+﻿using PersonalProjectApi.Models.Enums;
 
 namespace PersonalProjectApi.Models.DTO.CardDTOs
 {

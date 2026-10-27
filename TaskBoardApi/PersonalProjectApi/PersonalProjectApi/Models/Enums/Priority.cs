@@ -1,4 +1,4 @@
-﻿namespace PersonalProjectApi.Models.Domain
+﻿namespace PersonalProjectApi.Models.Enums
 {
         public enum Priority
         {

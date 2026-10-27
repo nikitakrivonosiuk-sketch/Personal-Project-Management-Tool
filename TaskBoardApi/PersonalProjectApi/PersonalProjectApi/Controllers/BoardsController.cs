@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalProjectApi.Models.DTO.BoardsDto;
 using PersonalProjectApi.Services;
+using System.Text.Json;
 
 namespace PersonalProjectApi.Controllers
 {
@@ -38,7 +39,7 @@ namespace PersonalProjectApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBoard([FromBody] CreatingBoardDto creatingRequestDto)
         {
-            _logger.LogInformation($"{nameof(CreateBoard)} received request: {System.Text.Json.JsonSerializer.Serialize(creatingRequestDto)}");
+            _logger.LogInformation($"{nameof(CreateBoard)} received request: {JsonSerializer.Serialize(creatingRequestDto)}");
 
             var board = await _boardService.CreateBoardAsync(creatingRequestDto);
             return Ok(board);
@@ -47,7 +48,7 @@ namespace PersonalProjectApi.Controllers
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> UpdateBoard([FromBody] UpdateBoardRequestDto requestDto)
         {
-            _logger.LogInformation($"{nameof(UpdateBoard)} received request: {System.Text.Json.JsonSerializer.Serialize(requestDto)}");
+            _logger.LogInformation($"{nameof(UpdateBoard)} received request: {JsonSerializer.Serialize(requestDto)}");
 
             var board = await _boardService.UpdateBoardAsync(requestDto);
             return Ok(board);

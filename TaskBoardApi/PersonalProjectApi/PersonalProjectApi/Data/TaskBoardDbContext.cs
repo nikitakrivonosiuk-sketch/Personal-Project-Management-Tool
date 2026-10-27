@@ -2,6 +2,7 @@
 using Microsoft.Identity.Client;
 using PersonalProjectApi.Models;
 using PersonalProjectApi.Models.Domain;
+using PersonalProjectApi.Models.Enums;
 
 namespace PersonalProjectApi.Data
 {

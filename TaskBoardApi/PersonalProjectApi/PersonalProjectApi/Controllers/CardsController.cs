@@ -1,10 +1,7 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PersonalProjectApi.Models.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalProjectApi.Models.DTO.CardDTOs;
-using PersonalProjectApi.Repositories.CardsRepositories;
 using PersonalProjectApi.Services;
+using System.Text.Json;
 
 namespace PersonalProjectApi.Controllers
 {
@@ -33,7 +30,7 @@ namespace PersonalProjectApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCard([FromBody] AddCardRequestDto cardRequestDto)
         {
-            _logger.LogInformation($"{nameof(CreateCard)} received request: {System.Text.Json.JsonSerializer.Serialize(cardRequestDto)}");
+            _logger.LogInformation($"{nameof(CreateCard)} received request: {JsonSerializer.Serialize(cardRequestDto)}");
 
             var card = await _cardsService.CreateCardAsync(cardRequestDto); 
             return Ok(card);
@@ -42,7 +39,7 @@ namespace PersonalProjectApi.Controllers
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> UpdateCard([FromRoute] Guid id, [FromBody] UpdateCardDto cardRequestDto)
         {
-            _logger.LogInformation($"{nameof(UpdateCard)} received request: {System.Text.Json.JsonSerializer.Serialize(cardRequestDto)}, id: {id}");
+            _logger.LogInformation($"{nameof(UpdateCard)} received request: {JsonSerializer.Serialize(cardRequestDto)}, id: {id}");
 
             var card = await _cardsService.UpdateCardAsync(id, cardRequestDto);
             return Ok(card);

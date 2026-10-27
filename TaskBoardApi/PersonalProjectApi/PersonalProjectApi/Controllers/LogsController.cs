@@ -1,9 +1,6 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PersonalProjectApi.Models.DTO.ActivityLogDtos;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalProjectApi.Repositories.ActivityLogRepositories;
-using PersonalProjectApi.Repositories.ListRepositories;
+using System.Text.Json;
 
 namespace PersonalProjectApi.Controllers
 {
@@ -27,7 +24,7 @@ namespace PersonalProjectApi.Controllers
         [FromQuery] int skip = 0,
         [FromQuery] int take = 10)
         {
-            _logger.LogInformation($"{nameof(GetLogs)} received request: {System.Text.Json.JsonSerializer.Serialize(new { boardId, listId, cardId, skip, take })}");
+            _logger.LogInformation($"{nameof(GetLogs)} received request: {JsonSerializer.Serialize(new { boardId, listId, cardId, skip, take })}");
 
             var logs = await _activityLogRepository.GetLogsAsync(boardId, listId, cardId, skip, take);
             return Ok(logs);

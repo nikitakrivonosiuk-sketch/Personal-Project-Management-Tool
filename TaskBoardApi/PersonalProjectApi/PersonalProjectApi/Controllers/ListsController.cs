@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.OpenApi.Validations;
-using PersonalProjectApi.Models.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalProjectApi.Models.DTO.BoardListsDto;
-using PersonalProjectApi.Repositories.ListRepositories;
+using PersonalProjectApi.Services;
+using System.Text.Json;
 
 namespace PersonalProjectApi.Controllers
 {
@@ -12,83 +9,48 @@ namespace PersonalProjectApi.Controllers
     [ApiController]
     public class ListsController : ControllerBase
     {
-        private readonly IListsRepository _listsRepository;
-        public ListsController(IListsRepository repository)
+        private readonly ListService _listService;
+        private readonly ILogger<ListsController> _logger;
+        public ListsController(ListService listService, ILogger<ListsController> logger)
         {
-            this._listsRepository = repository;
+            _listService = listService;
+            _logger = logger;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllLists()
+        public async Task<IActionResult> GetLists()
         {
-            var listsDomain = await _listsRepository.GetAllBoardListsAsync();
+            _logger.LogInformation($"{nameof(GetLists)} received request.");
 
-            var listsDto = listsDomain.Select(list => new BoardListDto
-            {
-                Id = list.Id,
-                Title = list.Title,
-                Position = list.Position,
-            });
-
-            return Ok(listsDto);
+            var lists = await _listService.GetListsAsync();
+            return Ok(lists);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateList([FromBody] BoardListDto boardListDto)
+        public async Task<IActionResult> CreateList([FromBody] CreateListRequestDto requestDto)
         {
-            var listDomain = new BoardList
-            {
-                Title = boardListDto.Title,
-            };
+            _logger.LogInformation($"{nameof(CreateList)} received request: {JsonSerializer.Serialize(requestDto)}");
 
-            listDomain = await _listsRepository.CreateListAsync(listDomain);
-
-            var listDto = new BoardListDto
-            {
-                Id = listDomain.Id,
-                Title = listDomain.Title,
-            };
-
-            return Ok(listDto);
+            var list = await _listService.CreateListAsync(requestDto);
+            return Ok(list);
         }
 
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> UpdateList([FromRoute] Guid id, [FromBody] BoardListDto boardListDto)
         {
-            var listDomain = new BoardList
-            {
-                Title= boardListDto.Title,
-                Position = boardListDto.Position,
-            };
+            _logger.LogInformation($"{nameof(UpdateList)} received request: {JsonSerializer.Serialize(boardListDto)}");
 
-            listDomain = await _listsRepository.UpdateListAsync(id, listDomain);
-
-            if (listDomain == null)
-            {
-                return NotFound(boardListDto);
-            }
-
-            var listDto = new BoardListDto
-            {
-                Id = listDomain.Id,
-                Title = listDomain.Title,
-                Position = listDomain.Position,
-            };
-
-            return Ok(listDto);
+            var list = await _listService.UpdateListASync(id, boardListDto);
+            return Ok(list);
         }
 
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteList([FromRoute] Guid id)
         {
-            var isDeleted = await _listsRepository.DeleteListAsync(id);
+            _logger.LogInformation($"{nameof(DeleteList)} received request: {id}");
 
-            if (!isDeleted)
-            {
-                return NotFound("List was not found.");
-            }
-
-            return Ok("Succesfully deleted.");
+            var deleted = await _listService.DeleteListAsync(id);
+            return Ok(deleted);
         }
     }
 }

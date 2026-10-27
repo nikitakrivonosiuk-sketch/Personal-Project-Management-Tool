@@ -1,0 +1,3 @@
+taskboard-mk26.swedencentral.cloudapp.azure.com {
+    reverse_proxy web:80
+}

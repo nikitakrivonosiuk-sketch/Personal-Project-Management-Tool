@@ -1,5 +1,5 @@
 services:
-  api: 
+  api:
     image: ${ACR_NAME}.azurecr.io/taskboard-api:latest
     restart: unless-stopped
     environment:
@@ -10,7 +10,24 @@ services:
   web:
     image: ${ACR_NAME}.azurecr.io/taskboard-web:latest
     restart: unless-stopped
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     depends_on:
       - api
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+
+volumes:
+  caddy_data:
+  caddy_config:

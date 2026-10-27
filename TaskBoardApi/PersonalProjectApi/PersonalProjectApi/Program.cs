@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using PersonalProjectApi.Controllers;
 using PersonalProjectApi.Data;
 using PersonalProjectApi.ExceptionHandler;
 using PersonalProjectApi.Repositories.ActivityLogRepositories;
@@ -8,8 +7,15 @@ using PersonalProjectApi.Repositories.CardsRepositories;
 using PersonalProjectApi.Repositories.Common;
 using PersonalProjectApi.Repositories.ListRepositories;
 using PersonalProjectApi.Services;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyVaultUri = builder.Configuration["KeyVault:Uri"];
+if (!string.IsNullOrEmpty(keyVaultUri))
+{
+    builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUri), new DefaultAzureCredential());
+}
 
 const string CORSOpenPolicy = "OpenCORSPolicy";
 
@@ -35,7 +41,12 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<TaskBoardDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("TaskBoardConnectionString")));
+options.UseSqlServer(
+    builder.Configuration.GetConnectionString("TaskBoardConnectionString"),
+    sql => sql.EnableRetryOnFailure(
+        maxRetryCount: 8,
+        maxRetryDelay: TimeSpan.FromSeconds(15),
+        errorNumbersToAdd: null)));
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

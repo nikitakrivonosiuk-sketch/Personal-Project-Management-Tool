@@ -1,21 +1,29 @@
 ﻿using PersonalProjectApi.Models.Domain;
 using PersonalProjectApi.Models.DTO.CardDTOs;
 using PersonalProjectApi.Repositories.CardsRepositories;
+using PersonalProjectApi.Repositories.ListRepositories;
+using PersonalProjectApi.Services.Authorization;
 
 namespace PersonalProjectApi.Services
 {
     public class CardsService
     {
-        private ICardsRepository _cardsRepository;
+        private readonly ICardsRepository _cardsRepository;
+        private readonly IListsRepository _listsRepository;
+        private readonly BoardAuthorizationService _authService;
 
-        public CardsService(ICardsRepository cardsRepository)
+        public CardsService(ICardsRepository cardsRepository,
+            IListsRepository listsRepository,
+            BoardAuthorizationService boardAuthorizationService)
         {
             _cardsRepository = cardsRepository;
+            _authService = boardAuthorizationService;
+            _listsRepository = listsRepository;
         }
 
-        public async Task<List<CardDto>> GetAllCardsAsync()
+        public async Task<List<CardDto>> GetAllCardsAsync(Guid userId)
         {
-            var cardsDomain = await _cardsRepository.GetAllCardsAsync();
+            var cardsDomain = await _cardsRepository.GetAllCardsAsync(userId);
 
             var cardsDto = cardsDomain.Select(card => new CardDto
             {
@@ -30,8 +38,12 @@ namespace PersonalProjectApi.Services
             return cardsDto;
         }
 
-        public async Task<CardDto> CreateCardAsync(AddCardRequestDto cardRequestDto)
+        public async Task<CardDto> CreateCardAsync(AddCardRequestDto cardRequestDto, Guid userId)
         {
+            var listWithMembers = await _listsRepository.GetListWithBoardMembersAsync(cardRequestDto.BoardListId);
+
+            _authService.EnsureCanEdit(userId, listWithMembers.Board);
+
             var cardDomain = new Card
             {
                 Title = cardRequestDto.Title,
@@ -56,23 +68,22 @@ namespace PersonalProjectApi.Services
             return cardDto;
         }
 
-        public async Task<CardDto> UpdateCardAsync(Guid id, UpdateCardDto cardRequestDto)
+        public async Task<CardDto> UpdateCardAsync(Guid cardId, UpdateCardDto cardRequestDto, Guid userId)
         {
+            var cardWithMembers = await _cardsRepository.GetCardWithBoardMembersAsync(cardId);
+
+            _authService.EnsureCanEdit(userId, cardWithMembers.BoardList.Board);
+
             var cardDomain = new Card
             {
                 Title = cardRequestDto.Title,
                 Description = cardRequestDto.Description,
                 DueDate = cardRequestDto.DueDate,
                 Priority = cardRequestDto.Priority,
-                BoardListId = cardRequestDto.BoardListId
+                BoardListId = cardWithMembers.BoardListId,
             };
 
-            cardDomain = await _cardsRepository.UpdateCardAsync(id, cardDomain);
-
-            if (cardDomain == null)
-            {
-                throw new KeyNotFoundException($"Card with id {id} was not found.");
-            }
+            cardDomain = await _cardsRepository.UpdateCardAsync(cardId, cardDomain);
 
             var cardDto = new CardDto
             {
@@ -87,13 +98,17 @@ namespace PersonalProjectApi.Services
             return cardDto;
         }
 
-        public async Task<string> DeleteCardAsync(Guid id)
+        public async Task<string> DeleteCardAsync(Guid cardId, Guid userId)
         {
-            var isDeleted = await _cardsRepository.DeleteCardAsync(id);
+            var cardWithBoardMembers = await _cardsRepository.GetCardWithBoardMembersAsync(cardId);
+            
+            _authService.EnsureCanEdit(userId, cardWithBoardMembers.BoardList.Board);
+
+            var isDeleted = await _cardsRepository.DeleteCardAsync(cardId);
 
             if (!isDeleted)
             {
-                throw new KeyNotFoundException($"Card with id {id} was not deleted. Invalid Id.");
+                throw new KeyNotFoundException($"Card with id {cardId} was not deleted. Invalid Id.");
             }
 
             return "Deleted succesfully";

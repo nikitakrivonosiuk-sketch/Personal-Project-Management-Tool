@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PersonalProjectApi.Data;
 using PersonalProjectApi.Models.Domain;
 using PersonalProjectApi.Repositories.Common;
@@ -12,16 +11,32 @@ namespace PersonalProjectApi.Repositories.ListRepositories
         {
         }
 
-        public async Task<List<BoardList>> GetAllBoardListsAsync()
+        public async Task<List<BoardList>> GetAllBoardListsAsync(Guid userId)
         {
-            var listsDomain = await _dbSet.OrderBy(l => l.Position).ToListAsync();
+            var listsDomain = await _dbSet
+                .Where(l => 
+                    l.Board.OwnerId == userId ||  l.Board.BoardMembers.Any(m => m.UserId == userId))
+                .OrderBy(l => l.Position)
+                .ToListAsync();
 
             return listsDomain;
         }
+        public async Task<BoardList> GetListWithBoardMembersAsync(Guid listId)
+        {
+            var listWithMembers = await _context.BoardLists
+                .Include(l => l.Board)
+                    .ThenInclude(m => m.BoardMembers)
+                .FirstOrDefaultAsync(list => list.Id == listId);
 
+            if (listWithMembers == null)
+                throw new KeyNotFoundException();
+
+            return listWithMembers;
+        }
         public async Task<BoardList> CreateListAsync(BoardList boardList)
         {
-            var maxPosittion = await _dbSet.MaxAsync(list => (int?)list.Position) ?? 0;
+            var maxPosittion = await _dbSet.Where(l => l.BoardId == boardList.BoardId)
+                .MaxAsync(list => (int?)list.Position) ?? 0;
             boardList.Position = maxPosittion + 1;
 
             await _dbSet.AddAsync(boardList);

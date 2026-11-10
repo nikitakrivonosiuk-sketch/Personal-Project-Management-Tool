@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalProjectApi.Data;
 using PersonalProjectApi.Models.Domain;
-using PersonalProjectApi.Models.DTO.CardDTOs;
 using PersonalProjectApi.Repositories.Common;
 
 namespace PersonalProjectApi.Repositories.CardsRepositories
@@ -17,13 +16,30 @@ namespace PersonalProjectApi.Repositories.CardsRepositories
             return card;
         }
 
-        public async Task<List<Card>> GetAllCardsAsync()
+        public async Task<List<Card>> GetAllCardsAsync(Guid userId)
         {
             var cardsDomain = await _dbSet
+                .Where(c => c.BoardList.Board.BoardMembers.Any(m => m.UserId == userId) ||
+                    c.BoardList.Board.OwnerId == userId)
                 .Include(c => c.BoardList)
                 .OrderBy(c => c.DueDate)
                 .ToListAsync();
             return cardsDomain;
+        }
+
+        public async Task<Card> GetCardWithBoardMembersAsync(Guid cardId)
+        {
+            var cardWithMembers = await _context
+                .Cards
+                .Include(l => l.BoardList)
+                    .ThenInclude(b => b.Board)
+                        .ThenInclude(m => m.BoardMembers)
+                .FirstOrDefaultAsync(c => c.Id == cardId);
+
+            if (cardWithMembers == null)
+                throw new KeyNotFoundException();
+
+            return cardWithMembers;
         }
 
         public async Task<Card> UpdateCardAsync(Guid Id, Card card)

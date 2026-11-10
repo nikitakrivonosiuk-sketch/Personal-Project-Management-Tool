@@ -1,26 +1,30 @@
-﻿using PersonalProjectApi.Models.Domain;
+﻿using PersonalProjectApi.ExceptionHandler.Exceptions;
+using PersonalProjectApi.Models.Domain;
 using PersonalProjectApi.Models.DTO.BoardListsDto;
 using PersonalProjectApi.Models.DTO.BoardsDto;
 using PersonalProjectApi.Models.DTO.CardDTOs;
+using PersonalProjectApi.Models.Enums;
 using PersonalProjectApi.Repositories.BoardRepository;
-using PersonalProjectApi.Repositories.Common;
+using PersonalProjectApi.Services.Authorization;
 
 namespace PersonalProjectApi.Services
 {
     public class BoardService
     {
         private readonly IBoardRepository _boardRepository;
+        private readonly BoardAuthorizationService _authService;
 
-        public BoardService(IBoardRepository boardRepository)
+        public BoardService(IBoardRepository boardRepository, BoardAuthorizationService boardAuthorizationService)
         {
             _boardRepository = boardRepository;
+            _authService = boardAuthorizationService;
         }
 
-        public async Task<List<Board>> GetAllBoards(int pageNumber, int pageSize)
+        public async Task<List<BoardDto>> GetAllBoards(Guid userId, int pageNumber, int pageSize)
         {
-            var boardsDomain = await _boardRepository.GetAllBoardsAsync(pageNumber, pageSize);
+            var boardsDomain = await _boardRepository.GetAllBoardsAsync(userId, pageNumber, pageSize);
 
-            var boardsDto = boardsDomain.Select(b => new Board
+            var boardsDto = boardsDomain.Select(b => new BoardDto
             {
                 Id = b.Id,
                 Title = b.Title,
@@ -30,18 +34,20 @@ namespace PersonalProjectApi.Services
             return boardsDto;
         }
 
-        public async Task<BoardDto> GetBoardByIdAsync(Guid id)
+        public async Task<BoardDto> GetBoardByIdAsync(Guid userId, Guid boardId)
         {
-            var boardDomain = await _boardRepository.GetBoardAsync(id);
+            var boardDomain = await _boardRepository.GetBoardAsync(boardId);
 
             if (boardDomain == null)
             {
-                throw new KeyNotFoundException($"Board with id {id} was not found.");
+                throw new KeyNotFoundException($"Board with id {boardId} was not found.");
             }
+
+            _authService.EnsureCanRead(userId, boardDomain);
 
             var boardDto = new BoardDto
             {
-                Id = id,
+                Id = boardId,
                 Title = boardDomain.Title,
                 CreatedAt = boardDomain.CreatedAt,
                 BoardLists = boardDomain.BoardLists.Select(l => new BoardListDto
@@ -64,11 +70,12 @@ namespace PersonalProjectApi.Services
             return boardDto;
         }
 
-        public async Task<BoardDto> CreateBoardAsync(CreatingBoardDto creatingRequestDto)
+        public async Task<BoardDto> CreateBoardAsync(Guid userId, CreatingBoardDto creatingRequestDto)
         {
             var boardDomain = new Board
             {
                 Title = creatingRequestDto.Title,
+                OwnerId = userId,
             };
 
             boardDomain = await _boardRepository.CreateBoardAsync(boardDomain);
@@ -83,20 +90,20 @@ namespace PersonalProjectApi.Services
             return boardDto;
         }
 
-        public async Task<BoardDto> UpdateBoardAsync(UpdateBoardRequestDto requestDto)
+        public async Task<BoardDto> UpdateBoardAsync(Guid boardId, UpdateBoardRequestDto requestDto, Guid userId)
         {
-            var boardDomain = new Board
-            {
-                Id = requestDto.Id,
-                Title = requestDto.Title,
-            };
+            var boardWithMembers = await _boardRepository.GetBoardWithMembersAsync(boardId);
 
-            boardDomain = await _boardRepository.UpdateBoardAsync(boardDomain);
-
-            if (boardDomain == null)
+            if (boardWithMembers == null)
             {
-                throw new KeyNotFoundException($"Board with id {requestDto.Id} was not found.");
+                throw new KeyNotFoundException($"Board with id {boardId} was not found.");
             }
+
+            _authService.EnsureCanEdit(userId, boardWithMembers);
+
+            boardWithMembers.Title = requestDto.Title;
+
+            var boardDomain = await _boardRepository.UpdateBoardAsync(boardWithMembers);
 
             var boardDto = new BoardDto
             {
@@ -107,14 +114,16 @@ namespace PersonalProjectApi.Services
             return boardDto;
         }
 
-        public async Task<string> DeleteBoardAsync(Guid id)
+        public async Task<string> DeleteBoardAsync(Guid boardId, Guid userId)
         {
-            var isDeleted = await _boardRepository.DeleteBoardAsync(id);
+            var board = await _boardRepository.GetBoardWithMembersAsync(boardId);
 
-            if (!isDeleted)
-            {
-                throw new KeyNotFoundException($"Board with id {id} was not found.");
-            }
+            if (board == null)
+                throw new KeyNotFoundException($"Board with id {boardId} was not found.");
+
+            _authService.EnsureCanDelete(userId, board);
+
+            await _boardRepository.DeleteBoardAsync(boardId);
 
             return "Deleted succesfully";
         }

@@ -5,8 +5,9 @@ namespace PersonalProjectApi.Repositories.BoardRepository
 {
         public interface IBoardRepository : IRepository<Board>
         {
-            Task<List<Board>> GetAllBoardsAsync(int pageNumber, int pageSize);
-            Task<Board?> GetBoardAsync(Guid id);
+            Task<List<Board>> GetAllBoardsAsync(Guid userId, int pageNumber, int pageSize);
+            Task<Board?> GetBoardAsync(Guid boardId);
+            Task<Board> GetBoardWithMembersAsync(Guid boardId);
             Task<Board> CreateBoardAsync(Board board);
             Task<Board> UpdateBoardAsync(Board board);
             Task<bool> DeleteBoardAsync(Guid id);

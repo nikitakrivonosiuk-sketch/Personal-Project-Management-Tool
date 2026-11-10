@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using PersonalProjectApi.ExceptionHandler.Exceptions;
 
 namespace PersonalProjectApi.ExceptionHandler
 {
@@ -19,6 +20,8 @@ namespace PersonalProjectApi.ExceptionHandler
             var (statusCode, title) = exception switch
             {
                 KeyNotFoundException => (StatusCodes.Status404NotFound, "Not Found"),
+                ForbiddenException => (StatusCodes.Status403Forbidden, "Forbidden"),
+                ConflictException => (StatusCodes.Status409Conflict, "Conflict"),
                 _ => (StatusCodes.Status500InternalServerError, "Internal Server Error"),
             };
 

@@ -1,20 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PersonalProjectApi.Models.DTO.BoardListsDto;
 using PersonalProjectApi.Services;
+using PersonalProjectApi.Services.Authorization;
 using System.Text.Json;
 
 namespace PersonalProjectApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ListsController : ControllerBase
     {
         private readonly ListService _listService;
         private readonly ILogger<ListsController> _logger;
-        public ListsController(ListService listService, ILogger<ListsController> logger)
+        private readonly CurrentUserService _currentUserService;
+        public ListsController(ListService listService, ILogger<ListsController> logger, CurrentUserService currentUserService)
         {
             _listService = listService;
             _logger = logger;
+            _currentUserService = currentUserService;
         }
 
         [HttpGet]
@@ -22,7 +27,7 @@ namespace PersonalProjectApi.Controllers
         {
             _logger.LogInformation($"{nameof(GetLists)} received request.");
 
-            var lists = await _listService.GetListsAsync();
+            var lists = await _listService.GetListsAsync(_currentUserService.UserId);
             return Ok(lists);
         }
 
@@ -31,7 +36,7 @@ namespace PersonalProjectApi.Controllers
         {
             _logger.LogInformation($"{nameof(CreateList)} received request: {JsonSerializer.Serialize(requestDto)}");
 
-            var list = await _listService.CreateListAsync(requestDto);
+            var list = await _listService.CreateListAsync(_currentUserService.UserId, requestDto);
             return Ok(list);
         }
 
@@ -40,7 +45,7 @@ namespace PersonalProjectApi.Controllers
         {
             _logger.LogInformation($"{nameof(UpdateList)} received request: {JsonSerializer.Serialize(boardListDto)}");
 
-            var list = await _listService.UpdateListASync(id, boardListDto);
+            var list = await _listService.UpdateListASync(id, boardListDto, _currentUserService.UserId);
             return Ok(list);
         }
 
@@ -49,7 +54,7 @@ namespace PersonalProjectApi.Controllers
         {
             _logger.LogInformation($"{nameof(DeleteList)} received request: {id}");
 
-            var deleted = await _listService.DeleteListAsync(id);
+            var deleted = await _listService.DeleteListAsync(id, _currentUserService.UserId);
             return Ok(deleted);
         }
     }

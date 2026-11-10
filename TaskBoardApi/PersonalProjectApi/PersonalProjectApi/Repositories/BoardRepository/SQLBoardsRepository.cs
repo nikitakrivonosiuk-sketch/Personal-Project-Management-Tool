@@ -11,9 +11,10 @@ namespace PersonalProjectApi.Repositories.BoardRepository
         {
         }
 
-        public async Task<List<Board>> GetAllBoardsAsync(int pageNumber, int pageSize)
+        public async Task<List<Board>> GetAllBoardsAsync(Guid userId, int pageNumber, int pageSize)
         {
             var boards = await _dbSet
+                .Where(b => b.OwnerId == userId || b.BoardMembers.Any(m => m.UserId == userId))
                 .OrderBy(b => b.CreatedAt)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -22,12 +23,13 @@ namespace PersonalProjectApi.Repositories.BoardRepository
             return boards;
         }
 
-        public async Task<Board> GetBoardAsync(Guid id)
+        public async Task<Board?> GetBoardAsync(Guid boardId)
         {
             var board = await _dbSet
+                .Include(m =>  m.BoardMembers)
                 .Include(l => l.BoardLists)
                     .ThenInclude(c => c.Cards)
-                .FirstOrDefaultAsync(b => b.Id == id);
+                .FirstOrDefaultAsync(b => b.Id == boardId);
 
             return board;
         }
@@ -37,6 +39,19 @@ namespace PersonalProjectApi.Repositories.BoardRepository
             await _dbSet.AddAsync(board);
 
             await _context.SaveChangesAsync();
+
+            return board;
+        }
+
+        public async Task<Board> GetBoardWithMembersAsync(Guid boardId)
+        {
+            var board = await _context.Boards
+                .Include(m => m.BoardMembers)
+                    .ThenInclude(u => u.User)
+                .FirstOrDefaultAsync(b => b.Id == boardId);
+
+            if (board == null)
+                throw new KeyNotFoundException();
 
             return board;
         }
@@ -60,7 +75,7 @@ namespace PersonalProjectApi.Repositories.BoardRepository
         {
             var boardDomain = await _dbSet
                 .Include(b => b.BoardLists)
-                .ThenInclude(l => l.Cards)
+                    .ThenInclude(l => l.Cards)
                 .FirstOrDefaultAsync(b => b.Id == id);
 
             if (boardDomain == null)

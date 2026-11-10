@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using PersonalProjectApi.Models;
 using PersonalProjectApi.Models.Domain;
 using PersonalProjectApi.Models.Enums;
 
 namespace PersonalProjectApi.Data
 {
-    public class TaskBoardDbContext : IdentityDbContext
+    public class TaskBoardDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
         public TaskBoardDbContext(DbContextOptions<TaskBoardDbContext> dbContextOptions) : base(dbContextOptions)
         {
@@ -18,6 +18,7 @@ namespace PersonalProjectApi.Data
         public DbSet<Card> Cards { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
         public DbSet<Board> Boards { get; set; }
+        public DbSet<BoardMember> BoardMembers { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -75,6 +76,34 @@ namespace PersonalProjectApi.Data
                 .HasOne(c => c.BoardList)
                 .WithMany(bl => bl.Cards)
                 .HasForeignKey(c => c.BoardListId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Board>(b =>
+            {
+               b.HasOne(board => board.Owner)
+                .WithMany()
+                .HasForeignKey(o => o.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<BoardMember>()
+                .HasKey(c => new { c.BoardId, c.UserId });
+
+            modelBuilder.Entity<BoardMember>()
+                .Property(l => l.UserLevel)
+                .HasConversion<string>()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<BoardMember>()
+                .HasOne(u => u.User)
+                .WithMany()
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BoardMember>()
+                .HasOne(b => b.Board)
+                .WithMany(b => b.BoardMembers)
+                .HasForeignKey(b => b.BoardId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

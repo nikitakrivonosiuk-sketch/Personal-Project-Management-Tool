@@ -10,7 +10,7 @@ import { CreateCardRequestDto } from '../../models/board-models';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '../../services/toast.service/toast.service';
 import { Store } from '@ngrx/store';
-import { selectBoardList } from '../../state/board.selectors';
+import { selectBoardList, selectIsLoading } from '../../state/board.selectors';
 import { BoardActions } from '../../state/board.actions';
 
 @Component({
@@ -27,6 +27,7 @@ export class Board implements OnInit {
   store = inject(Store);
 
   boardLists = this.store.selectSignal(selectBoardList);
+  isLoading = this.store.selectSignal(selectIsLoading);
 
   isAddingList = false;
   isViewCardModal = false;

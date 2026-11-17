@@ -39,33 +39,48 @@ namespace PersonalProjectApi.Services
             var boardDomain = await _boardRepository.GetBoardAsync(boardId);
 
             if (boardDomain == null)
-            {
                 throw new KeyNotFoundException($"Board with id {boardId} was not found.");
-            }
 
             _authService.EnsureCanRead(userId, boardDomain);
 
-            var boardDto = new BoardDto
+            var isOwner = false;
+            UserLevelAccess? currentLevel = null;
+            
+            if (boardDomain.OwnerId == userId)
+                isOwner = true;
+            else
             {
-                Id = boardId,
-                Title = boardDomain.Title,
-                CreatedAt = boardDomain.CreatedAt,
-                BoardLists = boardDomain.BoardLists.Select(l => new BoardListDto
+                var member = boardDomain.BoardMembers.FirstOrDefault(m => m.UserId == userId);
+                if (member == null)
+                    throw new KeyNotFoundException();
+
+                currentLevel = member.UserLevel;
+            }
+
+                var boardDto = new BoardDto
                 {
-                    Id = l.Id,
-                    Title = l.Title,
-                    Position = l.Position,
-                    Cards = l.Cards.Select(c => new CardDto
+                    Id = boardId,
+                    Title = boardDomain.Title,
+                    CreatedAt = boardDomain.CreatedAt,
+                    IsOwner = isOwner,
+                    OwnerEmail = boardDomain.Owner?.Email ?? string.Empty,
+                    CurrentLevel = currentLevel,
+                    BoardLists = boardDomain.BoardLists.Select(l => new BoardListDto
                     {
-                        Id = c.Id,
-                        Title = c.Title,
-                        Priority = c.Priority,
-                        Description = c.Description,
-                        DueDate = c.DueDate,
-                        BoardListId = l.Id,
+                        Id = l.Id,
+                        Title = l.Title,
+                        Position = l.Position,
+                        Cards = l.Cards.Select(c => new CardDto
+                        {
+                            Id = c.Id,
+                            Title = c.Title,
+                            Priority = c.Priority,
+                            Description = c.Description,
+                            DueDate = c.DueDate,
+                            BoardListId = l.Id,
+                        }).ToList()
                     }).ToList()
-                }).ToList()
-            };
+                };
 
             return boardDto;
         }

@@ -14,7 +14,7 @@ namespace PersonalProjectApi.Services
             _configuration = configuration;
         }
 
-        public string CreateAccessToken(AppUser user)
+        public (string Token, DateTime ExpiresAtUtc) CreateAccessToken(AppUser user)
         {
             var secretKey = _configuration["Jwt:SigningKey"];
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -28,8 +28,13 @@ namespace PersonalProjectApi.Services
             };
 
 
+            var minutes = _configuration.GetValue<int>("Jwt:AccessTokenMinutes");
             var now = DateTime.UtcNow;
-            var expires = now.AddMinutes(15);
+            var expires = now.AddMinutes(minutes);
+
+            if (minutes <= 0)
+                throw new InvalidOperationException(
+                    "Jwt:AccessTokenMinutes must be greater than zero.");
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
@@ -39,7 +44,8 @@ namespace PersonalProjectApi.Services
                 signingCredentials: credentials,
                 claims: claims);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
+            return (accessToken, expires);
         }
     }
 }

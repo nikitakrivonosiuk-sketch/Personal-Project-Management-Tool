@@ -84,5 +84,20 @@ namespace PersonalProjectApi.Services.Authorization
             if (member.UserLevel != UserLevelAccess.Admin || targetMember.UserLevel == UserLevelAccess.Admin)
                 throw new ForbiddenException(); 
         }
+        public void EnsureCanManageUsers(Guid userId, Board board)
+        {
+            if (board.OwnerId == userId)
+                return;
+
+            var member = board.BoardMembers.FirstOrDefault(u => u.UserId == userId && u.BoardId == board.Id);
+
+            if (member == null)
+                throw new KeyNotFoundException();
+
+            if (member.UserLevel is not (UserLevelAccess.Admin))
+            {
+                throw new ForbiddenException();
+            }
+        }
     }
 }

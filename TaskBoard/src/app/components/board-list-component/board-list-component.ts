@@ -7,6 +7,9 @@ import { ContextMenu } from '../context-menu/context-menu';
 import { ToastService } from '../../services/toast.service/toast.service';
 import { checkErrors } from '../../services/form-validator';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { selectIsLoading } from '../../state/board.selectors';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-board-list-component',
@@ -19,6 +22,7 @@ export class BoardListComponent implements OnInit {
   editingBoardId: string | null = null;
   pageSize: number = 8;
   pageNumber: number = 1;
+  isLoading = signal(true);
 
   private toaster = inject(ToastService);
 
@@ -39,7 +43,9 @@ export class BoardListComponent implements OnInit {
   boards = signal<BoardDto[]>([]);
 
   ngOnInit() {
-    this.boardService.getBoards(this.pageNumber, this.pageSize).subscribe({
+    this.boardService.getBoards(this.pageNumber, this.pageSize)
+    .pipe(finalize(() => this.isLoading.set(false)))
+    .subscribe({
       next: (boardsListFromDb: BoardDto[]) => {
         this.boards.set(boardsListFromDb);
       },

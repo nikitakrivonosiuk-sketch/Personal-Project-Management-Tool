@@ -1,9 +1,12 @@
-﻿namespace PersonalProjectApi.Models.Enums
+﻿using System.Text.Json.Serialization;
+
+namespace PersonalProjectApi.Models.Enums
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum UserLevelAccess 
     {
-        Reader = 1,
-        Editor = 2,
-        Admin = 3,
+        Reader = 0,
+        Editor = 1,
+        Admin = 2,
     }
 }

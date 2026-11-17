@@ -15,8 +15,6 @@ namespace PersonalProjectApi.ExceptionHandler
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            _logger.LogError(exception, "Unhandled exception occurred: {Message}", exception.Message);
-
             var (statusCode, title) = exception switch
             {
                 KeyNotFoundException => (StatusCodes.Status404NotFound, "Not Found"),
@@ -29,12 +27,26 @@ namespace PersonalProjectApi.ExceptionHandler
             {
                 Status = statusCode,
                 Title = title,
-                Detail = exception.Message
             };
+
+            if (statusCode == StatusCodes.Status500InternalServerError)
+            {
+                problemDetails.Detail = "Internal server error";
+                _logger.LogError(exception, "Unhandled exception occurred: {Message}", exception.Message);
+            }
+            else if (statusCode == StatusCodes.Status404NotFound)
+            {
+                problemDetails.Detail = "Resource was not found";
+                _logger.LogInformation("Resource was not found.");
+            }
+            else
+            {
+                problemDetails.Detail = exception.Message;
+                _logger.LogWarning("Request rejected with status {StatusCode}: {Message}", statusCode, exception.Message);
+            }
 
             httpContext.Response.StatusCode = statusCode;
             await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
-
             return true;
         }
     }

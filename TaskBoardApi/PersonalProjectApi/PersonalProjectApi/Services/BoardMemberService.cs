@@ -71,7 +71,10 @@ namespace PersonalProjectApi.Services
                 UserLevel = requestDto.UserLevel
             };
 
-            var result = await _membersRepository.AddBoardMemberAsync(boardMember);
+            var added = await _membersRepository.TryAddBoardMemberAsync(boardMember);
+
+            if (!added)
+                throw new ConflictException("User is already a member of this board.");
 
             var memberDto = new BoardMemberDto
             {
@@ -87,7 +90,9 @@ namespace PersonalProjectApi.Services
             var boardWithMembers = await _boardRepository.GetBoardWithMembersAsync(boardId);
 
             if (boardWithMembers == null)
-                throw new KeyNotFoundException("Board or member was not found.");
+                throw new KeyNotFoundException();
+
+            _authService.EnsureCanManageUsers(userId, boardWithMembers);
 
             if (boardWithMembers.OwnerId == memberUserId)
                 throw new ConflictException("The board owner cannot be managed as a member.");
@@ -95,7 +100,6 @@ namespace PersonalProjectApi.Services
             var targerMember = boardWithMembers.BoardMembers.FirstOrDefault(m => m.UserId == memberUserId);
             if (targerMember == null)
                 throw new KeyNotFoundException("Board member was not found.");
-
 
             _authService.EnsureCanChangeRoles(userId, boardWithMembers, targerMember, requestDto.LevelAccess);
 

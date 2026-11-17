@@ -1,4 +1,5 @@
 import { Priority } from "./card.models";
+import { UserLevelAccess } from "./member-models";
 
 export interface BoardListDto {
     id: string;
@@ -38,5 +39,8 @@ export interface BoardDto {
     id: string;
     title: string;
     createdAt: string;
+    isOwner: boolean;
+    ownerEmail: string;
+    currentLevel: UserLevelAccess | null;
     boardLists: BoardListDto[];
 }

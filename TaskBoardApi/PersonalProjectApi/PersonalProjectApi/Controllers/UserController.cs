@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalProjectApi.Models.DTO.UserDTOs;
 using PersonalProjectApi.Services;
@@ -7,6 +7,7 @@ namespace PersonalProjectApi.Controllers
 {
     [Route("api/auth/")]
     [ApiController]
+    [AllowAnonymous]
     public class UserController : ControllerBase
     {
         private readonly AccountService _accountService;
@@ -20,7 +21,15 @@ namespace PersonalProjectApi.Controllers
         {
             var result = await _accountService.CreateUserAsync(request);
 
-            return Ok(result);
+            if (result.Succeeded)
+                return StatusCode(StatusCodes.Status201Created);
+
+            var isDuplicate = result.Errors.Any(error => error.Code is "DuplicateEmail" or "DuplicateUserName");
+
+            if (isDuplicate)
+                return Conflict(new { message = "This email is already registrated." });
+
+            return BadRequest(new {message = "Registration failed. Check the email format and password requirements." });
         }
 
         [HttpPost("login")]
@@ -30,7 +39,7 @@ namespace PersonalProjectApi.Controllers
 
             if (result == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             return Ok(result);

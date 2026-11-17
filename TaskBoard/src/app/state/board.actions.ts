@@ -1,11 +1,32 @@
-import { createActionGroup, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { BoardDto, BoardListDto, CardDto, CreateCardRequestDto, CreateListRequestDto } from '../models/board-models';
 import { ListItem } from '../models/list-model';
 import { CardItem } from '../models/card.models';
+import { BoardMemberDto, UserLevelAccess } from '../models/member-models';
 
 export const BoardActions = createActionGroup({
   source: 'Board Page',
   events: {
+    'Logout': emptyProps(),
+
+    // Member Actions
+    'Load Members': props<{boardId: string}>(),
+    'Load Members Success': props<{ boardMembers: BoardMemberDto[]}>(),
+    'Load Members Failure': props<{ error: string}>(),
+
+    'Add Member': props<{boardId: string, email: string, userLevel: UserLevelAccess}>(),
+    'Add Member Success': props<{boardMember: BoardMemberDto}>(),
+    'Add Member Failure': props<{error: string}>(),
+
+    'Update Member': props<{boardId: string, userId: string, userLevel: UserLevelAccess}>(),
+    'Update Member Success': props<{boardMember: BoardMemberDto}>(),
+    'Update Member Failure': props<{error: string}>(),
+
+    'Delete Member': props<{userId: string, boardId: string}>(),
+    'Delete Member Success': props<{userId: string}>(),
+    'Delete Member Failure': props<{error: string}>(),
+
+    // Board Actions
     'Load Board': props<{ boardId: string }>(),
     'Load Board Success': props<{board: BoardDto}>(),
     'Load Board Failure': props<{error: string}>(),

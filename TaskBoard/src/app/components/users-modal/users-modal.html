@@ -1,0 +1,93 @@
+<div class="fixed flex bg-black/30 inset-0 z-50 items-center justify-center">
+
+    <div class="flex flex-col rounded-xl bg-white w-full max-w-lg overflow-hidden p-5 gap-4 shadow-2xl">
+        <div class="inline-flex w-full justify-between">
+            <h1 class="text-2xl font-semibold"> Board Members </h1>
+            <button (click)="closeModal()" 
+            class="">
+                <span class="material-symbols-outlined object-contain text-slate-600 cursor-pointer rounded-lg hover:bg-gray-200 [font-variation-settings:'wght'_400]">close</span>
+            </button>
+        </div>
+
+        <form [formGroup]="addUserForm" (ngSubmit)="onAddMember()" class="mt-2">
+            <p class="text-base text-slate-600 font-medium mb-2"> Email of user you want to add:</p>
+
+            <div class="inline-flex w-full justify-between gap-2">
+                    <input type="email" id="email" placeholder="example@email.com" formControlName="email"
+                        class="w-full border border-gray-200 rounded-md p-2">
+
+                <div class="flex gap-2">
+                    <select formControlName="userLevel" class="rounded-md border border-gray-200 w-30 p-2">
+                        <option value="Reader"> Reader </option>
+                        <option value="Editor"> Editor </option>
+                        @if (board()?.isOwner) {
+                            <option value="Admin"> Admin </option>
+                        }
+                    </select>
+    
+                    <button class="bg-slate-700 w-20 rounded-md p-2 text-white cursor-pointer transition hover:bg-slate-600 active:bg-slate-500" type="submit">
+                        Share
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div>
+            <span class="text-base font-semibold text-slate-600"> Members: </span>
+
+            @if (board(); as currentBoard) {
+            <div class="inline-flex w-full justify-between mt-2">
+                <div class="inline-flex gap-4 mt-1">
+                    <span class="material-symbols-outlined opacity-70">person</span>
+                    <p>
+                        {{ currentBoard.ownerEmail }}
+                
+                        @if (currentBoard.isOwner) {
+                        <span class="text-slate-500">(You)</span>
+                        }
+                    </p>
+                </div>
+
+                <div class="inline-flex gap-2">
+                    <span class="text-slate-500 mt-1">
+                        Owner
+                    </span>
+                </div>
+            </div>
+            }
+
+            @for (member of boardMembers(); track member.userId) {
+            <div class="inline-flex w-full justify-between mt-2">
+                <div class="inline-flex gap-4 mt-1">
+                    <span class="material-symbols-outlined opacity-70">person</span>
+                    <p>
+                        {{ member.email }}
+                
+                        @if (member.userId === currentUserId) {
+                        <span class="text-slate-500">(You)</span>
+                        }
+                    </p>
+                </div>
+
+                @if (canManageMembers(member)){
+                    <div class="inline-flex gap-2">
+                        <select [value]="member.userLevel" class="rounded-md border border-gray-200 px-2"
+                            (change)="onUpdateMember(member.userId, $event)">
+                            <option value="Reader"> Reader </option>
+                            <option value="Editor"> Editor </option>
+                            <option value="Admin"> Admin </option>
+                        </select>
+    
+                            <button (click)="onDeleteMember(member.userId)" class="material-symbols-outlined text-red-500 cursor-pointer hover:bg-red-100 rounded-lg p-1 active:bg-red-200">
+                                person_cancel
+                            </button>
+                    </div>
+                }
+            </div>
+            }
+            @empty {
+                <p class="text-slate-600"> No other members. </p>
+            }
+        </div>
+    </div>
+</div>

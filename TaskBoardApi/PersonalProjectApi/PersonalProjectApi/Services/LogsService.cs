@@ -12,9 +12,9 @@ namespace PersonalProjectApi.Services
             _activityLogRepository = activityLogRepository;   
         }
 
-        public async Task<List<ActivityLogDto>> GetLogs (Guid cardId, Guid listId, Guid boardId, int take, int skip)
+        public async Task<List<ActivityLogDto>> GetLogsAsync(Guid userId, Guid? boardId, Guid? listId, Guid? cardId, int take, int skip)
         {
-            var logs = await _activityLogRepository.GetLogsAsync(boardId, listId, cardId, skip, take);
+            var logs = await _activityLogRepository.GetLogsAsync(userId, boardId, listId, cardId, skip, take);
 
             var logsDto = logs.Select(log => new ActivityLogDto
             {
@@ -26,7 +26,7 @@ namespace PersonalProjectApi.Services
                 Description = log.Description,
                 CreatedAt = log.CreatedAt,
             })
-                .OrderBy(x => x.CreatedAt)
+                .OrderByDescending(x => x.CreatedAt)
                 .ToList();
 
             return logsDto;

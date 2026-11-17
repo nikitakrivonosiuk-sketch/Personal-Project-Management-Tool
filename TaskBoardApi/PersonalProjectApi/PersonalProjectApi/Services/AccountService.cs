@@ -39,9 +39,8 @@ namespace PersonalProjectApi.Services
                 return null;
             }
 
-            var token = _tokenService.CreateAccessToken(foundUser);
-
-            return new UserLoginResponseDto(token, DateTime.UtcNow.AddMinutes(15));
+            var (token, expiresAtUtc) = _tokenService.CreateAccessToken(foundUser);
+            return new UserLoginResponseDto(token, expiresAtUtc);
         }
     }
 }

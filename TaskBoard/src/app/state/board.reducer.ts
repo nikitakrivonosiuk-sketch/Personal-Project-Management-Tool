@@ -1,11 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import { BoardDto } from '../models/board-models';
 import { BoardActions } from './board.actions';
+import { BoardMemberDto } from '../models/member-models';
 
 export interface BoardState {
   board: BoardDto | null, 
   isLoading: boolean; 
   error: string | null;
+}
+
+export interface BoardMembersState {
+    boardMembers: BoardMemberDto[] | null,
+    membersLoading: boolean,
+    error: string | null,  
 }
 
 export const initialState: BoardState = {
@@ -14,8 +21,18 @@ export const initialState: BoardState = {
     error: null,
 }
 
+export const initialBoardMembersState: BoardMembersState = {
+    boardMembers: [],
+    membersLoading: false,
+    error: null,
+}
+
 export const boardReducer = createReducer(
     initialState,
+
+    on(BoardActions.logout, () => {
+        return initialState;
+    }),
 
     on(BoardActions.loadBoard, (state) => {
         return {
@@ -162,4 +179,102 @@ export const boardReducer = createReducer(
             }
         };
     }),
+);
+
+export const boardMembersReducer = createReducer(
+    initialBoardMembersState,
+
+    on(BoardActions.logout, () => {
+        return initialBoardMembersState;
+    }),
+
+    on(BoardActions.loadMembers, (state) => {
+        return {...state, 
+            membersLoading: true,
+            error: null};
+    }),
+
+    on(BoardActions.loadMembersSuccess, (state, {boardMembers}) => {
+        return {
+            ...state, 
+            boardMembers: boardMembers,
+            membersLoading: false,
+            error: null
+        }
+    }),
+
+    on (BoardActions.loadMembersFailure, (state, {error}) => {
+        return {
+            ...state,
+            error: error,
+            membersLoading: false,
+        }
+    }),
+
+    on(BoardActions.addMember, (state) => {
+        return {
+            ...state, 
+            error: null,
+        };
+    }),
+
+    on(BoardActions.addMemberSuccess, (state, {boardMember}) => ({
+            boardMembers: [...(state.boardMembers ?? []), boardMember],
+            membersLoading: false,
+            error: null,
+    })),
+
+    on(BoardActions.addMemberFailure, (state, {error}) => ({
+            ...state,
+            error: error,
+            membersLoading: false,
+    })),
+
+    // Update board member
+    on(BoardActions.updateMember, (state) => {
+        return {
+            ...state, 
+            error: null,
+        };
+    }),
+
+    on(BoardActions.updateMemberSuccess, (state, {boardMember}) => {
+        return {
+            ...state,
+            boardMembers: (state.boardMembers ?? []).map(member => 
+                member.userId === boardMember.userId ? boardMember : member
+            ),
+            membersLoading: false,
+            error: null,
+        }
+    }),
+
+    on(BoardActions.updateMemberFailure, (state, {error}) => ({
+        ...state,
+        error: error,
+        membersLoading: false,
+    })),
+
+    // Delete board member
+    on(BoardActions.deleteMember, (state) => {
+        return {
+            ...state,
+            error: null,
+        };
+    }),
+
+    on(BoardActions.deleteMemberSuccess, (state, {userId}) => {
+        return {
+            ...state,
+            boardMembers: (state.boardMembers ?? []).filter(member => member.userId !== userId),
+            membersLoading: false,
+            error: null
+        }
+    }),
+
+    on(BoardActions.deleteMemberFailure, (state, {error}) => ({
+        ...state,
+        error: error,
+        membersLoading: false,
+    })),
 );

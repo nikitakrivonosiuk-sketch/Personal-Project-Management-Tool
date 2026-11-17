@@ -1,0 +1,6 @@
+<app-header (addMembers)="membersModalOpen.set(true)" (logout)="onLogout()"/>
+<router-outlet />
+
+@if(membersModalOpen()){
+    <app-users-modal (closed)="membersModalOpen.set(false);"/>
+}

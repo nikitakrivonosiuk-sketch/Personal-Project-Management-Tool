@@ -4,6 +4,8 @@ import { BoardDto, BoardListDto, CardDto, CreatingBoardRequestDto } from "../mod
 import { Subject } from "rxjs";
 import { ActivityLog } from "../models/activity-log.model";
 import { environment } from "../../environments/environment";
+import { List } from "../components/list/list";
+import { BoardMemberDto, UserLevelAccess } from "../models/member-models";
 
 @Injectable ({
     providedIn: 'root'
@@ -16,6 +18,33 @@ export class BoardService {
 
     apiUrl = environment.apiUrl;
 
+    // Board Members Functions
+    getBoardMembers(boardId: string){
+        return this.http.get<BoardMemberDto[]>(`${this.apiUrl}/Boards/${boardId}/Members`);
+    }
+
+    addBoardMember(boardId: string, email: string, UserLevel: UserLevelAccess){
+        const requestDto = {
+            email: email,
+            userLevel: UserLevel,
+        };
+
+        return this.http.post<BoardMemberDto>(`${this.apiUrl}/boards/${boardId}/Members`, requestDto);
+    }
+
+    updateBoardMember(boardId: string, userLevel: UserLevelAccess, memberUserId: string){
+        const requestDto = {
+            levelAccess: userLevel
+        };
+
+        return this.http.put<BoardMemberDto>(`${this.apiUrl}/boards/${boardId}/Members/${memberUserId}`, requestDto);
+    }
+
+    deleteBoardMember(userId: string, boardId: string){
+        return this.http.delete(`${this.apiUrl}/boards/${boardId}/Members/${userId}`, {responseType: 'text'});
+    }
+
+    // Logs
     getLogs(filters: {boardId?: string, listId?: string, cardId?: string, skip?: number, take?: number}){
         let params = new HttpParams();
 

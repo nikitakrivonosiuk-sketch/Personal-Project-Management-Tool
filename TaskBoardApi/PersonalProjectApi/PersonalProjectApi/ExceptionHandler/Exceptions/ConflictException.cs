@@ -2,6 +2,6 @@
 {
     public class ConflictException : Exception
     {
-        public ConflictException(string? error) : base("Conflict occured.") { }
+        public ConflictException(string message) : base(message) { }
     }
 }

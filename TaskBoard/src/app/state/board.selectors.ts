@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BoardState } from './board.reducer';
+import { BoardMembersState, BoardState } from './board.reducer';
 import { Priority } from '../models/card.models';
 
 export const selectBoardState = createFeatureSelector<BoardState>('boardFeature');
+export const selectBoardMembersState = createFeatureSelector<BoardMembersState>('boardMembersFeature');
 
 export const selectBoard = createSelector(selectBoardState, (state) => state.board);
 
@@ -32,3 +33,10 @@ export const selectBoardList = createSelector(selectBoard, (boardDto) => {
 });
 
 export const selectIsLoading = createSelector(selectBoardState, (state) => state.isLoading);
+
+// BoardMembers Selectors
+export const selectBoardMembers = createSelector(selectBoardMembersState, (state) => state.boardMembers);
+
+export const selectIsBoardMembersLoading = createSelector(selectBoardMembersState, (state) => state.membersLoading);
+
+export const selectBoardMembersError = createSelector(selectBoardMembersState, (state) => state.error);

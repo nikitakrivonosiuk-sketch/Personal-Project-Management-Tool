@@ -1,7 +1,8 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { HistoryBar } from "./history-bar/history-bar";
 import { BoardService } from '../../services/board-service';
 import { RouterLink } from '@angular/router';
+import { TokenStorageService } from '../../services/token-storage-service';
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,15 @@ import { RouterLink } from '@angular/router';
 })
 export class Header {
   boardService = inject(BoardService);
+  tokenStorage = inject(TokenStorageService);
+
+  addMembers = output<void>();
+  logout = output<void>();
   
   activeBoardId = this.boardService.activeBoardId; 
   historyState = signal(false);
+
+  logoutShow = signal(!!this.tokenStorage.getToken());
 
   toggle(){
     this.historyState.update(x => !x);

@@ -27,6 +27,7 @@ namespace PersonalProjectApi.Repositories.BoardRepository
         {
             var board = await _dbSet
                 .Include(m =>  m.BoardMembers)
+                .Include(o => o.Owner)
                 .Include(l => l.BoardLists)
                     .ThenInclude(c => c.Cards)
                 .FirstOrDefaultAsync(b => b.Id == boardId);

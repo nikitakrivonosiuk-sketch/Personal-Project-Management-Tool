@@ -1,39 +1,42 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PersonalProjectApi.Models.DTO.ActivityLogDtos;
 using PersonalProjectApi.Repositories.ActivityLogRepositories;
-using PersonalProjectApi.Repositories.ListRepositories;
+using PersonalProjectApi.Services;
+using PersonalProjectApi.Services.Authorization;
+using System.Drawing.Printing;
+using System.Text.Json;
 
 namespace PersonalProjectApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LogsController : ControllerBase
     {
-        private readonly IActivityLogRepository _activityLogRepository;
-        public LogsController(IActivityLogRepository logRepository)
+        private readonly LogsService _logsService;
+        private readonly ILogger<LogsController> _logger;
+        private readonly CurrentUserService _currentUserService;
+        public LogsController(LogsService logsService,
+            ILogger<LogsController> logger,
+            CurrentUserService currentUserService)
         {
-            _activityLogRepository = logRepository;
+            _logsService = logsService;
+            _logger = logger;
+            _currentUserService = currentUserService;
         }
 
-        [HttpGet("{boardId:guid}/logs")]
-        public async Task<IActionResult> GetBoardLogs([FromRoute] Guid boardId, [FromQuery] int skip = 0, [FromQuery] int take = 10)
+        [HttpGet]
+        public async Task<IActionResult> GetLogs(
+        [FromQuery] Guid? boardId,
+        [FromQuery] Guid? listId,
+        [FromQuery] Guid? cardId,
+        [FromQuery] int skip = 0,
+        [FromQuery] int take = 10)
         {
-            var logs = await _activityLogRepository.GetLogsAsync(boardId: boardId, skip: skip, take: take);
+            _logger.LogInformation($"{nameof(GetLogs)} received request: {JsonSerializer.Serialize(new { boardId, listId, cardId, skip, take, _currentUserService.UserId})}");
 
-            var logsDto = logs.Select(log => new ActivityLogDto
-            {
-                Id = log.Id,
-                CardId = log.CardId,
-                BoardListId = log.BoardListId,
-                BoardId = log.BoardId,
-                ActionType = log.ActionType,
-                Description = log.Description,
-                CreatedAt = log.CreatedAt,
-            }).ToList();
-
-            return Ok(logsDto);
+            var logs = await _logsService.GetLogsAsync(_currentUserService.UserId, boardId, listId, cardId, take, skip);
+            return Ok(logs);
         }
-
     }
 }

@@ -1,0 +1,80 @@
+<div class="fixed flex bg-black/30 inset-0 z-50 items-center justify-center">
+
+    <div class="flex flex-col rounded-xl bg-white w-250 overflow-hidden">
+        
+        <div class="flex inline-flex justify-end bg-slate-600">
+            <button (click)="onClose()" type="button" class="hover:opacity-75 h-10 px-2 cursor-pointer">
+                <span class="material-symbols-outlined object-contain text-white mt-1.5 [font-variation-settings:'wght'_300]">close</span>
+            </button>
+        </div>
+
+        <div class="w-full max-h-[70vh] overflow-hidden flex">
+            <!-- Card Info -->
+            <div class="flex flex-col w-2/3 p-9 bg-white">
+                
+                <!-- Title and Edit button -->
+                <div class="flex items-center w-full justify-between">
+                    <h3 class="text-3xl font-bold">
+                        {{cardInfo.title}}
+                    </h3>
+                    <button (click)="onEditClick()" class="flex gap-2 py-1 px-5 cursor-pointer border border-gray-300 items-center rounded-md
+                    hover:opacity-90 hover:bg-gray-100 active:bg-gray-100">
+                        <span class="material-symbols-outlined [font-variation-settings:'wght'_300]">edit_square</span>
+                        <span class="font-base text-black text-base font-semibold"> Edit card </span>
+                    </button>
+                </div>
+
+                <!-- Other Info -->
+                <div class="grid grid-cols-[100px_1fr] gap-y-6 items-center gap-10 py-6">
+                    <!-- List -->
+                        <div class="flex items-center gap-2 opacity-60">
+                            <span class="material-symbols-outlined">menu</span>
+                            <span class="text-base font-normal"> List </span>
+                        </div>
+                        <span class="text-base text-black font-semibold"> {{cardList}} </span>
+    
+                    <!-- Date -->
+                        <div class="flex items-center gap-2 opacity-60">
+                            <span class="material-symbols-outlined text-xs">calendar_today</span>
+                            <span class="text-base font-normal"> Due date </span>
+                        </div>
+                        <span class="text-base text-black font-semibold"> {{cardInfo.dueDate | date: "EEEE, d MMM"}} </span>
+
+                    <!-- Priority -->
+                        <div class="flex items-center gap-2 opacity-60">
+                            <span class="material-symbols-outlined">low_priority</span>
+                            <span class="text-base font-normal"> Priority </span>
+                        </div>
+                        <span class="text-base text-black font-semibold"> {{cardInfo.priority}} </span>
+                </div>
+
+                <div class="flex flex-col py-4 gap-2">
+                    <h3 class="text-xl font-bold"> Description </h3>
+
+                    <span class="text-base font-normal text-gray-500">
+                        {{cardInfo.description}}
+                    </span>
+                </div>
+            </div>
+
+            <!-- History -->
+            <div class="w-1/3 bg-gray-100 overflow-y-auto">
+                <div class="flex flex-col gap-3 p-8">
+                    <span class="text-xl text-black font-semibold"> Activity </span>
+                    
+                    @for (log of cardLogs(); track log.id) {
+                        <div class="flex items-center gap-3 mb-4 w-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0"></span>
+                                <div class="flex flex-col">
+                                    <p class="text-base text-gray-500 leading-tight">
+                                        {{log.description}}
+                                    </p>
+                                    <small class="text-gray-500"> {{log.createdAt | date:'short'}}</small>
+                                </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,13 +13,18 @@ namespace PersonalProjectApi.Repositories.ActivityLogRepositories
             this.dbContext = taskBoardDbContext;
         }
 
-        public async Task<List<ActivityLog>> GetLogsAsync(Guid? boardId,Guid? listId, Guid? cardId, int skip = 0, int take = 10)
+        public async Task<List<ActivityLog>> GetLogsAsync(Guid userId, Guid? boardId, Guid? listId, Guid? cardId, int skip = 0, int take = 10)
         {
-            var query = dbContext.ActivityLogs.AsQueryable();
+            var query = dbContext.ActivityLogs.
+                Where(log => log.BoardId.HasValue &&
+                dbContext.Boards.Any(board =>
+                    board.Id == log.BoardId.Value &&
+                    ((board.OwnerId == userId) ||
+                    board.BoardMembers.Any(m => m.UserId == userId))));
 
             if (boardId.HasValue)
             {
-                query = query.Where(log => log.BoardId == boardId);
+                query = query.Where(log => log.BoardId == boardId.Value);
             }
 
             if (listId.HasValue)
